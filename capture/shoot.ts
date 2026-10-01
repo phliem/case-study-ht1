@@ -2,7 +2,7 @@ import { mkdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import type { Browser, BrowserContext, Page } from "@playwright/test";
 import sharp, { type OverlayOptions } from "sharp";
-import type { Capture, Loop, StickyHeader, Tile, Version } from "../src/data/types";
+import type { Capture, StickyHeader, Tile, Version } from "../src/data/types";
 import {
   addSpecimenInPage,
   floatingElementsInPage,
@@ -16,6 +16,7 @@ import {
   settleInPage,
   type TokenSelectors,
 } from "./inPage";
+import { captureLoops } from "./loops";
 import { captureDir, PUBLIC_DIR, publicPath } from "./paths";
 import { type DeviceProfile, SCALE, SOCS_REJECTED, TILE_HEIGHT } from "./profiles";
 import { anchorList, assertSections } from "./sections";
@@ -227,8 +228,8 @@ export async function capturePage(browser: Browser, job: PageJob): Promise<Captu
     const outDir = captureDir(job.version, job.profile.device);
     rmSync(outDir, { recursive: true, force: true });
     mkdirSync(outDir, { recursive: true });
-    const { tiles, pageHeight } = await captureTiles(page, outDir);
-    const loops: Loop[] = [];
+    const { tiles, pageHeight, full } = await captureTiles(page, outDir);
+    const loops = job.withLoops ? await captureLoops(page, job.profile.device, outDir, full) : [];
     const header = sticky ? await captureHeaderStates(page, outDir) : null;
     if (job.withSpecimen) await captureSpecimen(page);
     return {

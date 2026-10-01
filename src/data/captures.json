@@ -4,7 +4,7 @@
       "version": "before",
       "device": "desktop",
       "commit": "0a143c682087965a3f0e489c382ccb68285b1e6a",
-      "capturedAt": "2026-10-01T14:55:03.742Z",
+      "capturedAt": "2026-10-01T14:58:23.311Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -82,7 +82,7 @@
       "version": "before",
       "device": "mobile",
       "commit": "0a143c682087965a3f0e489c382ccb68285b1e6a",
-      "capturedAt": "2026-10-01T14:55:14.212Z",
+      "capturedAt": "2026-10-01T14:58:34.013Z",
       "viewport": {
         "width": 390,
         "height": 844
@@ -166,7 +166,7 @@
       "version": "after",
       "device": "desktop",
       "commit": "c016453be737d49f95e06f96e275cdc2abb99217",
-      "capturedAt": "2026-10-01T14:55:34.478Z",
+      "capturedAt": "2026-10-01T15:02:53.257Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -230,7 +230,80 @@
           }
         ]
       },
-      "loops": [],
+      "loops": [
+        {
+          "id": "hero",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 804
+          },
+          "radius": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "mp4": "captures/after/desktop/loop-hero.mp4",
+          "webm": "captures/after/desktop/loop-hero.webm",
+          "duration": 10.2
+        },
+        {
+          "id": "how-1",
+          "rect": {
+            "x": 125,
+            "y": 1496,
+            "width": 382,
+            "height": 173
+          },
+          "radius": [
+            18,
+            18,
+            0,
+            0
+          ],
+          "mp4": "captures/after/desktop/loop-how-1.mp4",
+          "webm": "captures/after/desktop/loop-how-1.webm",
+          "duration": 21
+        },
+        {
+          "id": "how-2",
+          "rect": {
+            "x": 529,
+            "y": 1496,
+            "width": 382,
+            "height": 173
+          },
+          "radius": [
+            18,
+            18,
+            0,
+            0
+          ],
+          "mp4": "captures/after/desktop/loop-how-2.mp4",
+          "webm": "captures/after/desktop/loop-how-2.webm",
+          "duration": 7
+        },
+        {
+          "id": "how-3",
+          "rect": {
+            "x": 933,
+            "y": 1496,
+            "width": 382,
+            "height": 173
+          },
+          "radius": [
+            18,
+            18,
+            0,
+            0
+          ],
+          "mp4": "captures/after/desktop/loop-how-3.mp4",
+          "webm": "captures/after/desktop/loop-how-3.webm",
+          "duration": 7
+        }
+      ],
       "tokens": {
         "headline": {
           "fontFamily": "\"Hanken Grotesk\", \"Hanken Grotesk Fallback\", system-ui, sans-serif",
@@ -254,7 +327,7 @@
       "version": "after",
       "device": "mobile",
       "commit": "c016453be737d49f95e06f96e275cdc2abb99217",
-      "capturedAt": "2026-10-01T14:55:43.244Z",
+      "capturedAt": "2026-10-01T15:04:18.178Z",
       "viewport": {
         "width": 390,
         "height": 844
@@ -324,7 +397,62 @@
           }
         ]
       },
-      "loops": [],
+      "loops": [
+        {
+          "id": "how-1",
+          "rect": {
+            "x": 25,
+            "y": 1826,
+            "width": 340,
+            "height": 173
+          },
+          "radius": [
+            18,
+            18,
+            0,
+            0
+          ],
+          "mp4": "captures/after/mobile/loop-how-1.mp4",
+          "webm": "captures/after/mobile/loop-how-1.webm",
+          "duration": 21
+        },
+        {
+          "id": "how-2",
+          "rect": {
+            "x": 25,
+            "y": 2180,
+            "width": 340,
+            "height": 173
+          },
+          "radius": [
+            18,
+            18,
+            0,
+            0
+          ],
+          "mp4": "captures/after/mobile/loop-how-2.mp4",
+          "webm": "captures/after/mobile/loop-how-2.webm",
+          "duration": 7
+        },
+        {
+          "id": "how-3",
+          "rect": {
+            "x": 25,
+            "y": 2557,
+            "width": 340,
+            "height": 173
+          },
+          "radius": [
+            18,
+            18,
+            0,
+            0
+          ],
+          "mp4": "captures/after/mobile/loop-how-3.mp4",
+          "webm": "captures/after/mobile/loop-how-3.webm",
+          "duration": 7
+        }
+      ],
       "tokens": {
         "headline": {
           "fontFamily": "\"Hanken Grotesk\", \"Hanken Grotesk Fallback\", system-ui, sans-serif",

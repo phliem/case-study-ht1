@@ -192,3 +192,111 @@ export async function addSpecimenInPage(): Promise<void> {
   window.scrollTo({ top: 0, behavior: "instant" });
   await document.fonts.ready;
 }
+
+export type LoopRegionQuery = {
+  id: string;
+  scopeHeading: string | null;
+  selector: string;
+  index: number;
+  radius: "self" | "parent-top";
+};
+
+type LoopWindow = Window & { __loop?: { animation: Animation; start: number }[] };
+
+export function markLoopRegionInPage(region: LoopRegionQuery): {
+  rect: { x: number; y: number; width: number; height: number };
+  radius: [number, number, number, number];
+  periods: number[];
+} {
+  const textOf = (element: Element) => (element.textContent ?? "").replace(/\s+/g, " ").trim();
+  const scope: ParentNode | undefined =
+    region.scopeHeading === null
+      ? document
+      : Array.from(document.querySelectorAll("main > *")).find((child) =>
+          Array.from(child.querySelectorAll("h1, h2, h3")).some(
+            (heading) => textOf(heading) === region.scopeHeading,
+          ),
+        );
+  const element = scope?.querySelectorAll(region.selector)[region.index];
+  if (!element) throw new Error(`Loop region ${region.id} is not on the page`);
+
+  const box = element.getBoundingClientRect();
+  const x = Math.floor(box.left + window.scrollX);
+  const y = Math.floor(box.top + window.scrollY);
+  const rect = {
+    x,
+    y,
+    width: Math.ceil(box.right + window.scrollX) - x,
+    height: Math.ceil(box.bottom + window.scrollY) - y,
+  };
+
+  const corners = (source: Element) => {
+    const style = getComputedStyle(source);
+    return [
+      style.borderTopLeftRadius,
+      style.borderTopRightRadius,
+      style.borderBottomRightRadius,
+      style.borderBottomLeftRadius,
+    ].map((value) => Number.parseFloat(value) || 0);
+  };
+  const own = corners(element);
+  const parent = element.parentElement ? corners(element.parentElement) : [0, 0, 0, 0];
+  const radius: [number, number, number, number] =
+    region.radius === "self" ? [own[0], own[1], own[2], own[3]] : [parent[0], parent[1], 0, 0];
+
+  const animations = document.getAnimations().filter((animation) => {
+    const target = animation.effect instanceof KeyframeEffect ? animation.effect.target : null;
+    return (
+      target !== null &&
+      element.contains(target) &&
+      animation.effect?.getComputedTiming().iterations === Infinity
+    );
+  });
+  if (animations.length === 0)
+    throw new Error(`Loop region ${region.id} has no running animations`);
+  (window as LoopWindow).__loop = animations.map((animation) => ({
+    animation,
+    start: Number(animation.currentTime ?? 0),
+  }));
+  return {
+    rect,
+    radius,
+    periods: animations.map(
+      (animation) => Number(animation.effect?.getComputedTiming().duration ?? 0) / 1000,
+    ),
+  };
+}
+
+export async function scrollRegionIntoViewInPage(rect: {
+  y: number;
+  height: number;
+}): Promise<number> {
+  if (rect.height > window.innerHeight) {
+    throw new Error(
+      `A ${rect.height}px loop region is taller than the ${window.innerHeight}px viewport`,
+    );
+  }
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const top = Math.min(
+    maxScroll,
+    Math.max(0, Math.round(rect.y - (window.innerHeight - rect.height) / 2)),
+  );
+  window.scrollTo({ top, behavior: "instant" });
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  return rect.y - window.scrollY;
+}
+
+export async function seekLoopInPage({
+  seconds,
+  rates,
+}: {
+  seconds: number;
+  rates: number[];
+}): Promise<void> {
+  const loop = (window as LoopWindow).__loop;
+  if (!loop) throw new Error("No loop region is marked");
+  for (const [index, entry] of loop.entries()) {
+    entry.animation.currentTime = entry.start + seconds * 1000 * (rates[index] ?? 1);
+  }
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+}
