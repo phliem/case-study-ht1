@@ -11,8 +11,10 @@ import type { Device, SectionId } from "../data/types";
 import { useElementSize } from "../hooks/useElementSize";
 import { useFrameScroll } from "../hooks/useFrameScroll";
 import { useLiveStyle } from "../hooks/useLiveStyle";
+import { useMotionPreference } from "../hooks/useMotionPreference";
 import type { SectionMap } from "../lib/sectionMap";
 import { PageLayer } from "./PageLayer";
+import { StickyHeaderOverlay } from "./StickyHeaderOverlay";
 import { VersionLabels } from "./VersionLabels";
 import { WipeDivider } from "./WipeDivider";
 
@@ -26,6 +28,7 @@ type StageViewportProps = {
   device: Device;
   divider: MotionValue<number>;
   map: SectionMap;
+  live: boolean;
   initialScroll: number;
   onGroupChange: (id: SectionId) => void;
   ref?: Ref<StageViewportHandle>;
@@ -38,10 +41,12 @@ export function StageViewport({
   device,
   divider,
   map,
+  live,
   initialScroll,
   onGroupChange,
   ref,
 }: StageViewportProps) {
+  const { reduced } = useMotionPreference();
   const before = captureFor("before", device);
   const after = captureFor("after", device);
   const [measure, size] = useElementSize<HTMLDivElement>();
@@ -49,7 +54,7 @@ export function StageViewport({
   const scroller = useRef<HTMLElement>(null);
   const glide = useRef<AnimationPlaybackControls | null>(null);
   const group = useRef<SectionId>(map.groupAt(initialScroll));
-  const { scrollA, beforeY } = useFrameScroll(scroller, map, scale, initialScroll);
+  const { scrollA, scrollB, beforeY } = useFrameScroll(scroller, map, scale, initialScroll);
   const outerClip = useLiveStyle<HTMLDivElement>(
     divider,
     "transform",
@@ -126,7 +131,7 @@ export function StageViewport({
       data-testid="stage-viewport"
       data-scale={scale}
       className="absolute inset-0 overflow-hidden bg-white"
-      initial={{ opacity: 0 }}
+      initial={reduced ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.25, duration: 0.35 }}
     >
@@ -140,10 +145,20 @@ export function StageViewport({
           <PageLayer
             capture={after}
             scale={scale}
+            live={live}
+            root={scroller}
             alt={`After: the Bookable homepage on its own design system, ${device}`}
           />
         </div>
       </section>
+      {after.header && (
+        <StickyHeaderOverlay
+          header={after.header}
+          width={after.viewport.width}
+          scale={scale}
+          scroll={scrollA}
+        />
+      )}
       <div
         ref={outerClip.ref}
         className="pointer-events-none absolute inset-0 overflow-hidden will-change-transform"
@@ -163,9 +178,19 @@ export function StageViewport({
             <PageLayer
               capture={before}
               scale={scale}
+              live={false}
+              root={scroller}
               alt={`Before: the Bookable homepage on the NHS design system, ${device}`}
             />
           </div>
+          {before.header && (
+            <StickyHeaderOverlay
+              header={before.header}
+              width={before.viewport.width}
+              scale={scale}
+              scroll={scrollB}
+            />
+          )}
         </div>
       </div>
       <WipeDivider divider={divider} />

@@ -1,9 +1,17 @@
+import type { RefObject } from "react";
 import type { Capture } from "../data/types";
+import { LiveLoop } from "./LiveLoop";
 import { PageTile } from "./PageTile";
 
-type PageLayerProps = { capture: Capture; scale: number; alt: string };
+type PageLayerProps = {
+  capture: Capture;
+  scale: number;
+  alt: string;
+  live: boolean;
+  root: RefObject<Element | null>;
+};
 
-export function PageLayer({ capture, scale, alt }: PageLayerProps) {
+export function PageLayer({ capture, scale, alt, live, root }: PageLayerProps) {
   return (
     <div
       className="absolute top-0 left-0 origin-top-left"
@@ -22,6 +30,7 @@ export function PageLayer({ capture, scale, alt }: PageLayerProps) {
           alt={index === 0 ? alt : ""}
         />
       ))}
+      {live && capture.loops.map((loop) => <LiveLoop key={loop.id} loop={loop} root={root} />)}
     </div>
   );
 }

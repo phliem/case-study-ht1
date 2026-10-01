@@ -21,7 +21,7 @@ export function VersionLabels({ device, divider }: VersionLabelsProps) {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-x-3 top-3 flex justify-between"
+      className="pointer-events-none absolute inset-x-4 bottom-4 flex justify-between"
     >
       <span ref={beforeChip.ref} className={`${CHIP} bg-ink/75 text-mist`} style={beforeChip.style}>
         {compact ? "Before" : "Before · NHS design system"}

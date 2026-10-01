@@ -2,6 +2,7 @@ import { useMotionValue } from "motion/react";
 import { useState } from "react";
 import { captureFor } from "../data/captures";
 import type { Device, SectionId } from "../data/types";
+import { useMotionPreference } from "../hooks/useMotionPreference";
 import { createSectionMap, type SectionMap } from "../lib/sectionMap";
 import { DeviceFrame } from "./DeviceFrame";
 import { StageViewport } from "./StageViewport";
@@ -18,6 +19,7 @@ function initialDevice(): Device {
 }
 
 export function ComparisonStage() {
+  const { reduced } = useMotionPreference();
   const [device] = useState<Device>(initialDevice);
   const [group, setGroup] = useState<SectionId>("hero");
   const divider = useMotionValue(0.5);
@@ -35,6 +37,7 @@ export function ComparisonStage() {
             device={device}
             divider={divider}
             map={MAPS[device]}
+            live={!reduced}
             initialScroll={0}
             onGroupChange={setGroup}
           />
