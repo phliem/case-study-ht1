@@ -115,3 +115,22 @@ test.describe("before the animation code has loaded", () => {
       .toBe("55%");
   });
 });
+
+test.describe("on a touch phone", () => {
+  test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+
+  test("scrolling past the end of the frame carries on down the page", async ({ page }) => {
+    await page.goto("/");
+    await stageRegion(page).scrollIntoViewIfNeeded();
+    const scroller = page.getByTestId("after-scroller");
+    await scroller.evaluate((element) => {
+      element.scrollTop = element.scrollHeight;
+    });
+    const box = await scroller.boundingBox();
+    if (!box) throw new Error("The frame has not laid out");
+    const pageScroll = await page.evaluate(() => window.scrollY);
+    await page.mouse.move(box.x + box.width * 0.75, box.y + box.height * 0.3);
+    await page.mouse.wheel(0, 600);
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(pageScroll);
+  });
+});

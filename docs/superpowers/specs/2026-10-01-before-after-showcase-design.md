@@ -116,7 +116,7 @@ About one viewport tall.
 - **Live loops.** On the after layer, captured video loops sit exactly over the regions that animate
   on the real site (see 6.3). They play only while visible in the frame, and not under reduced
   motion.
-- **Section rail.** The six rail labels beside the frame (below it on narrow screens); the current
+- **Section rail.** The six rail labels beside the frame (above it on narrow screens, as a sideways-scrolling row); the current
   group is highlighted; clicking glides the frame to that group.
 - **"What changed" callouts.** Two or three notes per group animate in as the group reaches the
   frame's anchor (beside the frame on wide screens, below on narrow). The final copy lives in

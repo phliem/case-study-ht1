@@ -136,7 +136,7 @@ export function StageViewport({
         ref={scroller}
         data-testid="after-scroller"
         aria-label="After: the v2 homepage. Scroll to move both versions together."
-        className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain [scrollbar-width:none]"
+        className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain pointer-coarse:overscroll-auto [scrollbar-width:none]"
       >
         <div className="relative" style={{ height: after.pageHeight * scale }}>
           <PageLayer
