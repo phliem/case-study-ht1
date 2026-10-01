@@ -1,6 +1,9 @@
 # Bookable homepage, before & after — design
 
-Date: 2026-10-01 · Owner: Liem Pham · Status: approved; amended while planning (see the plan's notes)
+Date: 2026-10-01 · Owner: Liem Pham · Status: approved; amended while planning (see the plan's notes);
+extended to the guide article and help centre by
+[the article and help-centre design](2026-10-01-article-and-help-comparisons-design.md), which wins
+where the two differ
 
 ## 1. Purpose
 
@@ -42,7 +45,7 @@ any remote (only on request).
 | Header | `LandingTopNav`, static NHS-blue bar | `HeroSiteHeader`, sticky, transparent over the hero, solid after scrolling |
 | Typeface | Frutiger (NHS licence) | Hanken Grotesk 500/700/800 (OFL) |
 
-The redesign shipped in four chunks, which the outro timeline shows (no links, the repo is private):
+The redesign shipped in four chunks:
 
 | Date | Chunk |
 |---|---|
@@ -169,8 +172,7 @@ clicking a card flips it back and forth.
 
 ### 5.6 Outro timeline
 
-The four chunks from section 4 on a horizontal track that draws itself in on scroll (vertical on
-narrow screens), ending on "Live at bookable.health".
+Removed on 2026-10-01.
 
 ### 5.7 Throughout
 
