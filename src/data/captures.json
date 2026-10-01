@@ -1,0 +1,848 @@
+{
+  "captures": [
+    {
+      "version": "before",
+      "device": "desktop",
+      "commit": "0a143c682087965a3f0e489c382ccb68285b1e6a",
+      "capturedAt": "2026-10-01T14:55:03.742Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 4435,
+      "tiles": [
+        {
+          "avif": "captures/before/desktop/tile-00.avif",
+          "webp": "captures/before/desktop/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/before/desktop/tile-01.avif",
+          "webp": "captures/before/desktop/tile-01.webp",
+          "top": 2000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/before/desktop/tile-02.avif",
+          "webp": "captures/before/desktop/tile-02.webp",
+          "top": 4000,
+          "height": 435
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "top": 0
+        },
+        {
+          "id": "proof",
+          "top": 700
+        },
+        {
+          "id": "how",
+          "top": 1756
+        },
+        {
+          "id": "faq-about",
+          "top": 2180
+        },
+        {
+          "id": "areas",
+          "top": 3676
+        },
+        {
+          "id": "footer",
+          "top": 3958
+        }
+      ],
+      "header": null,
+      "loops": [],
+      "tokens": {
+        "headline": {
+          "fontFamily": "frutiger, \"frutiger Fallback\", Arial, Helvetica, sans-serif",
+          "fontSize": "64px",
+          "lineHeight": "72px",
+          "letterSpacing": "normal",
+          "fontWeight": "700"
+        },
+        "heroGround": "rgb(0, 94, 184)",
+        "search": {
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.24) 0px 8px 48px 0px, rgb(216, 221, 224) 0px 4px 0px 0px"
+        },
+        "card": {
+          "borderRadius": "0px 0px 8px 8px",
+          "boxShadow": "none"
+        }
+      }
+    },
+    {
+      "version": "before",
+      "device": "mobile",
+      "commit": "0a143c682087965a3f0e489c382ccb68285b1e6a",
+      "capturedAt": "2026-10-01T14:55:14.212Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 6922,
+      "tiles": [
+        {
+          "avif": "captures/before/mobile/tile-00.avif",
+          "webp": "captures/before/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/before/mobile/tile-01.avif",
+          "webp": "captures/before/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/before/mobile/tile-02.avif",
+          "webp": "captures/before/mobile/tile-02.webp",
+          "top": 4000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/before/mobile/tile-03.avif",
+          "webp": "captures/before/mobile/tile-03.webp",
+          "top": 6000,
+          "height": 922
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "top": 0
+        },
+        {
+          "id": "proof",
+          "top": 500
+        },
+        {
+          "id": "how",
+          "top": 3067
+        },
+        {
+          "id": "faq-about",
+          "top": 3907
+        },
+        {
+          "id": "areas",
+          "top": 5853
+        },
+        {
+          "id": "footer",
+          "top": 6175
+        }
+      ],
+      "header": null,
+      "loops": [],
+      "tokens": {
+        "headline": {
+          "fontFamily": "frutiger, \"frutiger Fallback\", Arial, Helvetica, sans-serif",
+          "fontSize": "40px",
+          "lineHeight": "48px",
+          "letterSpacing": "normal",
+          "fontWeight": "700"
+        },
+        "heroGround": "rgb(0, 94, 184)",
+        "search": {
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.24) 0px 8px 48px 0px, rgb(216, 221, 224) 0px 4px 0px 0px"
+        },
+        "card": {
+          "borderRadius": "0px 0px 8px 8px",
+          "boxShadow": "none"
+        }
+      }
+    },
+    {
+      "version": "after",
+      "device": "desktop",
+      "commit": "c016453be737d49f95e06f96e275cdc2abb99217",
+      "capturedAt": "2026-10-01T14:55:34.478Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 3772,
+      "tiles": [
+        {
+          "avif": "captures/after/desktop/tile-00.avif",
+          "webp": "captures/after/desktop/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/after/desktop/tile-01.avif",
+          "webp": "captures/after/desktop/tile-01.webp",
+          "top": 2000,
+          "height": 1772
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "top": 0
+        },
+        {
+          "id": "proof",
+          "top": 804
+        },
+        {
+          "id": "how",
+          "top": 1338
+        },
+        {
+          "id": "faq-about",
+          "top": 1933
+        },
+        {
+          "id": "areas",
+          "top": 3046
+        },
+        {
+          "id": "footer",
+          "top": 3504
+        }
+      ],
+      "header": {
+        "flipAt": 1,
+        "states": [
+          {
+            "id": "top",
+            "src": "captures/after/desktop/header-top.png",
+            "height": 67,
+            "blur": null
+          },
+          {
+            "id": "scrolled",
+            "src": "captures/after/desktop/header-scrolled.png",
+            "height": 67,
+            "blur": 10
+          }
+        ]
+      },
+      "loops": [],
+      "tokens": {
+        "headline": {
+          "fontFamily": "\"Hanken Grotesk\", \"Hanken Grotesk Fallback\", system-ui, sans-serif",
+          "fontSize": "64px",
+          "lineHeight": "64px",
+          "letterSpacing": "-2.24px",
+          "fontWeight": "800"
+        },
+        "heroGround": "radial-gradient(125% 130% at 12% 0px, rgb(19, 135, 204) 0px, rgb(10, 99, 172) 40%, rgb(8, 63, 128) 72%, rgb(5, 47, 96) 100%)",
+        "search": {
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(3, 20, 45, 0.42) 0px 30px 72px 0px"
+        },
+        "card": {
+          "borderRadius": "16px",
+          "boxShadow": "none"
+        }
+      }
+    },
+    {
+      "version": "after",
+      "device": "mobile",
+      "commit": "c016453be737d49f95e06f96e275cdc2abb99217",
+      "capturedAt": "2026-10-01T14:55:43.244Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 5530,
+      "tiles": [
+        {
+          "avif": "captures/after/mobile/tile-00.avif",
+          "webp": "captures/after/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/after/mobile/tile-01.avif",
+          "webp": "captures/after/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/after/mobile/tile-02.avif",
+          "webp": "captures/after/mobile/tile-02.webp",
+          "top": 4000,
+          "height": 1530
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "top": 0
+        },
+        {
+          "id": "proof",
+          "top": 677
+        },
+        {
+          "id": "how",
+          "top": 1704
+        },
+        {
+          "id": "faq-about",
+          "top": 2962
+        },
+        {
+          "id": "areas",
+          "top": 4456
+        },
+        {
+          "id": "footer",
+          "top": 4992
+        }
+      ],
+      "header": {
+        "flipAt": 1,
+        "states": [
+          {
+            "id": "top",
+            "src": "captures/after/mobile/header-top.png",
+            "height": 69,
+            "blur": null
+          },
+          {
+            "id": "scrolled",
+            "src": "captures/after/mobile/header-scrolled.png",
+            "height": 69,
+            "blur": 10
+          }
+        ]
+      },
+      "loops": [],
+      "tokens": {
+        "headline": {
+          "fontFamily": "\"Hanken Grotesk\", \"Hanken Grotesk Fallback\", system-ui, sans-serif",
+          "fontSize": "48px",
+          "lineHeight": "48px",
+          "letterSpacing": "-1.68px",
+          "fontWeight": "800"
+        },
+        "heroGround": "radial-gradient(125% 130% at 12% 0px, rgb(19, 135, 204) 0px, rgb(10, 99, 172) 40%, rgb(8, 63, 128) 72%, rgb(5, 47, 96) 100%)",
+        "search": {
+          "borderRadius": "0px",
+          "boxShadow": "none"
+        },
+        "card": {
+          "borderRadius": "16px",
+          "boxShadow": "none"
+        }
+      }
+    }
+  ],
+  "palettes": {
+    "before": [
+      {
+        "name": "blue",
+        "swatches": [
+          {
+            "name": "blue",
+            "hex": "#005EB8"
+          },
+          {
+            "name": "blue-dark",
+            "hex": "#002F5C"
+          }
+        ]
+      },
+      {
+        "name": "green",
+        "swatches": [
+          {
+            "name": "green",
+            "hex": "#007F3B"
+          }
+        ]
+      },
+      {
+        "name": "yellow",
+        "swatches": [
+          {
+            "name": "yellow",
+            "hex": "#FFEB3B"
+          },
+          {
+            "name": "yellow-warm",
+            "hex": "#FFB81C"
+          },
+          {
+            "name": "yellow-pale",
+            "hex": "#FFF9C4"
+          }
+        ]
+      },
+      {
+        "name": "red",
+        "swatches": [
+          {
+            "name": "red",
+            "hex": "#D5281B"
+          }
+        ]
+      },
+      {
+        "name": "pink",
+        "swatches": [
+          {
+            "name": "pink",
+            "hex": "#7C2855"
+          }
+        ]
+      },
+      {
+        "name": "purple",
+        "swatches": [
+          {
+            "name": "purple",
+            "hex": "#330072"
+          }
+        ]
+      },
+      {
+        "name": "black",
+        "swatches": [
+          {
+            "name": "black",
+            "hex": "#212B32"
+          }
+        ]
+      },
+      {
+        "name": "grey",
+        "swatches": [
+          {
+            "name": "grey-1",
+            "hex": "#4C6272"
+          },
+          {
+            "name": "grey-2",
+            "hex": "#768692"
+          },
+          {
+            "name": "grey-3",
+            "hex": "#AEB7BD"
+          },
+          {
+            "name": "grey-4",
+            "hex": "#D8DDE0"
+          },
+          {
+            "name": "grey-5",
+            "hex": "#F0F4F5"
+          }
+        ]
+      },
+      {
+        "name": "white",
+        "swatches": [
+          {
+            "name": "white",
+            "hex": "#FFFFFF"
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "name": "blue",
+        "swatches": [
+          {
+            "name": "blue-0",
+            "hex": "#04264F"
+          },
+          {
+            "name": "blue-1",
+            "hex": "#003D7A"
+          },
+          {
+            "name": "blue-2",
+            "hex": "#005EB8"
+          },
+          {
+            "name": "blue-3",
+            "hex": "#2D6E96"
+          },
+          {
+            "name": "blue-4",
+            "hex": "#0072CE"
+          },
+          {
+            "name": "blue-5",
+            "hex": "#B9D4EA"
+          },
+          {
+            "name": "blue-6",
+            "hex": "#BFE0FF"
+          },
+          {
+            "name": "blue-7",
+            "hex": "#CFE0EF"
+          },
+          {
+            "name": "blue-8",
+            "hex": "#D5E7F4"
+          },
+          {
+            "name": "blue-9",
+            "hex": "#E6EFF6"
+          },
+          {
+            "name": "blue-10",
+            "hex": "#E1F0F8"
+          },
+          {
+            "name": "blue-11",
+            "hex": "#E8F1F8"
+          },
+          {
+            "name": "blue-12",
+            "hex": "#EEF5FC"
+          },
+          {
+            "name": "blue-13",
+            "hex": "#F1F6FA"
+          },
+          {
+            "name": "blue-14",
+            "hex": "#F4F8FB"
+          }
+        ]
+      },
+      {
+        "name": "green",
+        "swatches": [
+          {
+            "name": "green-0",
+            "hex": "#0B3D22"
+          },
+          {
+            "name": "green-1",
+            "hex": "#33544A"
+          },
+          {
+            "name": "green-2",
+            "hex": "#006931"
+          },
+          {
+            "name": "green-3",
+            "hex": "#007F3B"
+          },
+          {
+            "name": "green-4",
+            "hex": "#1D7A46"
+          },
+          {
+            "name": "green-5",
+            "hex": "#9FD3B4"
+          },
+          {
+            "name": "green-6",
+            "hex": "#BFE0CB"
+          },
+          {
+            "name": "green-7",
+            "hex": "#CDE9D6"
+          },
+          {
+            "name": "green-8",
+            "hex": "#D3ECDD"
+          },
+          {
+            "name": "green-9",
+            "hex": "#E6F1E9"
+          }
+        ]
+      },
+      {
+        "name": "red",
+        "swatches": [
+          {
+            "name": "red-0",
+            "hex": "#6E2A2C"
+          },
+          {
+            "name": "red-1",
+            "hex": "#9A1F24"
+          },
+          {
+            "name": "red-2",
+            "hex": "#C1272D"
+          },
+          {
+            "name": "red-3",
+            "hex": "#DA291C"
+          },
+          {
+            "name": "red-4",
+            "hex": "#E0A9A7"
+          },
+          {
+            "name": "red-5",
+            "hex": "#F0C2BC"
+          },
+          {
+            "name": "red-6",
+            "hex": "#F0D7D4"
+          },
+          {
+            "name": "red-7",
+            "hex": "#FBE0DD"
+          },
+          {
+            "name": "red-8",
+            "hex": "#FBE4E4"
+          },
+          {
+            "name": "red-9",
+            "hex": "#F6E9E9"
+          },
+          {
+            "name": "red-10",
+            "hex": "#FDF3F1"
+          }
+        ]
+      },
+      {
+        "name": "amber",
+        "swatches": [
+          {
+            "name": "amber-0",
+            "hex": "#5A4A2E"
+          },
+          {
+            "name": "amber-1",
+            "hex": "#6A4A00"
+          },
+          {
+            "name": "amber-2",
+            "hex": "#6B5300"
+          },
+          {
+            "name": "amber-3",
+            "hex": "#8A5A00"
+          },
+          {
+            "name": "amber-4",
+            "hex": "#B45309"
+          },
+          {
+            "name": "amber-5",
+            "hex": "#8A6A00"
+          },
+          {
+            "name": "amber-6",
+            "hex": "#E0A12E"
+          },
+          {
+            "name": "amber-7",
+            "hex": "#E7CB80"
+          },
+          {
+            "name": "amber-8",
+            "hex": "#FFC65C"
+          },
+          {
+            "name": "amber-9",
+            "hex": "#F3DBAE"
+          },
+          {
+            "name": "amber-10",
+            "hex": "#FFEB3B"
+          },
+          {
+            "name": "amber-11",
+            "hex": "#FBE9C9"
+          },
+          {
+            "name": "amber-12",
+            "hex": "#FFEDB3"
+          },
+          {
+            "name": "amber-13",
+            "hex": "#FFF3CF"
+          },
+          {
+            "name": "amber-14",
+            "hex": "#FFF6E9"
+          }
+        ]
+      },
+      {
+        "name": "purple",
+        "swatches": [
+          {
+            "name": "purple-0",
+            "hex": "#330072"
+          },
+          {
+            "name": "purple-1",
+            "hex": "#DCD3F0"
+          },
+          {
+            "name": "purple-2",
+            "hex": "#EDEAF5"
+          }
+        ]
+      },
+      {
+        "name": "aqua",
+        "swatches": [
+          {
+            "name": "aqua-0",
+            "hex": "#00A499"
+          },
+          {
+            "name": "aqua-1",
+            "hex": "#E4F3F2"
+          }
+        ]
+      },
+      {
+        "name": "dark",
+        "swatches": [
+          {
+            "name": "dark-0",
+            "hex": "#212B32"
+          },
+          {
+            "name": "dark-1",
+            "hex": "#25424F"
+          },
+          {
+            "name": "dark-2",
+            "hex": "#33454F"
+          },
+          {
+            "name": "dark-3",
+            "hex": "#37474F"
+          },
+          {
+            "name": "dark-4",
+            "hex": "#425563"
+          },
+          {
+            "name": "dark-5",
+            "hex": "#4C6272"
+          },
+          {
+            "name": "dark-6",
+            "hex": "#5A6B76"
+          },
+          {
+            "name": "dark-7",
+            "hex": "#8895A0"
+          },
+          {
+            "name": "dark-8",
+            "hex": "#94A3AC"
+          },
+          {
+            "name": "dark-9",
+            "hex": "#9AA6AF"
+          },
+          {
+            "name": "dark-10",
+            "hex": "#AEB7BD"
+          }
+        ]
+      },
+      {
+        "name": "light",
+        "swatches": [
+          {
+            "name": "light-0",
+            "hex": "#CBD5DA"
+          },
+          {
+            "name": "light-1",
+            "hex": "#D2D9DC"
+          },
+          {
+            "name": "light-2",
+            "hex": "#D8E0E4"
+          },
+          {
+            "name": "light-3",
+            "hex": "#DBE1E3"
+          },
+          {
+            "name": "light-4",
+            "hex": "#DEE5E8"
+          },
+          {
+            "name": "light-5",
+            "hex": "#E4EAEC"
+          },
+          {
+            "name": "light-6",
+            "hex": "#E4ECEF"
+          },
+          {
+            "name": "light-7",
+            "hex": "#E8EDEE"
+          },
+          {
+            "name": "light-8",
+            "hex": "#EDF0F1"
+          },
+          {
+            "name": "light-9",
+            "hex": "#EEF2F4"
+          },
+          {
+            "name": "light-10",
+            "hex": "#F0F2F3"
+          },
+          {
+            "name": "light-11",
+            "hex": "#F0F4F5"
+          },
+          {
+            "name": "light-12",
+            "hex": "#F7FAFB"
+          },
+          {
+            "name": "light-13",
+            "hex": "#FFFFFF"
+          }
+        ]
+      }
+    ]
+  },
+  "radiusScale": [
+    "1px",
+    "2px",
+    "3px",
+    "4px",
+    "6px",
+    "7px",
+    "8px",
+    "9px",
+    "10px",
+    "11px",
+    "12px",
+    "14px",
+    "16px",
+    "18px",
+    "20px",
+    "999px"
+  ],
+  "specimens": {
+    "frutiger": "captures/specimen-frutiger.png"
+  }
+}
