@@ -19,11 +19,17 @@ export function App() {
     <LazyMotion features={loadFeatures} strict>
       <MotionConfig reducedMotion={options.record === null ? "user" : "never"}>
         <MotionPreferenceContext value={preference}>
-          <GlowBackground />
-          <CaseHeader />
-          <main className="pb-24">
-            <ComparisonStage />
-          </main>
+          {options.record === null ? (
+            <>
+              <GlowBackground />
+              <CaseHeader />
+              <main className="pb-24">
+                <ComparisonStage options={options} />
+              </main>
+            </>
+          ) : (
+            <ComparisonStage options={options} />
+          )}
         </MotionPreferenceContext>
       </MotionConfig>
     </LazyMotion>
