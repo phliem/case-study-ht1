@@ -1,6 +1,6 @@
 # Bookable homepage, before & after — design
 
-Date: 2026-10-01 · Owner: Liem Pham · Status: awaiting review
+Date: 2026-10-01 · Owner: Liem Pham · Status: approved; amended while planning (see the plan's notes)
 
 ## 1. Purpose
 
@@ -97,15 +97,18 @@ About one viewport tall.
 - **Layers.** The after page is the base layer and the real scroll container (native scrolling and
   momentum). The before page sits above it, clipped to the left of the divider, with
   `pointer-events: none` so scrolling always reaches the after layer.
-- **Divider.** Labels "Before · NHS design system" (left) and "After · v2" (right). Drag the handle
-  with mouse or touch (pointer capture, `touch-action: none` on the handle); keyboard on the focused
-  handle: ←/→ 5%, Shift+←/→ 20%, Home/End to 0%/100%. `role="slider"` with `aria-valuetext`
-  ("60% after").
+- **Divider.** Labels "Before · NHS design system" (left) and "After · v2" (right). A visually
+  hidden native range input carries the keyboard and screen-reader semantics: ←/→ 5%,
+  Shift+←/→ 20%, Home/End to 0%/100%, and `aria-valuetext` such as "40% before, 60% after". The
+  visible handle takes mouse and touch drags (pointer capture, `touch-action: none`).
 - **Locked scroll.** The before layer follows the after layer through a piecewise-linear mapping
-  over the section groups, anchored at the middle of the frame viewport:
-  `anchorA = scrollA + H/2` → group `i` with `t = (anchorA − topA[i]) / heightA[i]` →
-  `anchorB = topB[i] + t × heightB[i]` → `scrollB = clamp(anchorB − H/2, 0, pageHeightB − H)`.
-  So How it works lines up with How it works whatever their heights.
+  over the section groups, using a proportional anchor: `anchor = scroll / maxScroll × pageHeight`.
+  The anchor sweeps from the frame's top edge at the top of the page to its bottom edge at the
+  end, so both pages' tops and bottoms always line up. A fixed mid-frame anchor, the first draft,
+  could leave one version short of its footer. An anchor at fraction `t` through after group `i`
+  maps to fraction `t` through before group `i`, then back to a scroll position:
+  `scrollB = anchorB / pageHeightB × maxScrollB`. So How it works lines up with How it works,
+  whatever their heights.
 - **Sticky header.** A version whose header is sticky gets it pinned in the frame from captured
   state images, flipping state at the captured scroll threshold. The solid state sits on a
   `backdrop-filter: blur()` matching the site's. The full-page capture of such a version is taken
@@ -116,17 +119,17 @@ About one viewport tall.
 - **Section rail.** The six rail labels beside the frame (below it on narrow screens); the current
   group is highlighted; clicking glides the frame to that group.
 - **"What changed" callouts.** Two or three notes per group animate in as the group reaches the
-  frame's middle (beside the frame on wide screens, below on narrow). Draft copy below; before it
-  ships, each note is checked against both commits' source and corrected if it does not hold.
+  frame's anchor (beside the frame on wide screens, below on narrow). The final copy lives in
+  `src/data/changes.ts`, and each note was checked against both commits' source:
 
-| Group | Draft notes |
+| Group | Notes |
 |---|---|
-| `hero` | The postcode search becomes the hero's one control, lifted on the system's deepest shadow. · A reel of appointment cards scrolls beside the search (desktop). · The header sits transparent over the hero and turns solid as you scroll. |
-| `proof` | Stats, a top-rated surgeries list and reviews (three blocks) merge into one testimonials section. · Headline figures sit under the quotes they back up. |
-| `how` | Each step gets a looping product vignette: choosing a route, nearby surgeries, a confirmed booking. · Steps are numbered with tracked microlabels. |
-| `faq-about` | FAQ moves above About, retitled from "Common questions about finding an NHS GP in England" to "Questions before you start". |
-| `areas` | The "Looking for a GP in a specific city?" tag list becomes a call to action, "Find an NHS GP surgery in your area", with live areas to browse. |
-| `footer` | The NHS three-column footer becomes one site-wide footer: brand, inline nav, the 111/999 disclaimer, legal links. · On phones the nav rebuilds as full-width rows with 44px tap targets. |
+| `hero` | The postcode search becomes the hero's single control, lifted further here than anywhere else it appears. · A reel of appointment cards scrolls beside the search on desktop. · The header lies clear over the hero and turns solid as soon as the page moves. |
+| `proof` | Stats, a top-rated surgeries list and reviews, three NHS-styled blocks, merge into one testimonials section. · Headline figures sit under the quotes they back up. |
+| `how` | Icons give way to looping product vignettes for each step. · Steps are numbered with tracked microlabels: Step 1, Step 2, Step 3. |
+| `faq-about` | The FAQ moves above About. · Its title changes from "Common questions about finding an NHS GP in England" to "Questions before you start". |
+| `areas` | The "Looking for a GP in a specific city?" tag list becomes a call to action: "Find an NHS GP surgery in your area". · The areas where Bookable is live sit underneath, ready to browse. |
+| `footer` | The NHS three-column footer becomes one site-wide footer: brand, inline nav, the 111/999 disclaimer and legal links. · On phones the nav becomes 56px full-width rows and the legal links a two-column grid. |
 
 ### 5.3 Play
 
@@ -185,14 +188,17 @@ motion.
 
 For each pinned commit:
 
-1. `git -C $SANNY_REPO worktree add --detach <tmp> <sha>` in the OS temp directory.
-2. `pnpm install --frozen-lockfile`, then build bookable's workspace dependencies
-   (`turbo build --filter=bookable^...`, which restores from the shared turbo cache).
+1. Export it with `git archive <sha> | tar -x` into `CAPTURE_WORK_DIR/<version>` (default
+   `<os tmp>/bookable-before-after`). This writes nothing to sanny, neither the working tree nor
+   git metadata.
+2. `pnpm install --frozen-lockfile --filter "bookable..."`, then
+   `pnpm --filter "bookable^..." run build` for bookable's workspace dependencies.
 3. Write `packages/bookable/.env.local` with `NEXT_PUBLIC_WEBAPI_BASE_URL=https://api.ht1.uk/v2`,
    plus the Weglot key copied from the main checkout's `packages/bookable/.env.local` if present.
 4. `next build`, then `next start` on port 3061 (before) or 3062 (after); wait until it answers.
-5. After capturing: stop the server, `git worktree remove --force <tmp>`. Cleanup also runs on
-   failure.
+   The capture refuses to start if something already answers on either port.
+5. After capturing, stop both servers; this also runs on failure. A build is reused while its
+   commit is unchanged, and `pnpm capture:clean` deletes the work directory.
 
 ### 6.2 Shots
 
@@ -208,8 +214,12 @@ Viewports: desktop 1440×900; mobile 390×844 with `isMobile` and `hasTouch`. `d
 
 Then record:
 
-- **Tiles.** The full page (header hidden if sticky), cut into tiles 2000 CSS px tall; each encoded
-  to AVIF and WebP with sharp. Single images cannot hold a page this tall (WebP's limit is 16383px).
+- **Tiles.** The full page is stitched from screenshots taken at the capture viewport, one
+  viewport at a time. That keeps viewport-relative heights exact, such as the v2 hero's
+  `100vh − 96px`, which a single tall screenshot can distort. A sticky header is hidden; any
+  other visible fixed or sticky element stops the capture until it is added to the hidden list.
+  The page is cut into tiles 2000 CSS px tall, each encoded to AVIF and WebP with sharp. Single
+  images cannot hold a page this tall (WebP's limit is 16383px).
 - **Sections.** Each group's top from the selector map in `capture/sections.ts`, plus the page
   height.
 - **Header.** If the header is sticky: its scroll threshold (scroll down until its computed
@@ -234,7 +244,10 @@ the still under it are pixel-identical at frame 0. Frames are stepped, not recor
 at 30fps, every animation's `currentTime` is set to
 its frame-0 time plus `n/30` seconds, then the region is screenshotted. An animation whose period
 does not divide the loop length is time-scaled by up to 5% so it completes whole cycles (e.g. the
-2s live pulse runs at 2.04s, five cycles per 10.2s), which makes every loop seamless. ffmpeg encodes
+2s live pulse runs at 2.04s, five cycles per 10.2s), which makes every loop seamless. If no
+scaling within 5% fits, the loop grows to the smallest multiple of its longest period that does:
+a 2.6s pulse beside a 7s vignette makes a 21s loop. Frame 0 of each loop is checked against the
+still under it, and the capture stops if they differ. ffmpeg encodes
 the frames to H.264 MP4 and VP9 WebM, tagged BT.709. Each region's edges are colour edges (band or
 panel edges), so any small video colour shift does not show as a seam.
 
@@ -262,6 +275,7 @@ type Capture = {
   loops: {
     id: string;
     rect: { x: number; y: number; width: number; height: number };
+    radius: [number, number, number, number];
     mp4: string;
     webm: string;
     duration: number;
@@ -280,9 +294,12 @@ type Capture = {
   };
 };
 
+type PaletteGroup = { name: string; swatches: { name: string; hex: string }[] };
+
 type CapturesFile = {
   captures: Capture[];
-  palettes: { before: Record<string, string>; after: Record<string, Record<string, string>> };
+  palettes: { before: PaletteGroup[]; after: PaletteGroup[] };
+  radiusScale: string[];
   specimens: { frutiger: string };
 };
 ```
@@ -341,8 +358,9 @@ e2e/              smoke.spec.ts
   the current device only). Other tiles load as they near the frame; loops load after idle with
   the still image showing until then.
 - Targets: current Chrome, Safari, Firefox and Edge; iOS Safari 17+.
-- Section images carry alt text ("Before: the homepage hero, NHS design system"); the slider and
-  rail are keyboard operable; text contrast meets WCAG AA on the dark ground.
+- The first tile of each page layer carries alt text ("Before: the Bookable homepage on the NHS
+  design system, desktop"). The slider and rail are keyboard operable. Text contrast meets
+  WCAG AA on the dark ground.
 
 ## 10. Licensing and privacy
 
