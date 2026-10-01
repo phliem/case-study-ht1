@@ -15,3 +15,20 @@ test("loads with its title and no console errors", async ({ page }) => {
   );
   expect(errors).toEqual([]);
 });
+
+test("introduces the case study", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByText("Front-end engineering")).toBeVisible();
+  await expect(page.getByRole("banner").getByText("29 Sept 2026")).toBeVisible();
+  await expect(page.getByRole("link", { name: "bookable.health", exact: true })).toHaveAttribute(
+    "href",
+    "https://bookable.health",
+  );
+});
+
+test("@review the page top", async ({ page }) => {
+  test.skip(!process.env.REVIEW, "Run with pnpm review");
+  await page.goto("/");
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: ".capture/review/01-top.png" });
+});

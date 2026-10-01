@@ -18,7 +18,8 @@
     "lint:fix": "biome check --write .",
     "capture:serve": "tsx capture/serve.ts",
     "capture:clean": "tsx capture/clean.ts",
-    "capture": "tsx capture/capture.ts"
+    "capture": "tsx capture/capture.ts",
+    "review": "REVIEW=1 playwright test --grep @review"
   },
   "dependencies": {
     "motion": "13.5.0",

@@ -1,9 +1,27 @@
+import { LazyMotion, MotionConfig, useReducedMotion } from "motion/react";
+import { useMemo } from "react";
+import { CaseHeader } from "./components/CaseHeader";
+import { GlowBackground } from "./components/GlowBackground";
+import { MotionPreferenceContext } from "./hooks/useMotionPreference";
+import { parseUrlOptions } from "./lib/urlOptions";
+
+const loadFeatures = () => import("./motionFeatures").then((module) => module.default);
+
 export function App() {
+  const options = useMemo(() => parseUrlOptions(window.location.search), []);
+  const systemReduced = useReducedMotion() ?? false;
+  const preference = useMemo(
+    () => ({ reduced: systemReduced && options.record === null }),
+    [systemReduced, options.record],
+  );
   return (
-    <main className="grid min-h-svh place-items-center px-6">
-      <h1 className="text-center font-extrabold text-5xl tracking-[-0.035em]">
-        Bookable homepage, before & after
-      </h1>
-    </main>
+    <LazyMotion features={loadFeatures} strict>
+      <MotionConfig reducedMotion={options.record === null ? "user" : "never"}>
+        <MotionPreferenceContext value={preference}>
+          <GlowBackground />
+          <CaseHeader />
+        </MotionPreferenceContext>
+      </MotionConfig>
+    </LazyMotion>
   );
 }
