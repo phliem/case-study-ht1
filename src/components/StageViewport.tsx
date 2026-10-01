@@ -1,10 +1,4 @@
-import {
-  type AnimationPlaybackControls,
-  animate,
-  type MotionValue,
-  m,
-  useMotionValueEvent,
-} from "motion/react";
+import { type MotionValue, m, useMotionValueEvent } from "motion/react";
 import { type Ref, useEffect, useImperativeHandle, useRef } from "react";
 import { captureFor } from "../data/captures";
 import type { Device, SectionId } from "../data/types";
@@ -12,6 +6,7 @@ import { useElementSize } from "../hooks/useElementSize";
 import { useFrameScroll } from "../hooks/useFrameScroll";
 import { useLiveStyle } from "../hooks/useLiveStyle";
 import { useMotionPreference } from "../hooks/useMotionPreference";
+import { easeInOutCubic, lerp } from "../lib/math";
 import type { SectionMap } from "../lib/sectionMap";
 import { PageLayer } from "./PageLayer";
 import { StickyHeaderOverlay } from "./StickyHeaderOverlay";
@@ -34,7 +29,6 @@ type StageViewportProps = {
   ref?: Ref<StageViewportHandle>;
 };
 
-const GLIDE_EASE = [0.65, 0, 0.35, 1] as const;
 const INTERRUPTIONS = ["wheel", "touchstart", "pointerdown", "keydown"] as const;
 
 export function StageViewport({
@@ -52,7 +46,7 @@ export function StageViewport({
   const [measure, size] = useElementSize<HTMLDivElement>();
   const scale = size.width / after.viewport.width;
   const scroller = useRef<HTMLElement>(null);
-  const glide = useRef<AnimationPlaybackControls | null>(null);
+  const glide = useRef<number | null>(null);
   const group = useRef<SectionId>(map.groupAt(initialScroll));
   const { scrollA, scrollB, beforeY } = useFrameScroll(scroller, map, scale, initialScroll);
   const outerClip = useLiveStyle<HTMLDivElement>(
@@ -86,7 +80,7 @@ export function StageViewport({
     const element = scroller.current;
     if (!element) return;
     const cancelGlide = () => {
-      glide.current?.stop();
+      if (glide.current !== null) cancelAnimationFrame(glide.current);
       glide.current = null;
     };
     for (const name of INTERRUPTIONS)
@@ -106,18 +100,21 @@ export function StageViewport({
       glideTo(pagePx, seconds) {
         const element = scroller.current;
         if (!element || scale === 0) return;
-        glide.current?.stop();
+        if (glide.current !== null) cancelAnimationFrame(glide.current);
+        glide.current = null;
+        const target = pagePx * scale;
         if (seconds === 0) {
-          element.scrollTop = pagePx * scale;
+          element.scrollTop = target;
           return;
         }
-        glide.current = animate(element.scrollTop, pagePx * scale, {
-          duration: seconds,
-          ease: GLIDE_EASE,
-          onUpdate: (value) => {
-            element.scrollTop = value;
-          },
-        });
+        const from = element.scrollTop;
+        const startedAt = performance.now();
+        const step = (now: number) => {
+          const t = Math.min(1, Math.max(0, (now - startedAt) / (seconds * 1000)));
+          element.scrollTop = lerp(from, target, easeInOutCubic(t));
+          glide.current = t < 1 ? requestAnimationFrame(step) : null;
+        };
+        glide.current = requestAnimationFrame(step);
       },
       getScroll: () => scrollA.get(),
     }),

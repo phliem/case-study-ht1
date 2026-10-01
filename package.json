@@ -19,7 +19,10 @@
     "capture:serve": "tsx capture/serve.ts",
     "capture:clean": "tsx capture/clean.ts",
     "capture": "tsx capture/capture.ts",
-    "review": "REVIEW=1 playwright test --grep @review"
+    "review": "REVIEW=1 playwright test --grep @review",
+    "og": "OG=1 playwright test --grep @og",
+    "budget": "tsx scripts/budget.ts",
+    "capture:compare": "tsx capture/compareLive.ts"
   },
   "dependencies": {
     "motion": "13.5.0",
