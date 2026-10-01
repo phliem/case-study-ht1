@@ -4,6 +4,8 @@ import { CaseHeader } from "./components/CaseHeader";
 import { ComparisonStage } from "./components/ComparisonStage";
 import { DesignDiff } from "./components/DesignDiff";
 import { GlowBackground } from "./components/GlowBackground";
+import { ShipTimeline } from "./components/ShipTimeline";
+import { SiteCredits } from "./components/SiteCredits";
 import { MotionPreferenceContext } from "./hooks/useMotionPreference";
 import { parseUrlOptions } from "./lib/urlOptions";
 
@@ -27,7 +29,9 @@ export function App() {
               <main className="pb-24">
                 <ComparisonStage options={options} />
                 <DesignDiff />
+                <ShipTimeline />
               </main>
+              <SiteCredits />
             </>
           ) : (
             <ComparisonStage options={options} />
