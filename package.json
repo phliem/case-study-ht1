@@ -15,7 +15,9 @@
     "test": "vitest run",
     "e2e": "playwright test --grep-invert \"@review|@og\"",
     "lint": "biome check .",
-    "lint:fix": "biome check --write ."
+    "lint:fix": "biome check --write .",
+    "capture:serve": "tsx capture/serve.ts",
+    "capture:clean": "tsx capture/clean.ts"
   },
   "dependencies": {
     "motion": "13.5.0",
