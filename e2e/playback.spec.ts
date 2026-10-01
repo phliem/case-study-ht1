@@ -6,8 +6,8 @@ const SLIDER = { name: "Divider between before and after" };
 test("Play runs the tour on its own", async ({ page }) => {
   await page.goto("/");
   await stageRegion(page).scrollIntoViewIfNeeded();
-  await page.getByRole("button", { name: "Play" }).click();
-  await expect(page.getByRole("button", { name: "Stop" })).toBeVisible();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Stop", exact: true })).toBeVisible();
   const slider = page.getByRole("slider", SLIDER);
   const first = await slider.inputValue();
   await expect.poll(() => slider.inputValue(), { timeout: 3000 }).not.toBe(first);
@@ -16,13 +16,13 @@ test("Play runs the tour on its own", async ({ page }) => {
 test("any input during Play stops it", async ({ page }) => {
   await page.goto("/");
   await stageRegion(page).scrollIntoViewIfNeeded();
-  await page.getByRole("button", { name: "Play" }).click();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.waitForTimeout(600);
   const viewport = await page.getByTestId("stage-viewport").boundingBox();
   if (!viewport) throw new Error("The stage has not laid out");
   await page.mouse.move(viewport.x + viewport.width * 0.7, viewport.y + viewport.height * 0.5);
   await page.mouse.wheel(0, 120);
-  await expect(page.getByRole("button", { name: "Play" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Play", exact: true })).toBeVisible();
   const slider = page.getByRole("slider", SLIDER);
   const held = await slider.inputValue();
   await page.waitForTimeout(500);
@@ -46,7 +46,7 @@ test("with reduced motion the loops stay off and Play cuts instead of sweeping",
   await page.goto("/");
   await expect(page.getByTestId("live-loop")).toHaveCount(0);
   await stageRegion(page).scrollIntoViewIfNeeded();
-  await page.getByRole("button", { name: "Play" }).click();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
   await expect(page.getByRole("slider", SLIDER)).toHaveValue("0", { timeout: 400 });
 });
 
