@@ -1,10 +1,11 @@
 import { AnimatePresence, m } from "motion/react";
-import { CHANGES } from "../data/changes";
-import { SECTION_LABELS } from "../data/sections";
-import type { SectionId } from "../data/types";
+import { useId } from "react";
+import { changesFor } from "../data/changes";
+import { sectionLabel } from "../data/pages";
+import type { PageId, SectionId } from "../data/types";
 import { useMotionPreference } from "../hooks/useMotionPreference";
 
-type ChangeCalloutsProps = { group: SectionId };
+type ChangeCalloutsProps = { page: PageId; group: SectionId };
 
 const LIST = { hidden: {}, shown: { transition: { staggerChildren: 0.08 } } };
 const ITEM = {
@@ -12,12 +13,13 @@ const ITEM = {
   shown: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
-export function ChangeCallouts({ group }: ChangeCalloutsProps) {
+export function ChangeCallouts({ page, group }: ChangeCalloutsProps) {
   const { reduced } = useMotionPreference();
+  const headingId = useId();
   return (
-    <aside aria-labelledby="callouts-heading" className="max-w-[420px]">
-      <p id="callouts-heading" className="caption text-mint">
-        What changed · {SECTION_LABELS[group]}
+    <aside aria-labelledby={headingId} className="max-w-[420px]">
+      <p id={headingId} className="caption text-mint">
+        What changed · {sectionLabel(page, group)}
       </p>
       <AnimatePresence mode="wait" initial={false}>
         <m.ul
@@ -28,7 +30,7 @@ export function ChangeCallouts({ group }: ChangeCalloutsProps) {
           animate="shown"
           exit={reduced ? undefined : { opacity: 0, transition: { duration: 0.15 } }}
         >
-          {CHANGES[group].map((note) => (
+          {changesFor(page, group).map((note) => (
             <m.li
               key={note}
               variants={reduced ? undefined : ITEM}

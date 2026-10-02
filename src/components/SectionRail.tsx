@@ -1,10 +1,11 @@
 import { m } from "motion/react";
-import { SECTION_IDS, SECTION_LABELS } from "../data/sections";
-import type { SectionId } from "../data/types";
+import { PAGES } from "../data/pages";
+import type { PageId, SectionId } from "../data/types";
 
 export type RailLayout = "responsive" | "vertical" | "horizontal";
 
 type SectionRailProps = {
+  page: PageId;
   active: SectionId;
   onSelect: (id: SectionId) => void;
   layout: RailLayout;
@@ -17,11 +18,12 @@ const LIST: Record<RailLayout, string> = {
   horizontal: "flex flex-wrap justify-center gap-1",
 };
 
-export function SectionRail({ active, onSelect, layout }: SectionRailProps) {
+export function SectionRail({ page, active, onSelect, layout }: SectionRailProps) {
+  const { name, sections } = PAGES[page];
   return (
-    <nav aria-label="Homepage sections">
+    <nav aria-label={`${name} sections`}>
       <ol className={LIST[layout]}>
-        {SECTION_IDS.map((id) => (
+        {sections.map(({ id, label }) => (
           <li key={id} className="shrink-0">
             <button
               type="button"
@@ -36,7 +38,7 @@ export function SectionRail({ active, onSelect, layout }: SectionRailProps) {
                   transition={{ type: "spring", stiffness: 420, damping: 36 }}
                 />
               )}
-              <span className="relative">{SECTION_LABELS[id]}</span>
+              <span className="relative">{label}</span>
             </button>
           </li>
         ))}

@@ -4,10 +4,10 @@ import { createSectionMap, type PageLayout } from "./sectionMap";
 
 const IDS: readonly SectionId[] = ["hero", "proof", "how", "faq-about", "areas", "footer"];
 
-function layout(heights: readonly number[]): PageLayout {
+function layout(heights: readonly number[], ids: readonly SectionId[] = IDS): PageLayout {
   let top = 0;
   const sections: SectionTop[] = heights.map((height, index) => {
-    const section = { id: IDS[index], top };
+    const section = { id: ids[index], top };
     top += height;
     return section;
   });
@@ -111,5 +111,18 @@ describe("createSectionMap", () => {
     expect(map.maxScrollA).toBe(0);
     expect(map.mapScroll(0)).toBe(0);
     expect(map.groupAt(0)).toBe("hero");
+  });
+
+  it("holds the before page still while the after page scrolls through a group it lacks", () => {
+    const ids: readonly SectionId[] = ["title", "guide", "questions", "next", "footer"];
+    const after = layout([600, 2400, 500, 700, 600], ids);
+    const before = layout([400, 1200, 0, 150, 500], ids);
+    const map = createSectionMap(after, before, VIEWPORT);
+    const enter = scrollAnchoredAt(after.sections[2].top + 1, after, map.maxScrollA);
+    const leave = scrollAnchoredAt(after.sections[3].top - 1, after, map.maxScrollA);
+    const held = scrollAnchoredAt(before.sections[2].top, before, map.maxScrollB);
+    expect(map.mapScroll(enter)).toBeCloseTo(held, 6);
+    expect(map.mapScroll(leave)).toBeCloseTo(held, 6);
+    expect(map.groupAt(enter)).toBe("questions");
   });
 });

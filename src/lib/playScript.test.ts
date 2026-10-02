@@ -1,20 +1,18 @@
 import { describe, expect, it } from "vitest";
-import type { SectionId } from "../data/types";
-import {
-  durationOf,
-  FULL_TOUR,
-  type PlayScript,
-  type ScrollResolver,
-  SHORT_TOUR,
-  stateAt,
-} from "./playScript";
+import { PAGE_IDS, sectionIds } from "../data/pages";
+import type { Device, SectionId } from "../data/types";
+import { durationOf, type PlayScript, type ScrollResolver, stateAt, TOURS } from "./playScript";
 
-const TOPS: Record<"desktop" | "mobile", Record<SectionId, number>> = {
+const FULL_TOUR = TOURS.home.full;
+const SHORT_TOUR = TOURS.home.short;
+
+const TOPS: Record<Device, Partial<Record<SectionId, number>>> = {
   desktop: { hero: 0, proof: 1000, how: 2000, "faq-about": 3000, areas: 4000, footer: 4500 },
   mobile: { hero: 0, proof: 3000, how: 6000, "faq-about": 9000, areas: 12000, footer: 13000 },
 };
 
-const resolve: ScrollResolver = (device, target) => (target === "top" ? 0 : TOPS[device][target]);
+const resolve: ScrollResolver = (device, target) =>
+  target === "top" ? 0 : (TOPS[device][target] ?? Number.NaN);
 
 function startOf(script: PlayScript, index: number): number {
   return script.steps.slice(0, index).reduce((total, step) => total + step.ms, 0);
@@ -87,5 +85,40 @@ describe("stateAt", () => {
     const end = stateAt(SHORT_TOUR, durationOf(SHORT_TOUR), resolve);
     expect(end).toMatchObject({ device: "desktop", scrollTop: 0 });
     expect(end.divider).toBeCloseTo(0.5, 6);
+  });
+});
+
+function glideStops(script: PlayScript): string[] {
+  return script.steps.flatMap((step) => (step.kind === "glide" ? [step.to] : []));
+}
+
+describe("TOURS", () => {
+  it("keeps the homepage tours as they were", () => {
+    expect(durationOf(TOURS.home.full)).toBe(34_000);
+    expect(durationOf(TOURS.home.short)).toBe(14_800);
+    expect(glideStops(TOURS.home.full)).toEqual([
+      "proof",
+      "how",
+      "faq-about",
+      "areas",
+      "footer",
+      "top",
+      "proof",
+      "how",
+      "top",
+    ]);
+  });
+
+  it("only glides to groups of its own page", () => {
+    for (const page of PAGE_IDS) {
+      const groups = new Set<string>(["top", ...sectionIds(page)]);
+      for (const script of [TOURS[page].full, TOURS[page].short]) {
+        expect(glideStops(script).filter((stop) => !groups.has(stop))).toEqual([]);
+      }
+    }
+  });
+
+  it("keeps every short tour under 20 seconds", () => {
+    for (const page of PAGE_IDS) expect(durationOf(TOURS[page].short)).toBeLessThan(20_000);
   });
 });

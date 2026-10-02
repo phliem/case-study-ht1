@@ -4,7 +4,7 @@ import { captureFor } from "../data/captures";
 import type { Device, SectionId } from "../data/types";
 import { useMotionPreference } from "../hooks/useMotionPreference";
 import { type PlaybackTargets, usePlayback } from "../hooks/usePlayback";
-import { FULL_TOUR, SHORT_TOUR } from "../lib/playScript";
+import { TOURS } from "../lib/playScript";
 import { createSectionMap, type SectionMap } from "../lib/sectionMap";
 import type { RecordAspect, UrlOptions } from "../lib/urlOptions";
 import { ChangeCallouts } from "./ChangeCallouts";
@@ -107,7 +107,7 @@ export function ComparisonStage({ options }: ComparisonStageProps) {
     [divider],
   );
 
-  const script = options.tour === "short" ? SHORT_TOUR : FULL_TOUR;
+  const script = TOURS.home[options.tour];
   const { playing, play, stop } = usePlayback(script, targets, {
     loop: options.record !== null,
     cut: reduced,
@@ -148,7 +148,7 @@ export function ComparisonStage({ options }: ComparisonStageProps) {
       <div className={layout.box}>
         <div className={layout.grid}>
           <div className={layout.side}>
-            <SectionRail active={group} onSelect={glideTo} layout={layout.rail} />
+            <SectionRail page="home" active={group} onSelect={glideTo} layout={layout.rail} />
           </div>
           <div className={layout.frame}>
             <DeviceFrame device={device} viewport={after.viewport}>
@@ -165,7 +165,7 @@ export function ComparisonStage({ options }: ComparisonStageProps) {
             </DeviceFrame>
           </div>
           <div className={layout.side}>
-            <ChangeCallouts group={group} />
+            <ChangeCallouts page="home" group={group} />
           </div>
         </div>
         {options.record === null && (

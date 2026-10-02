@@ -1,4 +1,4 @@
-import type { Device, SectionId } from "../data/types";
+import type { Device, PageId, SectionId } from "../data/types";
 import { easeInOutCubic, lerp } from "./math";
 
 export type ScrollTarget = SectionId | "top";
@@ -44,26 +44,50 @@ const MOBILE_SWEEP: PlayStep[] = [
   { kind: "divider", to: 0.5, ms: 600 },
 ];
 
-export const FULL_TOUR: PlayScript = {
-  start: { device: "desktop", divider: 1 },
-  steps: [
-    ...OPENING_SWEEP,
-    ...tour(["proof", "how", "faq-about", "areas", "footer"]),
-    ...MOBILE_SWEEP,
-    ...tour(["proof", "how"]),
-    { kind: "glide", to: "top", ms: 1200 },
-    { kind: "device", to: "desktop", ms: 800 },
-  ],
-};
+function fullTour(
+  desktopStops: readonly SectionId[],
+  mobileStops: readonly SectionId[],
+): PlayScript {
+  return {
+    start: { device: "desktop", divider: 1 },
+    steps: [
+      ...OPENING_SWEEP,
+      ...tour(desktopStops),
+      ...MOBILE_SWEEP,
+      ...tour(mobileStops),
+      { kind: "glide", to: "top", ms: 1200 },
+      { kind: "device", to: "desktop", ms: 800 },
+    ],
+  };
+}
 
-export const SHORT_TOUR: PlayScript = {
-  start: { device: "desktop", divider: 1 },
-  steps: [
-    ...OPENING_SWEEP,
-    ...tour(["proof", "how"]),
-    ...MOBILE_SWEEP,
-    { kind: "device", to: "desktop", ms: 800 },
-  ],
+function shortTour(stops: readonly SectionId[]): PlayScript {
+  return {
+    start: { device: "desktop", divider: 1 },
+    steps: [
+      ...OPENING_SWEEP,
+      ...tour(stops),
+      ...MOBILE_SWEEP,
+      { kind: "device", to: "desktop", ms: 800 },
+    ],
+  };
+}
+
+export type Tours = { full: PlayScript; short: PlayScript };
+
+export const TOURS: Record<PageId, Tours> = {
+  home: {
+    full: fullTour(["proof", "how", "faq-about", "areas", "footer"], ["proof", "how"]),
+    short: shortTour(["proof", "how"]),
+  },
+  article: {
+    full: fullTour(["guide", "questions", "next", "footer"], ["guide", "questions"]),
+    short: shortTour(["guide", "questions"]),
+  },
+  help: {
+    full: fullTour(["questions", "more-help", "footer"], ["questions", "more-help"]),
+    short: shortTour(["questions", "more-help"]),
+  },
 };
 
 export function durationOf(script: PlayScript): number {

@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { CAPTURES } from "./captures";
+import { sectionIds } from "./pages";
 
 const PUBLIC = join(import.meta.dirname, "../../public");
 
@@ -18,5 +19,11 @@ describe("captures.json", () => {
     ]);
     paths.push(CAPTURES.specimens.frutiger);
     expect(paths.filter((path) => !existsSync(join(PUBLIC, path)))).toEqual([]);
+  });
+
+  it("groups every capture by its page's groups", () => {
+    for (const capture of CAPTURES.captures) {
+      expect(capture.sections.map((section) => section.id)).toEqual(sectionIds(capture.page));
+    }
   });
 });
