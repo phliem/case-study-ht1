@@ -5,7 +5,7 @@ import { ComparisonStage } from "./components/ComparisonStage";
 import { DeferredDesignDiff } from "./components/DeferredDesignDiff";
 import { GlowBackground } from "./components/GlowBackground";
 import { SiteCredits } from "./components/SiteCredits";
-import { PAGE_IDS } from "./data/pages";
+import { VIEWS } from "./data/views";
 import { MotionPreferenceContext } from "./hooks/useMotionPreference";
 import { parseUrlOptions } from "./lib/urlOptions";
 
@@ -27,7 +27,7 @@ export function App() {
               <GlowBackground />
               <CaseHeader />
               <main className="pb-24">
-                {PAGE_IDS.map((page, index) => (
+                {VIEWS.main.map((page, index) => (
                   <ComparisonStage key={page} page={page} options={options} eager={index === 0} />
                 ))}
                 <DeferredDesignDiff />

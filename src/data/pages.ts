@@ -2,15 +2,15 @@ import type { PageId, SectionId, SectionIdOf } from "./types";
 
 export type PageSection = { id: SectionId; label: string };
 
+export type StageIntroCopy = { number: string; summary: string; shipped: string };
+
 export type PageInfo = {
   id: PageId;
-  number: string;
   name: string;
   noun: string;
-  summary: string;
   route: { before: string; after: string };
-  shipped: string;
   sections: readonly PageSection[];
+  intro: StageIntroCopy | null;
 };
 
 type SectionsOf<P extends PageId> = readonly { id: SectionIdOf[P]; label: string }[];
@@ -39,41 +39,63 @@ const HELP_SECTIONS = [
   { id: "footer", label: "Footer" },
 ] as const satisfies SectionsOf<"help">;
 
-export const PAGE_IDS: readonly PageId[] = ["home", "article", "help"];
+const HOME_2025_SECTIONS = [
+  { id: "hero", label: "Hero" },
+  { id: "proof-how", label: "Reviews & how it works" },
+  { id: "faq-about", label: "FAQ & About" },
+  { id: "areas", label: "Areas" },
+  { id: "footer", label: "Footer" },
+] as const satisfies SectionsOf<"home-2025">;
+
+export const PAGE_IDS: readonly PageId[] = ["home", "article", "help", "home-2025"];
 
 export const PAGES: Record<PageId, PageInfo> = {
   home: {
     id: "home",
-    number: "01",
     name: "Homepage",
     noun: "homepage",
-    summary:
-      "The landing page: one postcode search at the heart of the hero, one testimonials section in place of three proof blocks, and a live vignette for each step of how it works.",
     route: { before: "/", after: "/" },
-    shipped: "29 Sept 2026",
     sections: HOME_SECTIONS,
+    intro: {
+      number: "01",
+      summary:
+        "The landing page: one postcode search at the heart of the hero, one testimonials section in place of three proof blocks, and a live vignette for each step of how it works.",
+      shipped: "29 Sept 2026",
+    },
   },
   article: {
     id: "article",
-    number: "02",
     name: "Guide article",
     noun: "guide article",
-    summary:
-      "A how-to page on the NHS design system becomes the v2 article template: a hero, a summary up top, a contents list that follows the reader on desktop, and questions answered in place.",
     route: { before: "/how-to/book-doctor-appointment-nhs", after: "/book-a-gp-appointment" },
-    shipped: "22 Sept 2026",
     sections: ARTICLE_SECTIONS,
+    intro: {
+      number: "02",
+      summary:
+        "A how-to page on the NHS design system becomes the v2 article template: a hero, a summary up top, a contents list that follows the reader on desktop, and questions answered in place.",
+      shipped: "22 Sept 2026",
+    },
   },
   help: {
     id: "help",
-    number: "03",
     name: "Help centre",
     noun: "help centre",
-    summary:
-      "One long page of FAQ accordions becomes a help centre you can search, with popular questions up front and a page for every topic.",
     route: { before: "/faq", after: "/help" },
-    shipped: "11 Sept 2026",
     sections: HELP_SECTIONS,
+    intro: {
+      number: "03",
+      summary:
+        "One long page of FAQ accordions becomes a help centre you can search, with popular questions up front and a page for every topic.",
+      shipped: "11 Sept 2026",
+    },
+  },
+  "home-2025": {
+    id: "home-2025",
+    name: "Homepage",
+    noun: "homepage",
+    route: { before: "/", after: "/" },
+    sections: HOME_2025_SECTIONS,
+    intro: null,
   },
 };
 

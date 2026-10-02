@@ -1,4 +1,5 @@
 import { PAGE_IDS } from "../src/data/pages";
+import { isReused } from "../src/data/reuse";
 import type { Capture, CapturesFile, Device, Version } from "../src/data/types";
 
 export type HomeExtras = Omit<CapturesFile, "captures">;
@@ -19,11 +20,20 @@ export function mergeCaptures(
   const captures: Capture[] = [];
   for (const page of PAGE_IDS) {
     for (const version of VERSIONS) {
+      const reused = isReused(page, version);
       for (const device of DEVICES) {
         const matches = pool.filter(
           (capture) =>
             capture.page === page && capture.version === version && capture.device === device,
         );
+        if (reused) {
+          if (matches.length > 0) {
+            throw new Error(
+              `captures.json would hold a ${page} ${version} ${device} capture, but that side reuses another page's`,
+            );
+          }
+          continue;
+        }
         if (matches.length !== 1) {
           throw new Error(
             `captures.json would have ${matches.length} ${page} ${version} ${device} captures; capture ${page} as well`,

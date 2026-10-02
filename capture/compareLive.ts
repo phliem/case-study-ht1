@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { chromium } from "@playwright/test";
 import sharp from "sharp";
 import { PAGES } from "../src/data/pages";
+import { reusedAfter } from "../src/data/reuse";
 import type { CapturesFile, PageId } from "../src/data/types";
 import { pinnedStateIndex, pinnedTop } from "../src/lib/pinned";
 import { parseCaptureArgs } from "./args";
@@ -68,6 +69,11 @@ async function main() {
   const out = join(ROOT, ".capture");
   mkdirSync(out, { recursive: true });
   for (const page of pages) {
+    const reuse = reusedAfter(page);
+    if (reuse) {
+      console.log(`Skipping ${page}: its after side is the ${reuse.from} capture, so compare that`);
+      continue;
+    }
     const captured = await capturedTop(file, page);
     const live = await liveTop(page, captured.width, captured.height);
     const target = join(out, `live-vs-capture-${page}.png`);

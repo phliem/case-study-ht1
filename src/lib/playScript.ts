@@ -88,6 +88,10 @@ export const TOURS: Record<PageId, Tours> = {
     full: fullTour(["questions", "more-help", "footer"], ["questions", "more-help"]),
     short: shortTour(["questions", "more-help"]),
   },
+  "home-2025": {
+    full: fullTour(["proof-how", "faq-about", "areas", "footer"], ["proof-how", "faq-about"]),
+    short: shortTour(["proof-how", "faq-about"]),
+  },
 };
 
 export function durationOf(script: PlayScript): number {

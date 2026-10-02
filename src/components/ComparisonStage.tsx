@@ -40,6 +40,7 @@ const MAPS: Record<PageId, DeviceMaps> = {
   home: mapsFor("home"),
   article: mapsFor("article"),
   help: mapsFor("help"),
+  "home-2025": mapsFor("home-2025"),
 };
 
 const INPUTS = ["pointerdown", "wheel", "keydown", "touchstart"] as const;
@@ -163,7 +164,9 @@ export function ComparisonStage({ page, options, eager }: ComparisonStageProps) 
       className={layout.root}
     >
       <LayoutGroup id={page}>
-        {!recording && <StageIntro page={page} headingId={headingId} />}
+        {!recording && info.intro && (
+          <StageIntro page={page} intro={info.intro} headingId={headingId} />
+        )}
         <div className={layout.box}>
           <div data-testid="stage-grid" className={layout.grid}>
             <div className={layout.side}>

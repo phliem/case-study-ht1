@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
-import { PAGE_IDS, PAGES } from "../src/data/pages";
+import { PAGES } from "../src/data/pages";
+import { VIEWS } from "../src/data/views";
 import { dividerSlider, openStage } from "./stageHelpers";
 
 test("loads with its title and no console errors", async ({ page }) => {
@@ -34,7 +35,7 @@ test("credits the captures", async ({ page }) => {
 
 test("shows the three comparisons, each under its own names", async ({ page }) => {
   await page.goto("/?page=help");
-  for (const id of PAGE_IDS) {
+  for (const id of VIEWS.main) {
     const { name } = PAGES[id];
     await expect(page.getByRole("region", { name, exact: true })).toHaveCount(1);
     await expect(

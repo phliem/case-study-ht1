@@ -1,12 +1,18 @@
 import { expect, test } from "@playwright/test";
-import { PAGE_IDS, PAGES } from "../src/data/pages";
+import { PAGES } from "../src/data/pages";
 import type { PageId, SectionId } from "../src/data/types";
+import { VIEWS } from "../src/data/views";
 import { captureOf, scrollForAnchor, scrollToMiddleOf, spanOf } from "./captureData";
 import { beforeAnchor, dividerSlider, openStage, scrollAfterTo, stageRegion } from "./stageHelpers";
 
-const MIDDLE: Record<PageId, SectionId> = { home: "how", article: "guide", help: "questions" };
+const MIDDLE: Record<PageId, SectionId> = {
+  home: "how",
+  article: "guide",
+  help: "questions",
+  "home-2025": "proof-how",
+};
 
-for (const id of PAGE_IDS) {
+for (const id of VIEWS.main) {
   const after = captureOf(id, "after", "desktop");
   const before = captureOf(id, "before", "desktop");
   const middle = MIDDLE[id];

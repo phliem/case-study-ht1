@@ -70,6 +70,30 @@ export const CHANGES: PageChanges = {
       "On phones its nav becomes full-width rows and the legal links a two-column grid.",
     ],
   },
+  "home-2025": {
+    hero: [
+      'The headline "Get an appointment with a new GP surgery this week." becomes "Register and book with an NHS GP".',
+      'A boxed postcode form under an "appointments available" count becomes the hero\'s single control: one postcode search, with a reel of appointment cards beside it on desktop.',
+      'The NHS-blue header and its "Providing NHS services" logo give way to Bookable\'s own, which lies clear over the hero until the page moves.',
+    ],
+    "proof-how": [
+      "Reviews move above how it works.",
+      "Thirteen star-rated reviews in a strip that scrolls sideways become one testimonials section, with headline figures under the quotes.",
+      "Three bulleted steps become a looping product vignette each, labelled Step 1, Step 2, Step 3.",
+    ],
+    "faq-about": [
+      'Five NHS accordions under "Frequently asked questions" become a new five under "Questions before you start".',
+      'New in v2: "About finding an NHS GP in England" follows them.',
+    ],
+    areas: [
+      'New in v2: "Find an NHS GP surgery in your area", with the areas where Bookable is live underneath.',
+      "The 2025 homepage had no areas section, so its side waits here while v2 scrolls past.",
+    ],
+    footer: [
+      'The NHS footer, with three links, "Made with 💙 in Stratford" and a copyright line, becomes the site-wide v2 footer: brand, inline nav, the 111/999 disclaimer and legal links.',
+      "On phones the nav becomes 56px full-width rows and the legal links a two-column grid.",
+    ],
+  },
 };
 
 export function changesFor(page: PageId, id: SectionId): readonly string[] {
