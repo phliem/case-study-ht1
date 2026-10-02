@@ -8,10 +8,11 @@ type PageLayerProps = {
   scale: number;
   alt: string;
   live: boolean;
+  eager: boolean;
   root: RefObject<Element | null>;
 };
 
-export function PageLayer({ capture, scale, alt, live, root }: PageLayerProps) {
+export function PageLayer({ capture, scale, alt, live, eager, root }: PageLayerProps) {
   return (
     <div
       className="absolute top-0 left-0 origin-top-left"
@@ -26,7 +27,7 @@ export function PageLayer({ capture, scale, alt, live, root }: PageLayerProps) {
           key={tile.webp}
           tile={tile}
           width={capture.viewport.width}
-          eager={index === 0}
+          eager={eager && index === 0}
           alt={index === 0 ? alt : ""}
         />
       ))}

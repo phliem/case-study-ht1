@@ -1,7 +1,8 @@
-import { useMotionValue } from "motion/react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { LayoutGroup, useMotionValue } from "motion/react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { captureFor } from "../data/captures";
-import type { Device, SectionId } from "../data/types";
+import { addressOf, PAGES } from "../data/pages";
+import type { Device, PageId, SectionId } from "../data/types";
 import { useMotionPreference } from "../hooks/useMotionPreference";
 import { type PlaybackTargets, usePlayback } from "../hooks/usePlayback";
 import { TOURS } from "../lib/playScript";
@@ -11,9 +12,10 @@ import { ChangeCallouts } from "./ChangeCallouts";
 import { DeviceFrame } from "./DeviceFrame";
 import { type RailLayout, SectionRail } from "./SectionRail";
 import { StageControls } from "./StageControls";
+import { StageIntro } from "./StageIntro";
 import { StageViewport, type StageViewportHandle } from "./StageViewport";
 
-type ComparisonStageProps = { options: UrlOptions };
+type ComparisonStageProps = { page: PageId; options: UrlOptions; eager: boolean };
 
 type StageLayout = {
   root: string;
@@ -24,12 +26,21 @@ type StageLayout = {
   rail: RailLayout;
 };
 
-function mapFor(device: Device): SectionMap {
-  const after = captureFor("home", "after", device);
-  return createSectionMap(after, captureFor("home", "before", device), after.viewport.height);
+type DeviceMaps = Record<Device, SectionMap>;
+
+function mapsFor(page: PageId): DeviceMaps {
+  const mapFor = (device: Device) => {
+    const after = captureFor(page, "after", device);
+    return createSectionMap(after, captureFor(page, "before", device), after.viewport.height);
+  };
+  return { desktop: mapFor("desktop"), mobile: mapFor("mobile") };
 }
 
-const MAPS: Record<Device, SectionMap> = { desktop: mapFor("desktop"), mobile: mapFor("mobile") };
+const MAPS: Record<PageId, DeviceMaps> = {
+  home: mapsFor("home"),
+  article: mapsFor("article"),
+  help: mapsFor("help"),
+};
 
 const INPUTS = ["pointerdown", "wheel", "keydown", "touchstart"] as const;
 
@@ -66,14 +77,16 @@ function initialDevice(): Device {
   return window.innerWidth < 768 ? "mobile" : "desktop";
 }
 
-export function ComparisonStage({ options }: ComparisonStageProps) {
+export function ComparisonStage({ page, options, eager }: ComparisonStageProps) {
   const { reduced } = useMotionPreference();
+  const info = PAGES[page];
+  const maps = MAPS[page];
+  const recording = options.record !== null;
+  const headingId = useId();
   const layout = options.record === null ? PAGE_LAYOUT : RECORD_LAYOUTS[options.record];
-  const [device, setDevice] = useState<Device>(() =>
-    options.record === null ? initialDevice() : "desktop",
-  );
-  const [group, setGroup] = useState<SectionId>("hero");
-  const divider = useMotionValue(options.record === null ? 0.5 : 1);
+  const [device, setDevice] = useState<Device>(() => (recording ? "desktop" : initialDevice()));
+  const [group, setGroup] = useState<SectionId>(info.sections[0].id);
+  const divider = useMotionValue(recording ? 1 : 0.5);
   const stage = useRef<HTMLElement>(null);
   const viewport = useRef<StageViewportHandle>(null);
   const deviceRef = useRef(device);
@@ -83,19 +96,22 @@ export function ComparisonStage({ options }: ComparisonStageProps) {
     deviceRef.current = device;
   }, [device]);
 
-  const changeDevice = useCallback((next: Device) => {
-    const current = deviceRef.current;
-    if (next === current) return;
-    const scroll = viewport.current?.getScroll() ?? 0;
-    pendingScroll.current = MAPS[next].scrollForGroup(MAPS[current].groupAt(scroll));
-    setDevice(next);
-  }, []);
+  const changeDevice = useCallback(
+    (next: Device) => {
+      const current = deviceRef.current;
+      if (next === current) return;
+      const scroll = viewport.current?.getScroll() ?? 0;
+      pendingScroll.current = maps[next].scrollForGroup(maps[current].groupAt(scroll));
+      setDevice(next);
+    },
+    [maps],
+  );
 
   const targets = useMemo<PlaybackTargets>(
     () => ({
       divider,
       resolve: (forDevice, target) =>
-        target === "top" ? 0 : MAPS[forDevice].scrollForGroup(target),
+        target === "top" ? 0 : maps[forDevice].scrollForGroup(target),
       setDevice: (next, scrollTop) => {
         pendingScroll.current = scrollTop;
         setDevice(next);
@@ -104,18 +120,17 @@ export function ComparisonStage({ options }: ComparisonStageProps) {
         if (onDevice === deviceRef.current) viewport.current?.scrollTo(pagePx);
       },
     }),
-    [divider],
+    [divider, maps],
   );
 
-  const script = TOURS.home[options.tour];
-  const { playing, play, stop } = usePlayback(script, targets, {
-    loop: options.record !== null,
+  const { playing, play, stop } = usePlayback(TOURS[page][options.tour], targets, {
+    loop: recording,
     cut: reduced,
   });
 
   useEffect(() => {
-    if (options.record !== null) play();
-  }, [options.record, play]);
+    if (recording) play();
+  }, [recording, play]);
 
   useEffect(() => {
     const element = stage.current;
@@ -132,51 +147,57 @@ export function ComparisonStage({ options }: ComparisonStageProps) {
 
   const glideTo = useCallback(
     (id: SectionId) => {
-      viewport.current?.glideTo(MAPS[deviceRef.current].scrollForGroup(id), reduced ? 0 : 0.9);
+      viewport.current?.glideTo(maps[deviceRef.current].scrollForGroup(id), reduced ? 0 : 0.9);
     },
-    [reduced],
+    [maps, reduced],
   );
 
-  const after = captureFor("home", "after", device);
+  const after = captureFor(page, "after", device);
   return (
     <section
       ref={stage}
-      aria-label="Before and after comparison"
+      aria-labelledby={recording ? undefined : headingId}
+      aria-label={recording ? info.name : undefined}
       data-group={group}
       className={layout.root}
     >
-      <div className={layout.box}>
-        <div className={layout.grid}>
-          <div className={layout.side}>
-            <SectionRail page="home" active={group} onSelect={glideTo} layout={layout.rail} />
+      <LayoutGroup id={page}>
+        {!recording && <StageIntro page={page} headingId={headingId} />}
+        <div className={layout.box}>
+          <div data-testid="stage-grid" className={layout.grid}>
+            <div className={layout.side}>
+              <SectionRail page={page} active={group} onSelect={glideTo} layout={layout.rail} />
+            </div>
+            <div className={layout.frame}>
+              <DeviceFrame device={device} viewport={after.viewport} address={addressOf(page)}>
+                <StageViewport
+                  key={device}
+                  ref={viewport}
+                  page={page}
+                  device={device}
+                  divider={divider}
+                  map={maps[device]}
+                  live={!reduced}
+                  eager={eager}
+                  initialScroll={pendingScroll.current}
+                  onGroupChange={setGroup}
+                />
+              </DeviceFrame>
+            </div>
+            <div className={layout.side}>
+              <ChangeCallouts page={page} group={group} />
+            </div>
           </div>
-          <div className={layout.frame}>
-            <DeviceFrame device={device} viewport={after.viewport}>
-              <StageViewport
-                key={device}
-                ref={viewport}
-                device={device}
-                divider={divider}
-                map={MAPS[device]}
-                live={!reduced}
-                initialScroll={pendingScroll.current}
-                onGroupChange={setGroup}
-              />
-            </DeviceFrame>
-          </div>
-          <div className={layout.side}>
-            <ChangeCallouts page="home" group={group} />
-          </div>
+          {!recording && (
+            <StageControls
+              device={device}
+              onDeviceChange={changeDevice}
+              playing={playing}
+              onTogglePlay={playing ? stop : play}
+            />
+          )}
         </div>
-        {options.record === null && (
-          <StageControls
-            device={device}
-            onDeviceChange={changeDevice}
-            playing={playing}
-            onTogglePlay={playing ? stop : play}
-          />
-        )}
-      </div>
+      </LayoutGroup>
     </section>
   );
 }

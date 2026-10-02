@@ -1,7 +1,8 @@
 import { type MotionValue, m, useMotionValueEvent } from "motion/react";
 import { type Ref, useEffect, useImperativeHandle, useRef } from "react";
 import { captureFor } from "../data/captures";
-import type { Device, SectionId } from "../data/types";
+import { PAGES } from "../data/pages";
+import type { Device, PageId, SectionId } from "../data/types";
 import { useElementSize } from "../hooks/useElementSize";
 import { useFrameScroll } from "../hooks/useFrameScroll";
 import { useLiveStyle } from "../hooks/useLiveStyle";
@@ -20,10 +21,12 @@ export type StageViewportHandle = {
 };
 
 type StageViewportProps = {
+  page: PageId;
   device: Device;
   divider: MotionValue<number>;
   map: SectionMap;
   live: boolean;
+  eager: boolean;
   initialScroll: number;
   onGroupChange: (id: SectionId) => void;
   ref?: Ref<StageViewportHandle>;
@@ -32,17 +35,20 @@ type StageViewportProps = {
 const INTERRUPTIONS = ["wheel", "touchstart", "pointerdown", "keydown"] as const;
 
 export function StageViewport({
+  page,
   device,
   divider,
   map,
   live,
+  eager,
   initialScroll,
   onGroupChange,
   ref,
 }: StageViewportProps) {
   const { reduced } = useMotionPreference();
-  const before = captureFor("home", "before", device);
-  const after = captureFor("home", "after", device);
+  const { name, noun } = PAGES[page];
+  const before = captureFor(page, "before", device);
+  const after = captureFor(page, "after", device);
   const [measure, size] = useElementSize<HTMLDivElement>();
   const scale = size.width / after.viewport.width;
   const scroller = useRef<HTMLElement>(null);
@@ -135,7 +141,7 @@ export function StageViewport({
       <section
         ref={scroller}
         data-testid="after-scroller"
-        aria-label="After: the v2 homepage. Scroll to move both versions together."
+        aria-label={`After: the v2 ${noun}. Scroll to move both versions together.`}
         className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain pointer-coarse:overscroll-auto [scrollbar-width:none]"
       >
         <div className="relative" style={{ height: after.pageHeight * scale }}>
@@ -143,8 +149,9 @@ export function StageViewport({
             capture={after}
             scale={scale}
             live={live}
+            eager={eager}
             root={scroller}
-            alt={`After: the Bookable homepage on its own design system, ${device}`}
+            alt={`After: the Bookable ${noun} on its own design system, ${device}`}
           />
         </div>
       </section>
@@ -153,6 +160,7 @@ export function StageViewport({
         width={after.viewport.width}
         scale={scale}
         scroll={scrollA}
+        eager={eager}
       />
       <div
         ref={outerClip.ref}
@@ -174,8 +182,9 @@ export function StageViewport({
               capture={before}
               scale={scale}
               live={false}
+              eager={eager}
               root={scroller}
-              alt={`Before: the Bookable homepage on the NHS design system, ${device}`}
+              alt={`Before: the Bookable ${noun} on the NHS design system, ${device}`}
             />
           </div>
           <PinnedLayers
@@ -183,10 +192,11 @@ export function StageViewport({
             width={before.viewport.width}
             scale={scale}
             scroll={scrollB}
+            eager={eager}
           />
         </div>
       </div>
-      <WipeDivider divider={divider} />
+      <WipeDivider divider={divider} label={`${name}: divider between before and after`} />
       <VersionLabels device={device} divider={divider} />
     </m.div>
   );

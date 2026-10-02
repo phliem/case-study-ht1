@@ -7,12 +7,13 @@ import { PhoneIsland } from "./PhoneIsland";
 type DeviceFrameProps = {
   device: Device;
   viewport: { width: number; height: number };
+  address: string;
   children: ReactNode;
 };
 
 const CHROME = { desktop: { x: 0, y: 44 }, mobile: { x: 24, y: 52 } } as const;
 
-export function DeviceFrame({ device, viewport, children }: DeviceFrameProps) {
+export function DeviceFrame({ device, viewport, address, children }: DeviceFrameProps) {
   const chrome = CHROME[device];
   const ratio = viewport.width / viewport.height;
   const desktop = device === "desktop";
@@ -30,7 +31,7 @@ export function DeviceFrame({ device, viewport, children }: DeviceFrameProps) {
         borderRadius: desktop ? 18 : 52,
       }}
     >
-      {desktop ? <BrowserChrome /> : <PhoneIsland />}
+      {desktop ? <BrowserChrome address={address} /> : <PhoneIsland />}
       <div
         className="relative overflow-hidden bg-ink-2"
         style={{

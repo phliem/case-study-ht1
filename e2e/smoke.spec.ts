@@ -1,4 +1,6 @@
 import { expect, test } from "@playwright/test";
+import { PAGE_IDS, PAGES } from "../src/data/pages";
+import { dividerSlider, openStage } from "./stageHelpers";
 
 test("loads with its title and no console errors", async ({ page }) => {
   const errors: string[] = [];
@@ -29,6 +31,19 @@ test("introduces the case study", async ({ page }) => {
 test("credits the captures", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("contentinfo")).toContainText("Frutiger is licensed to the NHS");
+});
+
+test("shows the three comparisons, each under its own names", async ({ page }) => {
+  await page.goto("/?page=help");
+  for (const id of PAGE_IDS) {
+    const { name } = PAGES[id];
+    await expect(page.getByRole("region", { name, exact: true })).toHaveCount(1);
+    await expect(
+      page.getByRole("navigation", { name: `${name} sections`, exact: true }),
+    ).toHaveCount(1);
+    await openStage(page, id);
+    await expect(dividerSlider(page, id)).toHaveCount(1);
+  }
 });
 
 test("@review the page top", async ({ page }) => {

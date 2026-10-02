@@ -5,9 +5,9 @@ import type { PinnedLayer } from "../data/types";
 import { useLiveStyle } from "../hooks/useLiveStyle";
 import { pinnedStateIndex, pinnedTop } from "../lib/pinned";
 
-type PinnedLayerViewProps = { layer: PinnedLayer; scroll: MotionValue<number> };
+type PinnedLayerViewProps = { layer: PinnedLayer; scroll: MotionValue<number>; eager: boolean };
 
-export function PinnedLayerView({ layer, scroll }: PinnedLayerViewProps) {
+export function PinnedLayerView({ layer, scroll, eager }: PinnedLayerViewProps) {
   const [shown, setShown] = useState(() => pinnedStateIndex(layer, scroll.get()));
   const position = useLiveStyle<HTMLDivElement>(
     scroll,
@@ -40,6 +40,8 @@ export function PinnedLayerView({ layer, scroll }: PinnedLayerViewProps) {
             alt=""
             width={Math.round(layer.width)}
             height={Math.round(state.height)}
+            loading={eager ? "eager" : "lazy"}
+            decoding="async"
             className="block max-w-none"
             style={{ width: layer.width, height: state.height }}
           />

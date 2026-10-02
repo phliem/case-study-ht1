@@ -30,7 +30,11 @@ export function anchorOf(capture: Capture, scroll: number): number {
   return (scroll / maxScrollOf(capture)) * capture.pageHeight;
 }
 
+export function scrollForAnchor(capture: Capture, anchor: number): number {
+  return (anchor / capture.pageHeight) * maxScrollOf(capture);
+}
+
 export function scrollToMiddleOf(capture: Capture, id: SectionId): number {
   const span = spanOf(capture, id);
-  return ((span.start + span.end) / 2 / capture.pageHeight) * maxScrollOf(capture);
+  return scrollForAnchor(capture, (span.start + span.end) / 2);
 }

@@ -5,11 +5,11 @@ import { nextDividerValue } from "../lib/dividerKeys";
 import { clamp } from "../lib/math";
 import { HandleIcon } from "./HandleIcon";
 
-type WipeDividerProps = { divider: MotionValue<number> };
+type WipeDividerProps = { divider: MotionValue<number>; label: string };
 
 const toLeft = (share: number) => `${share * 100}%`;
 
-export function WipeDivider({ divider }: WipeDividerProps) {
+export function WipeDivider({ divider, label }: WipeDividerProps) {
   const track = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState(() => Math.round(divider.get() * 100));
   const line = useLiveStyle<HTMLDivElement>(divider, "left", toLeft);
@@ -31,7 +31,7 @@ export function WipeDivider({ divider }: WipeDividerProps) {
         max={100}
         step={1}
         value={value}
-        aria-label="Divider between before and after"
+        aria-label={label}
         aria-valuetext={`${value}% before, ${100 - value}% after`}
         onChange={(event) => divider.set(Number(event.currentTarget.value) / 100)}
         onKeyDown={(event) => {

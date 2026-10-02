@@ -5,6 +5,7 @@ import { ComparisonStage } from "./components/ComparisonStage";
 import { DesignDiff } from "./components/DesignDiff";
 import { GlowBackground } from "./components/GlowBackground";
 import { SiteCredits } from "./components/SiteCredits";
+import { PAGE_IDS } from "./data/pages";
 import { MotionPreferenceContext } from "./hooks/useMotionPreference";
 import { parseUrlOptions } from "./lib/urlOptions";
 
@@ -26,13 +27,15 @@ export function App() {
               <GlowBackground />
               <CaseHeader />
               <main className="pb-24">
-                <ComparisonStage options={options} />
+                {PAGE_IDS.map((page, index) => (
+                  <ComparisonStage key={page} page={page} options={options} eager={index === 0} />
+                ))}
                 <DesignDiff />
               </main>
               <SiteCredits />
             </>
           ) : (
-            <ComparisonStage options={options} />
+            <ComparisonStage page={options.page} options={options} eager />
           )}
         </MotionPreferenceContext>
       </MotionConfig>
