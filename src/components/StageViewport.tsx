@@ -142,7 +142,7 @@ export function StageViewport({
         ref={scroller}
         data-testid="after-scroller"
         aria-label={`After: the v2 ${noun}. Scroll to move both versions together.`}
-        className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain pointer-coarse:overscroll-auto [scrollbar-width:none]"
+        className="absolute inset-0 overflow-y-auto overflow-x-hidden pointer-coarse:overscroll-auto overscroll-contain [scrollbar-width:none]"
       >
         <div className="relative" style={{ height: after.pageHeight * scale }}>
           <PageLayer
@@ -197,7 +197,7 @@ export function StageViewport({
         </div>
       </div>
       <WipeDivider divider={divider} label={`${name}: divider between before and after`} />
-      <VersionLabels device={device} divider={divider} />
+      <VersionLabels page={page} device={device} divider={divider} />
     </m.div>
   );
 }

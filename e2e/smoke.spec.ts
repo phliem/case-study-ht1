@@ -72,3 +72,13 @@ test("@review the page top", async ({ page }) => {
   await page.waitForTimeout(1500);
   await page.screenshot({ path: ".capture/review/01-top.png" });
 });
+
+test("names the homepage's sides by design system", async ({ page }) => {
+  await page.goto("/");
+  const stage = await openStage(page);
+  await expect(stage.getByText("Before · NHS design system", { exact: true })).toBeVisible();
+  await expect(stage.getByText("After · v2", { exact: true })).toBeVisible();
+  await stage.getByRole("button", { name: "Mobile" }).click();
+  await expect(stage.getByText("Before", { exact: true })).toBeVisible();
+  await expect(stage.getByText("After", { exact: true })).toBeVisible();
+});

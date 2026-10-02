@@ -1,8 +1,10 @@
-import type { PageId, SectionId, SectionIdOf } from "./types";
+import type { PageId, SectionId, SectionIdOf, Version } from "./types";
 
 export type PageSection = { id: SectionId; label: string };
 
 export type StageIntroCopy = { number: string; summary: string; shipped: string };
+
+export type SideLabel = { long: string; short: string };
 
 export type PageInfo = {
   id: PageId;
@@ -10,10 +12,16 @@ export type PageInfo = {
   noun: string;
   route: { before: string; after: string };
   sections: readonly PageSection[];
+  sides: Record<Version, SideLabel>;
   intro: StageIntroCopy | null;
 };
 
 type SectionsOf<P extends PageId> = readonly { id: SectionIdOf[P]; label: string }[];
+
+const NHS_AND_V2: Record<Version, SideLabel> = {
+  before: { long: "Before · NHS design system", short: "Before" },
+  after: { long: "After · v2", short: "After" },
+};
 
 const HOME_SECTIONS = [
   { id: "hero", label: "Hero" },
@@ -56,6 +64,7 @@ export const PAGES: Record<PageId, PageInfo> = {
     noun: "homepage",
     route: { before: "/", after: "/" },
     sections: HOME_SECTIONS,
+    sides: NHS_AND_V2,
     intro: {
       number: "01",
       summary:
@@ -69,6 +78,7 @@ export const PAGES: Record<PageId, PageInfo> = {
     noun: "guide article",
     route: { before: "/how-to/book-doctor-appointment-nhs", after: "/book-a-gp-appointment" },
     sections: ARTICLE_SECTIONS,
+    sides: NHS_AND_V2,
     intro: {
       number: "02",
       summary:
@@ -82,6 +92,7 @@ export const PAGES: Record<PageId, PageInfo> = {
     noun: "help centre",
     route: { before: "/faq", after: "/help" },
     sections: HELP_SECTIONS,
+    sides: NHS_AND_V2,
     intro: {
       number: "03",
       summary:
@@ -95,6 +106,10 @@ export const PAGES: Record<PageId, PageInfo> = {
     noun: "homepage",
     route: { before: "/", after: "/" },
     sections: HOME_2025_SECTIONS,
+    sides: {
+      before: { long: "Sept 2025 · NHS design system", short: "2025" },
+      after: { long: "Sept 2026 · v2", short: "v2" },
+    },
     intro: null,
   },
 };

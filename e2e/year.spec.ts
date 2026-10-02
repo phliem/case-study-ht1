@@ -89,3 +89,13 @@ test("shares the main page header's left edge", async ({ page }) => {
     expect(lefts[1], `${viewport.width}px`).toBe(lefts[0]);
   }
 });
+
+test("names the two sides by date", async ({ page }) => {
+  await page.goto(YEAR);
+  const stage = await openStage(page, "home-2025");
+  await expect(stage.getByText("Sept 2025 · NHS design system", { exact: true })).toBeVisible();
+  await expect(stage.getByText("Sept 2026 · v2", { exact: true })).toBeVisible();
+  await stage.getByRole("button", { name: "Mobile" }).click();
+  await expect(stage.getByText("2025", { exact: true })).toBeVisible();
+  await expect(stage.getByText("v2", { exact: true })).toBeVisible();
+});
