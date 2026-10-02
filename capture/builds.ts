@@ -2,17 +2,21 @@ import { type ChildProcess, execFileSync, execSync, spawn } from "node:child_pro
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import type { Version } from "../src/data/types";
 import { WORK_DIR } from "./paths";
 
-export type BuildSpec = { version: Version; commit: string; port: number };
+export type BuildName = "home-before" | "after" | "article-before" | "help-before";
+export type BuildSpec = { name: BuildName; commit: string; port: number };
 export type PreparedBuild = BuildSpec & { dir: string; fullCommit: string };
 export type ServedBuild = PreparedBuild & { url: string; stop: () => Promise<void> };
 
-export const BUILDS: readonly BuildSpec[] = [
-  { version: "before", commit: "0a143c6820", port: 3061 },
-  { version: "after", commit: "c016453be7", port: 3062 },
-];
+// The two older commits are the last before their pages were replaced: 1e021d8370 swapped the
+// how-to pages for the guide pages, and 38facb0a65 swapped /faq for /help.
+export const BUILDS: Record<BuildName, BuildSpec> = {
+  "home-before": { name: "home-before", commit: "0a143c6820", port: 3061 },
+  after: { name: "after", commit: "c016453be7", port: 3062 },
+  "article-before": { name: "article-before", commit: "1e021d8370^", port: 3063 },
+  "help-before": { name: "help-before", commit: "38facb0a65^", port: 3064 },
+};
 
 export const SANNY_REPO = process.env.SANNY_REPO ?? join(homedir(), "Desktop/repos/sanny");
 
@@ -44,11 +48,11 @@ export function prepareBuild(spec: BuildSpec): PreparedBuild {
       encoding: "utf8",
     },
   ).trim();
-  const dir = join(WORK_DIR, spec.version);
+  const dir = join(WORK_DIR, spec.name);
   const marker = join(dir, ".capture-commit");
   const built = existsSync(join(dir, "packages/bookable/.next/BUILD_ID"));
   if (built && existsSync(marker) && readFileSync(marker, "utf8").trim() === fullCommit) {
-    console.log(`Reusing the ${spec.version} build at ${dir}`);
+    console.log(`Reusing the ${spec.name} build at ${dir}`);
     return { ...spec, dir, fullCommit };
   }
 

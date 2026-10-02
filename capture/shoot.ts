@@ -8,9 +8,11 @@ import type {
   PageId,
   PinnedLayer,
   PinnedState,
+  SectionId,
   Tile,
   Version,
 } from "../src/data/types";
+import { CAPTURE_CSS, isolateCss } from "./css";
 import {
   addSpecimenInPage,
   floatingElementsInPage,
@@ -27,7 +29,7 @@ import {
 import { captureLoops } from "./loops";
 import { captureDir, PUBLIC_DIR, publicPath } from "./paths";
 import { type DeviceProfile, SCALE, SOCS_REJECTED, TILE_HEIGHT } from "./profiles";
-import { anchorList, assertSections } from "./sections";
+import { resolveSections, type SectionAnchor } from "./sections";
 import { tileBands, viewportStops } from "./stitch";
 
 export type RawImage = {
@@ -41,42 +43,13 @@ export type PageJob = {
   commit: string;
   url: string;
   profile: DeviceProfile;
+  anchors: [SectionId, SectionAnchor][];
+  tokens: TokenSelectors | null;
   withLoops: boolean;
   withSpecimen: boolean;
 };
 
-export type CaptureResult = { capture: Capture; tokens: MeasuredTokens };
-
-const HIDDEN_SELECTORS = [".phone-help-bubble", ".cookie-banner-ssr"];
-
-const CAPTURE_CSS = [
-  `${HIDDEN_SELECTORS.join(", ")} { display: none !important; }`,
-  "[data-capture-hidden] { visibility: hidden !important; }",
-  "* { caret-color: transparent !important; }",
-].join("\n");
-
-const TOKEN_SELECTORS: Record<Version, TokenSelectors> = {
-  before: {
-    headline: "main h1",
-    heroGround: "main > section:first-of-type",
-    search: "main > section:first-of-type .rounded-2xl",
-    card: "main > section:nth-of-type(3) article > div:last-child",
-  },
-  after: {
-    headline: "main h1",
-    heroGround: "main > section:first-of-type",
-    search: '[class*="shadow-ui-search-pill-hero"]',
-    card: "main figure",
-  },
-};
-
-function isolateCss(selector: string): string {
-  return [
-    "html, body { background: transparent !important; }",
-    "body * { visibility: hidden !important; }",
-    `${selector}, ${selector} * { visibility: visible !important; }`,
-  ].join("\n");
-}
+export type CaptureResult = { capture: Capture; tokens: MeasuredTokens | null };
 
 async function openPage(
   browser: Browser,
@@ -222,21 +195,30 @@ export async function capturePage(browser: Browser, job: PageJob): Promise<Captu
   try {
     await page.evaluate(settleInPage);
     await page.evaluate(pauseInfiniteAnimationsInPage);
-    const sections = assertSections(
-      await page.evaluate(sectionTopsInPage, anchorList(job.version)),
+    const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+    const sections = resolveSections(
+      job.page,
+      await page.evaluate(sectionTopsInPage, job.anchors),
+      pageHeight,
     );
-    const tokens = await page.evaluate(measureTokensInPage, TOKEN_SELECTORS[job.version]);
+    const tokens =
+      job.tokens === null ? null : await page.evaluate(measureTokensInPage, job.tokens);
     const sticky = await page.evaluate(markStickyHeaderInPage);
     const floating = await page.evaluate(floatingElementsInPage);
     if (floating.length > 0) {
       throw new Error(
-        `Unexpected fixed or sticky elements: ${floating.join(", ")}. Add them to HIDDEN_SELECTORS in capture/shoot.ts.`,
+        `Unexpected fixed or sticky elements: ${floating.join(", ")}. Pin them in capture/pages.ts or hide them in capture/css.ts.`,
       );
     }
     const outDir = captureDir(job.page, job.version, job.profile.device);
     rmSync(outDir, { recursive: true, force: true });
     mkdirSync(outDir, { recursive: true });
-    const { tiles, pageHeight, full } = await captureTiles(page, outDir);
+    const { tiles, full, pageHeight: tiledHeight } = await captureTiles(page, outDir);
+    if (tiledHeight !== pageHeight) {
+      throw new Error(
+        `The page changed from ${pageHeight}px to ${tiledHeight}px while it was shot`,
+      );
+    }
     const loops = job.withLoops ? await captureLoops(page, job.profile.device, outDir, full) : [];
     const pinned: PinnedLayer[] = sticky
       ? [

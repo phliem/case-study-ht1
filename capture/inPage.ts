@@ -57,7 +57,7 @@ export async function scrollInPage(top: number): Promise<void> {
 
 export function sectionTopsInPage(
   anchors: [string, SectionAnchor][],
-): { id: string; top: number }[] {
+): { id: string; top: number | null }[] {
   const main = document.querySelector("main");
   if (!main) throw new Error("The page has no <main>");
   const children = Array.from(main.children);
@@ -83,6 +83,21 @@ export function sectionTopsInPage(
           throw new Error(
             `${id}: ${matches.length} children of <main> have the heading "${anchor.text}"`,
           );
+        }
+        return { id, top: pageTop(matches[0]) };
+      }
+      case "absent":
+        return { id, top: null };
+      case "element": {
+        const matches = Array.from(document.querySelectorAll(anchor.selector)).filter(
+          (element) => anchor.text === undefined || textOf(element) === anchor.text,
+        );
+        if (matches.length !== 1) {
+          const wanted =
+            anchor.text === undefined
+              ? anchor.selector
+              : `${anchor.selector} reading "${anchor.text}"`;
+          throw new Error(`${id}: ${matches.length} elements match ${wanted}`);
         }
         return { id, top: pageTop(matches[0]) };
       }
