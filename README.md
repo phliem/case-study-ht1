@@ -1,8 +1,9 @@
-# Bookable homepage, before & after
+# Bookable, before & after
 
-An interactive, animated before and after of the Bookable homepage (bookable.health) as it moved
-from the NHS design system to Bookable's own (v2) in September 2026. Drag the divider, scroll inside
-the frame (both versions stay on the same section), switch Desktop and Mobile, or press Play.
+An interactive, animated before and after of three Bookable pages (bookable.health) as they moved
+from the NHS design system to Bookable's own (v2) in September 2026: the homepage, a guide article
+and the help centre. Drag a divider, scroll inside a frame (both versions stay on the same section),
+switch Desktop and Mobile, or press Play.
 
 ## Run it
 
@@ -23,9 +24,10 @@ pnpm review
 
 ## Record a shot
 
-Open `/?record=16x9` or `/?record=4x3` (add `&tour=short` for a cut of about 15 seconds). The
-comparison fills the window with no controls or cursor and loops its tour; screen-record the
-window. Recording mode ignores the reduced-motion setting.
+Open `/?record=16x9` or `/?record=4x3`. Add `&page=article` or `&page=help` for the other
+comparisons, and `&tour=short` for a cut of about 15 seconds. The comparison fills the window with
+no controls or cursor and loops its tour; screen-record the window. Recording mode ignores the
+reduced-motion setting.
 
 ## Deploy
 
@@ -36,24 +38,35 @@ JS (100 KB gzipped) and first-paint image (1.5 MB) budgets.
 
 ## Recapture
 
-The captures in `public/captures/` and `src/data/captures.json` come from two pinned commits of
-the sanny repo: `0a143c6820` (before) and `c016453be7` (after).
+The captures in `public/captures/` and `src/data/captures.json` come from pinned commits of the
+sanny repo:
+
+| Page | Before | After (all at `c016453be7`) |
+|---|---|---|
+| Homepage | `/` at `0a143c6820` | `/` |
+| Guide article | `/how-to/book-doctor-appointment-nhs` at `1e021d8370^` | `/book-a-gp-appointment` |
+| Help centre | `/faq` at `38facb0a65^` | `/help` |
 
 ```bash
 pnpm capture
+pnpm capture --page article --page help
 ```
 
 This needs a sanny checkout (`SANNY_REPO`, default `~/Desktop/repos/sanny`), pnpm, and ffmpeg
-with libx264 and libvpx-vp9. Each commit is exported with `git archive` into
-`CAPTURE_WORK_DIR` (default `<os tmp>/bookable-before-after`), built, and served on ports 3061
-and 3062 against the public production API. Nothing is written to sanny.
-`pnpm capture --skip-loops` skips the video loops; `pnpm capture:clean` deletes the builds;
-`pnpm capture:serve` serves both builds for inspection; `pnpm capture:compare` puts the live
-site next to the capture in `.capture/live-vs-capture.png`. The capture hides the sticky header
-on purpose, because the page draws it as an overlay.
+with libx264 and libvpx-vp9. Each commit is exported with `git archive` into `CAPTURE_WORK_DIR`
+(default `<os tmp>/bookable-before-after`), built, and served against the public production API:
+the homepage before on port 3061, every after page on 3062, the article before on 3063 and the help
+centre before on 3064. Nothing is written to sanny.
+
+`--page` captures only those pages and leaves every other page's files and data as they were.
+`--skip-loops` skips the homepage's video loops. `pnpm capture:clean` deletes the builds;
+`pnpm capture:serve [--page …]` serves builds for inspection; `pnpm capture:compare [--page …]`
+puts the live site next to the capture in `.capture/live-vs-capture-<page>.png`. The capture hides
+each page's sticky parts (the header, the breadcrumb bar, the article's contents sidebar) on
+purpose, because the page draws them as live layers.
 
 ## Licensing
 
 Frutiger is licensed to the NHS, so no Frutiger file is in this project; the specimen is a
-rendered image. Hanken Grotesk is OFL and loads from Google Fonts. The screenshots show the public
-Bookable homepage.
+rendered image. Hanken Grotesk is OFL and loads from Google Fonts. The screenshots show public
+Bookable pages.

@@ -77,3 +77,11 @@ test("@review the recording frame", async ({ page }) => {
   await page.waitForTimeout(4500);
   await page.screenshot({ path: ".capture/review/08-record-16x9.png" });
 });
+
+test("@review the article recording frame", async ({ page }) => {
+  test.skip(!process.env.REVIEW, "Run with pnpm review");
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.goto("/?record=16x9&page=article");
+  await page.waitForTimeout(4500);
+  await page.screenshot({ path: ".capture/review/13-record-article.png" });
+});

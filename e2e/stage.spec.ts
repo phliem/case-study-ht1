@@ -176,3 +176,37 @@ test.describe("on a touch phone", () => {
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(pageScroll);
   });
 });
+
+test("@review the article and help stages", async ({ page }) => {
+  test.skip(!process.env.REVIEW, "Run with pnpm review");
+  await page.goto("/");
+  for (const [id, file] of [
+    ["article", "09-article"],
+    ["help", "11-help"],
+  ] as const) {
+    await openStage(page, id);
+    await page.waitForTimeout(1500);
+    await page.screenshot({ path: `.capture/review/${file}.png` });
+    await scrollAfterTo(page, scrollToMiddleOf(captureOf(id, "after", "desktop"), MIDDLE[id]), id);
+    await page.waitForTimeout(900);
+    await page.screenshot({ path: `.capture/review/${file}-middle.png` });
+  }
+});
+
+test("@review the article and help stages on a phone", async ({ browser }) => {
+  test.skip(!process.env.REVIEW, "Run with pnpm review");
+  const page = await browser.newPage({
+    viewport: { width: 390, height: 844 },
+    deviceScaleFactor: 2,
+  });
+  await page.goto("/");
+  for (const [id, file] of [
+    ["article", "10-article-phone"],
+    ["help", "12-help-phone"],
+  ] as const) {
+    await openStage(page, id);
+    await page.waitForTimeout(1200);
+    await page.screenshot({ path: `.capture/review/${file}.png` });
+  }
+  await page.close();
+});
