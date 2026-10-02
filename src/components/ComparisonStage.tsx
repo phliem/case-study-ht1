@@ -1,4 +1,4 @@
-import { LayoutGroup, useMotionValue } from "motion/react";
+import { LayoutGroup, useInView, useMotionValue } from "motion/react";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { captureFor } from "../data/captures";
 import { addressOf, PAGES } from "../data/pages";
@@ -88,6 +88,7 @@ export function ComparisonStage({ page, options, eager }: ComparisonStageProps) 
   const [group, setGroup] = useState<SectionId>(info.sections[0].id);
   const divider = useMotionValue(recording ? 1 : 0.5);
   const stage = useRef<HTMLElement>(null);
+  const near = useInView(stage, { once: true, margin: "25% 0px" });
   const viewport = useRef<StageViewportHandle>(null);
   const deviceRef = useRef(device);
   const pendingScroll = useRef(0);
@@ -170,18 +171,20 @@ export function ComparisonStage({ page, options, eager }: ComparisonStageProps) 
             </div>
             <div className={layout.frame}>
               <DeviceFrame device={device} viewport={after.viewport} address={addressOf(page)}>
-                <StageViewport
-                  key={device}
-                  ref={viewport}
-                  page={page}
-                  device={device}
-                  divider={divider}
-                  map={maps[device]}
-                  live={!reduced}
-                  eager={eager}
-                  initialScroll={pendingScroll.current}
-                  onGroupChange={setGroup}
-                />
+                {(eager || near) && (
+                  <StageViewport
+                    key={device}
+                    ref={viewport}
+                    page={page}
+                    device={device}
+                    divider={divider}
+                    map={maps[device]}
+                    live={!reduced}
+                    eager={eager}
+                    initialScroll={pendingScroll.current}
+                    onGroupChange={setGroup}
+                  />
+                )}
               </DeviceFrame>
             </div>
             <div className={layout.side}>
