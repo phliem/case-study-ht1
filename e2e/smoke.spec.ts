@@ -52,6 +52,8 @@ test("lines the comparison headings up with the page's other headings", async ({
   ]) {
     await page.setViewportSize(viewport);
     await page.goto("/");
+    await page.getByTestId("design-diff").scrollIntoViewIfNeeded();
+    await expect(page.getByRole("region", { name: "The system underneath" })).toBeVisible();
     const lefts = await page
       .getByRole("heading", { level: 1 })
       .or(page.getByRole("heading", { level: 2 }))

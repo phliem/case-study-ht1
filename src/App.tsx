@@ -2,7 +2,7 @@ import { LazyMotion, MotionConfig, useReducedMotion } from "motion/react";
 import { useMemo } from "react";
 import { CaseHeader } from "./components/CaseHeader";
 import { ComparisonStage } from "./components/ComparisonStage";
-import { DesignDiff } from "./components/DesignDiff";
+import { DeferredDesignDiff } from "./components/DeferredDesignDiff";
 import { GlowBackground } from "./components/GlowBackground";
 import { SiteCredits } from "./components/SiteCredits";
 import { PAGE_IDS } from "./data/pages";
@@ -30,7 +30,7 @@ export function App() {
                 {PAGE_IDS.map((page, index) => (
                   <ComparisonStage key={page} page={page} options={options} eager={index === 0} />
                 ))}
-                <DesignDiff />
+                <DeferredDesignDiff />
               </main>
               <SiteCredits />
             </>
