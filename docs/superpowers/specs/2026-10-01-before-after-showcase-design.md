@@ -255,6 +255,9 @@ panel edges), so any small video colour shift does not show as a seam.
 
 ### 6.4 Data file
 
+Superseded by §4.5 of [the article and help-centre design](2026-10-01-article-and-help-comparisons-design.md): each capture now carries `page` and `pinned` (in place of
+`header`), and the tokens moved to the top of the file. The shape below is the original one.
+
 `src/data/captures.json`, written by the capture and read by the page:
 
 ```ts
@@ -309,6 +312,9 @@ type CapturesFile = {
 All positions are CSS px in page coordinates.
 
 ## 7. Code
+
+Superseded in part by §5 of [the article and help-centre design](2026-10-01-article-and-help-comparisons-design.md): `src/data/pages.ts` replaces `sections.ts`,
+`PinnedLayers` replaces `StickyHeaderOverlay`, and `ShipTimeline` and `timeline.ts` are gone.
 
 Vite + React 19 + TypeScript strict, Motion (`motion/react`, loaded through `LazyMotion`),
 Tailwind v4 (`@tailwindcss/vite`), Biome (100-character lines, 2-space indent), Vitest,
