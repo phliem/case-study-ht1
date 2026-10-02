@@ -26,6 +26,11 @@ test("introduces the case study", async ({ page }) => {
   );
 });
 
+test("credits the captures", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("contentinfo")).toContainText("Frutiger is licensed to the NHS");
+});
+
 test("@review the page top", async ({ page }) => {
   test.skip(!process.env.REVIEW, "Run with pnpm review");
   await page.goto("/");
