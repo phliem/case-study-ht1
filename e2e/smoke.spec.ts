@@ -11,17 +11,15 @@ test("loads with its title and no console errors", async ({ page }) => {
 
   await page.goto("/");
 
-  await expect(page).toHaveTitle("Bookable homepage, before & after");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Bookable homepage, before & after",
-  );
+  await expect(page).toHaveTitle("Bookable, before & after");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Bookable, before & after");
   expect(errors).toEqual([]);
 });
 
 test("introduces the case study", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByText("Front-end engineering")).toBeVisible();
-  await expect(page.getByRole("banner").getByText("29 Sept 2026")).toBeVisible();
+  await expect(page.getByRole("banner").getByText("Sept 2026", { exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "bookable.health", exact: true })).toHaveAttribute(
     "href",
     "https://bookable.health",
@@ -31,6 +29,7 @@ test("introduces the case study", async ({ page }) => {
 test("credits the captures", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("contentinfo")).toContainText("Frutiger is licensed to the NHS");
+  await expect(page.getByRole("contentinfo")).toContainText(/Screens captured (on|between) \d/);
 });
 
 test("shows the three comparisons, each under its own names", async ({ page }) => {

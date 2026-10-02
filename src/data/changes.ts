@@ -36,8 +36,8 @@ export const CHANGES: PageChanges = {
       "Breadcrumbs sit under the hero, then pin beneath the header as you read.",
     ],
     guide: [
-      "Two headed sections grow into six, opened by an In short summary of three points.",
-      "On desktop an On this page list follows you down the article and marks the section you are in.",
+      'Two headed sections grow into six, opened by an "In short" summary of three points.',
+      'On desktop an "On this page" list follows you down the article and marks the section you are in.',
     ],
     questions: [
       "New in v2: four common questions answered on the page, each in its own card.",
@@ -45,7 +45,7 @@ export const CHANGES: PageChanges = {
     ],
     next: [
       'A lone "Find a new GP surgery near you" button becomes a "Ready when you are" card with the postcode search inside it.',
-      "Related articles below carry the reader on to the next guide.",
+      "A row of related articles below carries the reader on.",
     ],
     footer: [
       "The NHS footer becomes the site-wide footer the homepage ends on.",
@@ -58,12 +58,12 @@ export const CHANGES: PageChanges = {
       "The search filters every answer as you type.",
     ],
     questions: [
-      "49 questions in ten expanding sections give way to a short list of popular questions and a grid of topics.",
+      "48 questions in eleven expanding sections give way to a short list of popular questions and a grid of topics.",
       "Each topic gets its own page, so an answer has an address worth sharing.",
     ],
     "more-help": [
-      '"Need more help?" and its three bullets become a "Still need help?" panel.',
-      "Its cards go straight to Call 111, nhs.uk and Call 999.",
+      '"Need more help?" and its three bullet points become "Still need help?", a row of three cards.',
+      "The cards go straight to Call 111, nhs.uk and Call 999.",
     ],
     footer: [
       "The NHS footer becomes the site-wide footer the homepage ends on.",

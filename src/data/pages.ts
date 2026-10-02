@@ -59,7 +59,7 @@ export const PAGES: Record<PageId, PageInfo> = {
     name: "Guide article",
     noun: "guide article",
     summary:
-      "A how-to page on the NHS design system becomes the v2 article template: a hero, a summary up top, a contents list that follows the reader, and questions answered in place.",
+      "A how-to page on the NHS design system becomes the v2 article template: a hero, a summary up top, a contents list that follows the reader on desktop, and questions answered in place.",
     route: { before: "/how-to/book-doctor-appointment-nhs", after: "/book-a-gp-appointment" },
     shipped: "22 Sept 2026",
     sections: ARTICLE_SECTIONS,
