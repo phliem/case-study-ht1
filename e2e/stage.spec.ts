@@ -1,9 +1,16 @@
 import { expect, test } from "@playwright/test";
-import { PAGES } from "../src/data/pages";
+import { PAGE_IDS, PAGES } from "../src/data/pages";
 import type { PageId, SectionId } from "../src/data/types";
-import { VIEWS } from "../src/data/views";
 import { captureOf, scrollForAnchor, scrollToMiddleOf, spanOf } from "./captureData";
-import { beforeAnchor, dividerSlider, openStage, scrollAfterTo, stageRegion } from "./stageHelpers";
+import {
+  beforeAnchor,
+  dividerSlider,
+  openStage,
+  scrollAfterTo,
+  stageName,
+  stageRegion,
+  viewUrl,
+} from "./stageHelpers";
 
 const MIDDLE: Record<PageId, SectionId> = {
   home: "how",
@@ -12,14 +19,14 @@ const MIDDLE: Record<PageId, SectionId> = {
   "home-2025": "proof-how",
 };
 
-for (const id of VIEWS.main) {
+for (const id of PAGE_IDS) {
   const after = captureOf(id, "after", "desktop");
   const before = captureOf(id, "before", "desktop");
   const middle = MIDDLE[id];
 
-  test.describe(PAGES[id].name, () => {
+  test.describe(stageName(id), () => {
     test("the divider follows the arrow keys and a drag", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(viewUrl(id));
       const stage = await openStage(page, id);
       const slider = dividerSlider(page, id);
       await expect(slider).toHaveValue("50");
@@ -44,7 +51,7 @@ for (const id of VIEWS.main) {
     test("scrolling the after page carries the before page to the same section", async ({
       page,
     }) => {
-      await page.goto("/");
+      await page.goto(viewUrl(id));
       await openStage(page, id);
       await scrollAfterTo(page, scrollToMiddleOf(after, middle), id);
       await expect(stageRegion(page, id)).toHaveAttribute("data-group", middle);
@@ -53,8 +60,22 @@ for (const id of VIEWS.main) {
       expect(await beforeAnchor(page, before, id)).toBeLessThan(span.end);
     });
 
+    test("fits every rail label inside its button", async ({ page }) => {
+      await page.goto(viewUrl(id));
+      const stage = await openStage(page, id);
+      const overflowing = await stage
+        .getByRole("navigation", { name: `${PAGES[id].name} sections`, exact: true })
+        .getByRole("button")
+        .evaluateAll((buttons) =>
+          buttons
+            .filter((button) => button.scrollWidth > button.clientWidth)
+            .map((button) => button.textContent),
+        );
+      expect(overflowing).toEqual([]);
+    });
+
     test("resizing the window keeps the frame on the same section", async ({ page }) => {
-      await page.goto("/");
+      await page.goto(viewUrl(id));
       await openStage(page, id);
       await scrollAfterTo(page, scrollToMiddleOf(after, middle), id);
       await expect(stageRegion(page, id)).toHaveAttribute("data-group", middle);
@@ -84,15 +105,15 @@ test("the old how-to page holds still while the article scrolls through its ques
 test.describe("on a phone-sized screen", () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  for (const id of ["home", "article"] as const) {
-    test(`${PAGES[id].name} opens on the mobile captures without scrolling sideways`, async ({
+  for (const id of ["home", "article", "home-2025"] as const) {
+    test(`${stageName(id)} opens on the mobile captures without scrolling sideways`, async ({
       page,
     }) => {
-      await page.goto("/");
+      await page.goto(viewUrl(id));
       const stage = await openStage(page, id);
       await expect(stage.getByTestId("after-scroller").locator("img").first()).toHaveAttribute(
         "src",
-        new RegExp(`captures/${id}/after/mobile/`),
+        new RegExp(`${captureOf(id, "after", "mobile").tiles[0].webp}$`),
       );
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - window.innerWidth,

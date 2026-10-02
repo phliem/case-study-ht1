@@ -2,7 +2,8 @@ import { expect, test } from "@playwright/test";
 import { A_YEAR_ON, CASE_STUDY } from "../src/data/caseStudy";
 import { changesFor } from "../src/data/changes";
 import { PAGES } from "../src/data/pages";
-import { dividerSlider, openStage, stageRegion } from "./stageHelpers";
+import { captureOf, scrollForAnchor, scrollToMiddleOf, spanOf } from "./captureData";
+import { beforeAnchor, dividerSlider, openStage, scrollAfterTo, stageRegion } from "./stageHelpers";
 
 const YEAR = "/?view=a-year-on";
 
@@ -98,4 +99,117 @@ test("names the two sides by date", async ({ page }) => {
   await stage.getByRole("button", { name: "Mobile" }).click();
   await expect(stage.getByText("2025", { exact: true })).toBeVisible();
   await expect(stage.getByText("v2", { exact: true })).toBeVisible();
+});
+
+test("the 2025 page holds still while v2 scrolls through the areas", async ({ page }) => {
+  const after = captureOf("home-2025", "after", "desktop");
+  const before = captureOf("home-2025", "before", "desktop");
+  const areas = spanOf(after, "areas");
+  const held = spanOf(before, "areas").start;
+  await page.goto(YEAR);
+  await openStage(page, "home-2025");
+  await scrollAfterTo(page, scrollForAnchor(after, areas.start + 20), "home-2025");
+  await expect(stageRegion(page, "home-2025")).toHaveAttribute("data-group", "areas");
+  await expect.poll(() => beforeAnchor(page, before, "home-2025")).toBeCloseTo(held, 0);
+  await scrollAfterTo(page, scrollForAnchor(after, areas.end - 20), "home-2025");
+  await expect.poll(() => beforeAnchor(page, before, "home-2025")).toBeCloseTo(held, 0);
+});
+
+test("switching device keeps the group", async ({ page }) => {
+  await page.goto(YEAR);
+  const stage = await openStage(page, "home-2025");
+  await stage.getByRole("button", { name: "FAQ & About" }).click();
+  await expect(stage).toHaveAttribute("data-group", "faq-about");
+  await stage.getByRole("button", { name: "Mobile" }).click();
+  await expect(stage.getByTestId("before-page").locator("img").first()).toHaveAttribute(
+    "src",
+    /captures\/home-2025\/before\/mobile\//,
+  );
+  await expect(stage).toHaveAttribute("data-group", "faq-about");
+});
+
+test("Play tours the year-on comparison", async ({ page }) => {
+  await page.goto(YEAR);
+  const stage = await openStage(page, "home-2025");
+  await stage.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(stage).toHaveAttribute("data-group", "proof-how", { timeout: 5000 });
+});
+
+test("recording mode shows the year-on comparison, asked for by page or by view", async ({
+  page,
+}) => {
+  for (const url of ["/?record=16x9&page=home-2025", `${YEAR}&record=16x9`]) {
+    await page.goto(url);
+    const stage = page.getByRole("region", { name: PAGES["home-2025"].name, exact: true });
+    await expect(stage.getByTestId("before-page").locator("img").first()).toHaveAttribute(
+      "src",
+      /captures\/home-2025\/before\/desktop\//,
+    );
+    await expect(page.getByRole("heading", { level: 1 })).toHaveCount(0);
+  }
+});
+
+test("a keyboard visitor tabs from the back link to the divider", async ({ page }) => {
+  await page.goto(YEAR);
+  await page.getByRole("link", { name: CASE_STUDY.title, exact: true }).focus();
+  const slider = dividerSlider(page, "home-2025");
+  for (let presses = 0; presses < 16; presses++) {
+    if (await slider.evaluate((element) => element === document.activeElement)) break;
+    await page.keyboard.press("Tab");
+  }
+  await expect(slider).toBeFocused();
+});
+
+test("with reduced motion Play cuts instead of sweeping", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto(YEAR);
+  const stage = await openStage(page, "home-2025");
+  await stage.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(dividerSlider(page, "home-2025")).toHaveValue("0", { timeout: 400 });
+});
+
+test("@review the homepage a year on", async ({ page }) => {
+  test.skip(!process.env.REVIEW, "Run with pnpm review");
+  await page.goto(YEAR);
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: ".capture/review/14-year-top.png" });
+  await openStage(page, "home-2025");
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: ".capture/review/15-year-stage.png" });
+  await scrollAfterTo(
+    page,
+    scrollToMiddleOf(captureOf("home-2025", "after", "desktop"), "proof-how"),
+    "home-2025",
+  );
+  await page.waitForTimeout(900);
+  await page.screenshot({ path: ".capture/review/15-year-stage-middle.png" });
+});
+
+test("@review the homepage a year on, on a phone", async ({ browser }) => {
+  test.skip(!process.env.REVIEW, "Run with pnpm review");
+  const page = await browser.newPage({
+    viewport: { width: 390, height: 844 },
+    deviceScaleFactor: 2,
+  });
+  await page.goto(YEAR);
+  await page.waitForTimeout(1200);
+  await page.screenshot({ path: ".capture/review/16-year-phone-top.png" });
+  await openStage(page, "home-2025");
+  await page.waitForTimeout(1200);
+  await page.screenshot({ path: ".capture/review/16-year-phone-stage.png" });
+  await page.close();
+});
+
+test("fits its rail labels in the 16:9 recording frame", async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.goto("/?record=16x9&page=home-2025");
+  const overflowing = await page
+    .getByRole("navigation", { name: "Homepage sections", exact: true })
+    .getByRole("button")
+    .evaluateAll((buttons) =>
+      buttons
+        .filter((button) => button.scrollWidth > button.clientWidth)
+        .map((button) => button.textContent),
+    );
+  expect(overflowing).toEqual([]);
 });
