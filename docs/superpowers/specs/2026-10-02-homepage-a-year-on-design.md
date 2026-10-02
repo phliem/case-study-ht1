@@ -202,7 +202,7 @@ v2.
   - The main page's link opens the new view; the back link returns; neither view logs console
     errors; the document title.
   - The new view: header, details, the stage named "The homepage, a year on", five rail entries,
-    callouts, credits; its header lines up with the stage.
+    callouts, credits; its `h1` shares the main page header's left edge.
   - Stage behaviour on the new view: divider keys and drag, locked scroll, resize, phone captures
     without sideways scrolling; the 2025 side holds still through Areas; switching device keeps the
     group; Play tours it; recording mode with `page=home-2025`, and with `view=a-year-on` alone.
