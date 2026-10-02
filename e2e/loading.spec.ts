@@ -13,8 +13,9 @@ test("the lower comparisons load nothing until the visitor nears them", async ({
 
 test("a keyboard visitor tabbing into a comparison reaches its divider", async ({ page }) => {
   await page.goto("/");
-  await stageRegion(page, "article").getByRole("button", { name: "Title", exact: true }).focus();
   const slider = dividerSlider(page, "article");
+  await expect(slider).toHaveCount(0);
+  await stageRegion(page, "article").getByRole("button", { name: "Title", exact: true }).focus();
   await expect(slider).toHaveCount(1);
   for (let presses = 0; presses < 8; presses++) {
     if (await slider.evaluate((element) => element === document.activeElement)) break;
