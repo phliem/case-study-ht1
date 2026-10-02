@@ -2,23 +2,12 @@ import { mkdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import type { Browser, BrowserContext, Page } from "@playwright/test";
 import sharp, { type OverlayOptions } from "sharp";
-import type {
-  Capture,
-  MeasuredTokens,
-  PageId,
-  PinnedLayer,
-  PinnedState,
-  SectionId,
-  Tile,
-  Version,
-} from "../src/data/types";
+import type { Capture, MeasuredTokens, PageId, SectionId, Tile, Version } from "../src/data/types";
 import { CAPTURE_CSS, isolateCss } from "./css";
 import {
   addSpecimenInPage,
   floatingElementsInPage,
-  headerBlurInPage,
-  headerPaintAtInPage,
-  markStickyHeaderInPage,
+  hidePinnedInPage,
   measureTokensInPage,
   pauseInfiniteAnimationsInPage,
   scrollInPage,
@@ -27,7 +16,9 @@ import {
   type TokenSelectors,
 } from "./inPage";
 import { captureLoops } from "./loops";
+import type { PinnedQuery } from "./pages";
 import { captureDir, PUBLIC_DIR, publicPath } from "./paths";
+import { checkPinned, planPinned, shootPinned } from "./pinned";
 import { type DeviceProfile, SCALE, SOCS_REJECTED, TILE_HEIGHT } from "./profiles";
 import { resolveSections, type SectionAnchor } from "./sections";
 import { tileBands, viewportStops } from "./stitch";
@@ -44,6 +35,7 @@ export type PageJob = {
   url: string;
   profile: DeviceProfile;
   anchors: [SectionId, SectionAnchor][];
+  pinned: readonly PinnedQuery[];
   tokens: TokenSelectors | null;
   withLoops: boolean;
   withSpecimen: boolean;
@@ -90,6 +82,12 @@ async function captureTiles(
   const composites: OverlayOptions[] = [];
   for (const stop of viewportStops(pageHeight, viewportHeight)) {
     await page.evaluate(scrollInPage, stop.scrollY);
+    const floating = await page.evaluate(floatingElementsInPage);
+    if (floating.length > 0) {
+      throw new Error(
+        `Unexpected fixed or sticky elements at scroll ${stop.scrollY}px: ${floating.join(", ")}. Pin them in capture/pages.ts or hide them in capture/css.ts.`,
+      );
+    }
     const input = await page.screenshot({
       clip: { x: 0, y: stop.sliceTop, width, height: stop.sliceHeight },
       caret: "hide",
@@ -135,49 +133,6 @@ async function captureTiles(
   return { tiles, pageHeight, full };
 }
 
-async function shootHeader(
-  page: Page,
-  path: string,
-): Promise<{ height: number; blur: number | null }> {
-  const header = page.locator("header").first();
-  await header.screenshot({ path, omitBackground: true, caret: "hide" });
-  const box = await header.boundingBox();
-  if (!box) throw new Error("The header has no box to measure");
-  return { height: Math.round(box.height), blur: await page.evaluate(headerBlurInPage) };
-}
-
-async function captureHeaderStates(page: Page, outDir: string): Promise<PinnedState[]> {
-  await page.evaluate(() =>
-    document.querySelector("header")?.removeAttribute("data-capture-hidden"),
-  );
-  const isolation = await page.addStyleTag({ content: isolateCss("header") });
-  const atTop = await page.evaluate(headerPaintAtInPage, 0);
-  const top = join(outDir, "header-top.png");
-  const topShot = await shootHeader(page, top);
-  let flipAt: number | null = null;
-  for (const y of [1, 2, 4, 8, 16, 32, 64, 128, 256]) {
-    if ((await page.evaluate(headerPaintAtInPage, y)) !== atTop) {
-      flipAt = y;
-      break;
-    }
-  }
-  if (flipAt === null) throw new Error("The sticky header kept its paint for 256px of scrolling");
-  const scrolled = join(outDir, "header-scrolled.png");
-  const scrolledShot = await shootHeader(page, scrolled);
-  await isolation.evaluate((node) => {
-    node.parentNode?.removeChild(node);
-  });
-  return [
-    { from: 0, src: publicPath(top), height: topShot.height, blur: null },
-    {
-      from: flipAt,
-      src: publicPath(scrolled),
-      height: scrolledShot.height,
-      blur: scrolledShot.blur,
-    },
-  ];
-}
-
 async function captureSpecimen(page: Page): Promise<void> {
   await page.evaluate(addSpecimenInPage);
   const isolation = await page.addStyleTag({ content: isolateCss("#capture-specimen") });
@@ -203,13 +158,8 @@ export async function capturePage(browser: Browser, job: PageJob): Promise<Captu
     );
     const tokens =
       job.tokens === null ? null : await page.evaluate(measureTokensInPage, job.tokens);
-    const sticky = await page.evaluate(markStickyHeaderInPage);
-    const floating = await page.evaluate(floatingElementsInPage);
-    if (floating.length > 0) {
-      throw new Error(
-        `Unexpected fixed or sticky elements: ${floating.join(", ")}. Pin them in capture/pages.ts or hide them in capture/css.ts.`,
-      );
-    }
+    const plans = await planPinned(page, job.pinned);
+    await page.evaluate(hidePinnedInPage);
     const outDir = captureDir(job.page, job.version, job.profile.device);
     rmSync(outDir, { recursive: true, force: true });
     mkdirSync(outDir, { recursive: true });
@@ -220,19 +170,8 @@ export async function capturePage(browser: Browser, job: PageJob): Promise<Captu
       );
     }
     const loops = job.withLoops ? await captureLoops(page, job.profile.device, outDir, full) : [];
-    const pinned: PinnedLayer[] = sticky
-      ? [
-          {
-            id: "header",
-            x: 0,
-            y: 0,
-            width: job.profile.viewport.width,
-            stickTop: 0,
-            releaseAt: pageHeight,
-            states: await captureHeaderStates(page, outDir),
-          },
-        ]
-      : [];
+    const pinned = await shootPinned(page, plans, outDir);
+    await checkPinned(page, pinned);
     if (job.withSpecimen) await captureSpecimen(page);
     return {
       capture: {

@@ -1,4 +1,5 @@
-import type { MeasuredTokens } from "../src/data/types";
+import type { MeasuredTokens, Rect } from "../src/data/types";
+import type { PinnedBox } from "./pinnedPlan";
 import type { SectionAnchor } from "./sections";
 
 export type TokenSelectors = { headline: string; heroGround: string; search: string; card: string };
@@ -114,15 +115,6 @@ export function sectionTopsInPage(
   });
 }
 
-export function markStickyHeaderInPage(): boolean {
-  const header = document.querySelector("header");
-  if (!header) throw new Error("The page has no <header>");
-  const position = getComputedStyle(header).position;
-  if (position !== "sticky" && position !== "fixed") return false;
-  header.setAttribute("data-capture-hidden", "");
-  return true;
-}
-
 export function floatingElementsInPage(): string[] {
   const describe = (element: Element) => {
     const classes =
@@ -175,22 +167,6 @@ export function measureTokensInPage(selectors: TokenSelectors): MeasuredTokens {
     search: { borderRadius: search.borderRadius, boxShadow: search.boxShadow },
     card: { borderRadius: card.borderRadius, boxShadow: card.boxShadow },
   };
-}
-
-export async function headerPaintAtInPage(top: number): Promise<string> {
-  window.scrollTo({ top, behavior: "instant" });
-  await new Promise((resolve) => setTimeout(resolve, 400));
-  const header = document.querySelector("header");
-  if (!header) throw new Error("The page has no <header>");
-  const style = getComputedStyle(header);
-  return `${style.backgroundColor}|${style.borderBottomColor}|${style.backdropFilter}`;
-}
-
-export function headerBlurInPage(): number | null {
-  const header = document.querySelector("header");
-  if (!header) return null;
-  const match = /blur\(([\d.]+)px\)/.exec(getComputedStyle(header).backdropFilter);
-  return match ? Number(match[1]) : null;
 }
 
 export async function addSpecimenInPage(): Promise<void> {
@@ -314,4 +290,127 @@ export async function seekLoopInPage({
     entry.animation.currentTime = entry.start + seconds * 1000 * (rates[index] ?? 1);
   }
   await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+}
+
+export function markPinnedInPage(queries: { id: string; selector: string }[]): void {
+  for (const query of queries) {
+    const matches = document.querySelectorAll(query.selector);
+    if (matches.length !== 1) {
+      throw new Error(`Pinned ${query.id}: ${matches.length} elements match ${query.selector}`);
+    }
+    const position = getComputedStyle(matches[0]).position;
+    if (position !== "sticky") {
+      throw new Error(`Pinned ${query.id} is position: ${position}, not sticky`);
+    }
+    matches[0].setAttribute("data-capture-pinned", query.id);
+  }
+}
+
+export function hidePinnedInPage(): void {
+  for (const element of document.querySelectorAll("[data-capture-pinned]")) {
+    element.setAttribute("data-capture-hidden", "");
+  }
+}
+
+export async function measurePinnedInPage(id: string): Promise<PinnedBox> {
+  const element = document.querySelector<HTMLElement>(`[data-capture-pinned="${id}"]`);
+  if (!element) throw new Error(`Pinned ${id} is not marked`);
+  const frames = () =>
+    new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  const round = (value: number) => Math.round(value * 100) / 100;
+  window.scrollTo({ top: 0, behavior: "instant" });
+  await frames();
+  const style = getComputedStyle(element);
+  const stickTop = Number.parseFloat(style.top) || 0;
+  const zIndex = Number.parseInt(style.zIndex, 10) || 0;
+  const inline = element.getAttribute("style");
+  element.style.setProperty("position", "static", "important");
+  const natural = element.getBoundingClientRect();
+  if (inline === null) element.removeAttribute("style");
+  else element.setAttribute("style", inline);
+  const pageHeight = document.documentElement.scrollHeight;
+  const maxScroll = pageHeight - window.innerHeight;
+  window.scrollTo({ top: maxScroll, behavior: "instant" });
+  await frames();
+  const end = element.getBoundingClientRect();
+  const endTop = end.top + window.scrollY;
+  window.scrollTo({ top: 0, behavior: "instant" });
+  await frames();
+  const stuckToTheEnd = endTop >= maxScroll + stickTop - 0.5;
+  return {
+    x: round(natural.left),
+    y: round(natural.top),
+    width: round(natural.width),
+    stickTop,
+    releaseAt: round(
+      stuckToTheEnd ? Math.max(pageHeight, maxScroll + stickTop + end.height) : endTop + end.height,
+    ),
+    zIndex,
+  };
+}
+
+export async function pinnedSignaturesInPage({
+  ids,
+  top,
+}: {
+  ids: string[];
+  top: number;
+}): Promise<string[]> {
+  window.scrollTo({ top, behavior: "instant" });
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  await new Promise((resolve) => setTimeout(resolve, 60));
+  for (const animation of document.getAnimations()) {
+    if (animation instanceof CSSTransition) animation.finish();
+  }
+  return ids.map((id) => {
+    const element = document.querySelector(`[data-capture-pinned="${id}"]`);
+    if (!element) throw new Error(`Pinned ${id} is not marked`);
+    const style = getComputedStyle(element);
+    return [
+      element.outerHTML,
+      style.backgroundColor,
+      style.borderBottomColor,
+      style.boxShadow,
+      style.backdropFilter,
+    ].join("|");
+  });
+}
+
+export async function pinnedShotInPage({
+  id,
+  top,
+}: {
+  id: string;
+  top: number;
+}): Promise<{ rect: Rect; blur: number | null }> {
+  window.scrollTo({ top, behavior: "instant" });
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  await new Promise((resolve) => setTimeout(resolve, 60));
+  for (const animation of document.getAnimations()) {
+    if (animation instanceof CSSTransition) animation.finish();
+  }
+  const element = document.querySelector(`[data-capture-pinned="${id}"]`);
+  if (!element) throw new Error(`Pinned ${id} is not marked`);
+  const box = element.getBoundingClientRect();
+  if (
+    box.top < 0 ||
+    box.left < 0 ||
+    box.bottom > window.innerHeight ||
+    box.right > window.innerWidth
+  ) {
+    throw new Error(`Pinned ${id} is not wholly in view at scroll ${top}`);
+  }
+  const blur = /blur\(([\d.]+)px\)/.exec(getComputedStyle(element).backdropFilter);
+  return {
+    rect: { x: box.left, y: box.top, width: box.width, height: box.height },
+    blur: blur ? Number(blur[1]) : null,
+  };
+}
+
+export async function pinnedTopAtInPage({ id, top }: { id: string; top: number }): Promise<number> {
+  window.scrollTo({ top, behavior: "instant" });
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  const element = document.querySelector(`[data-capture-pinned="${id}"]`);
+  if (!element) throw new Error(`Pinned ${id} is not marked`);
+  return element.getBoundingClientRect().top + window.scrollY;
 }

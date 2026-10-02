@@ -90,6 +90,7 @@ async function main() {
                 url: `${build.url}${side.path}`,
                 profile: DEVICE_PROFILES[device],
                 anchors: anchorList(page, version),
+                pinned: side.pinned.filter((query) => query.devices.includes(device)),
                 tokens: page === "home" ? HOME_TOKEN_SELECTORS[version] : null,
                 withLoops: page === "home" && version === "after" && !skipLoops,
                 withSpecimen: page === "home" && version === "before" && device === "desktop",

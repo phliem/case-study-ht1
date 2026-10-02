@@ -417,6 +417,630 @@
           "duration": 7
         }
       ]
+    },
+    {
+      "page": "article",
+      "version": "before",
+      "device": "desktop",
+      "commit": "b750cbef251910b5eee1e0bc3e23fa3ee4deb61f",
+      "capturedAt": "2026-10-02T11:02:52.621Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 1983,
+      "tiles": [
+        {
+          "avif": "captures/article/before/desktop/tile-00.avif",
+          "webp": "captures/article/before/desktop/tile-00.webp",
+          "top": 0,
+          "height": 1983
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "guide",
+          "top": 288
+        },
+        {
+          "id": "questions",
+          "top": 1516
+        },
+        {
+          "id": "next",
+          "top": 1516
+        },
+        {
+          "id": "footer",
+          "top": 1596
+        }
+      ],
+      "pinned": [],
+      "loops": []
+    },
+    {
+      "page": "article",
+      "version": "before",
+      "device": "mobile",
+      "commit": "b750cbef251910b5eee1e0bc3e23fa3ee4deb61f",
+      "capturedAt": "2026-10-02T11:02:56.994Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 2609,
+      "tiles": [
+        {
+          "avif": "captures/article/before/mobile/tile-00.avif",
+          "webp": "captures/article/before/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/article/before/mobile/tile-01.avif",
+          "webp": "captures/article/before/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 609
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "guide",
+          "top": 304
+        },
+        {
+          "id": "questions",
+          "top": 1928
+        },
+        {
+          "id": "next",
+          "top": 1928
+        },
+        {
+          "id": "footer",
+          "top": 2008
+        }
+      ],
+      "pinned": [],
+      "loops": []
+    },
+    {
+      "page": "article",
+      "version": "after",
+      "device": "desktop",
+      "commit": "c016453be737d49f95e06f96e275cdc2abb99217",
+      "capturedAt": "2026-10-02T11:03:23.169Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 4099,
+      "tiles": [
+        {
+          "avif": "captures/article/after/desktop/tile-00.avif",
+          "webp": "captures/article/after/desktop/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/article/after/desktop/tile-01.avif",
+          "webp": "captures/article/after/desktop/tile-01.webp",
+          "top": 2000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/article/after/desktop/tile-02.avif",
+          "webp": "captures/article/after/desktop/tile-02.webp",
+          "top": 4000,
+          "height": 99
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "guide",
+          "top": 405
+        },
+        {
+          "id": "questions",
+          "top": 2260
+        },
+        {
+          "id": "next",
+          "top": 2993
+        },
+        {
+          "id": "footer",
+          "top": 3831
+        }
+      ],
+      "pinned": [
+        {
+          "id": "contents",
+          "x": 1066,
+          "y": 398.7,
+          "width": 250,
+          "stickTop": 120,
+          "releaseAt": 3282.48,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/article/after/desktop/pinned-contents-0.png",
+              "height": 431.58,
+              "blur": null
+            },
+            {
+              "from": 854,
+              "src": "captures/article/after/desktop/pinned-contents-1.png",
+              "height": 431.58,
+              "blur": null
+            },
+            {
+              "from": 1168,
+              "src": "captures/article/after/desktop/pinned-contents-2.png",
+              "height": 431.58,
+              "blur": null
+            },
+            {
+              "from": 1433,
+              "src": "captures/article/after/desktop/pinned-contents-3.png",
+              "height": 431.58,
+              "blur": null
+            },
+            {
+              "from": 1777,
+              "src": "captures/article/after/desktop/pinned-contents-4.png",
+              "height": 431.58,
+              "blur": null
+            },
+            {
+              "from": 1994,
+              "src": "captures/article/after/desktop/pinned-contents-5.png",
+              "height": 431.58,
+              "blur": null
+            },
+            {
+              "from": 2131,
+              "src": "captures/article/after/desktop/pinned-contents-6.png",
+              "height": 431.58,
+              "blur": null
+            }
+          ]
+        },
+        {
+          "id": "breadcrumbs",
+          "x": 0,
+          "y": 307.7,
+          "width": 1440,
+          "stickTop": 67,
+          "releaseAt": 4099,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/article/after/desktop/pinned-breadcrumbs-0.png",
+              "height": 47,
+              "blur": 10
+            }
+          ]
+        },
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "stickTop": 0,
+          "releaseAt": 4099,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/article/after/desktop/pinned-header-0.png",
+              "height": 67,
+              "blur": 10
+            }
+          ]
+        }
+      ],
+      "loops": []
+    },
+    {
+      "page": "article",
+      "version": "after",
+      "device": "mobile",
+      "commit": "c016453be737d49f95e06f96e275cdc2abb99217",
+      "capturedAt": "2026-10-02T11:03:53.140Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 6820,
+      "tiles": [
+        {
+          "avif": "captures/article/after/mobile/tile-00.avif",
+          "webp": "captures/article/after/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/article/after/mobile/tile-01.avif",
+          "webp": "captures/article/after/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/article/after/mobile/tile-02.avif",
+          "webp": "captures/article/after/mobile/tile-02.webp",
+          "top": 4000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/article/after/mobile/tile-03.avif",
+          "webp": "captures/article/after/mobile/tile-03.webp",
+          "top": 6000,
+          "height": 820
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "guide",
+          "top": 410
+        },
+        {
+          "id": "questions",
+          "top": 3393
+        },
+        {
+          "id": "next",
+          "top": 4559
+        },
+        {
+          "id": "footer",
+          "top": 6282
+        }
+      ],
+      "pinned": [
+        {
+          "id": "breadcrumbs",
+          "x": 0,
+          "y": 331,
+          "width": 390,
+          "stickTop": 69,
+          "releaseAt": 6820,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/article/after/mobile/pinned-breadcrumbs-0.png",
+              "height": 45,
+              "blur": 10
+            }
+          ]
+        },
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "stickTop": 0,
+          "releaseAt": 6820,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/article/after/mobile/pinned-header-0.png",
+              "height": 69,
+              "blur": 10
+            }
+          ]
+        }
+      ],
+      "loops": []
+    },
+    {
+      "page": "help",
+      "version": "before",
+      "device": "desktop",
+      "commit": "b4e56b67e8de7656d1fd16b08e92752d74a42225",
+      "capturedAt": "2026-10-02T11:04:14.582Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 8479,
+      "tiles": [
+        {
+          "avif": "captures/help/before/desktop/tile-00.avif",
+          "webp": "captures/help/before/desktop/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/help/before/desktop/tile-01.avif",
+          "webp": "captures/help/before/desktop/tile-01.webp",
+          "top": 2000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/help/before/desktop/tile-02.avif",
+          "webp": "captures/help/before/desktop/tile-02.webp",
+          "top": 4000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/help/before/desktop/tile-03.avif",
+          "webp": "captures/help/before/desktop/tile-03.webp",
+          "top": 6000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/help/before/desktop/tile-04.avif",
+          "webp": "captures/help/before/desktop/tile-04.webp",
+          "top": 8000,
+          "height": 479
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "questions",
+          "top": 712
+        },
+        {
+          "id": "more-help",
+          "top": 7695
+        },
+        {
+          "id": "footer",
+          "top": 8056
+        }
+      ],
+      "pinned": [],
+      "loops": []
+    },
+    {
+      "page": "help",
+      "version": "before",
+      "device": "mobile",
+      "commit": "b4e56b67e8de7656d1fd16b08e92752d74a42225",
+      "capturedAt": "2026-10-02T11:04:26.347Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 8710,
+      "tiles": [
+        {
+          "avif": "captures/help/before/mobile/tile-00.avif",
+          "webp": "captures/help/before/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/help/before/mobile/tile-01.avif",
+          "webp": "captures/help/before/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/help/before/mobile/tile-02.avif",
+          "webp": "captures/help/before/mobile/tile-02.webp",
+          "top": 4000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/help/before/mobile/tile-03.avif",
+          "webp": "captures/help/before/mobile/tile-03.webp",
+          "top": 6000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/help/before/mobile/tile-04.avif",
+          "webp": "captures/help/before/mobile/tile-04.webp",
+          "top": 8000,
+          "height": 710
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "questions",
+          "top": 680
+        },
+        {
+          "id": "more-help",
+          "top": 7680
+        },
+        {
+          "id": "footer",
+          "top": 8045
+        }
+      ],
+      "pinned": [],
+      "loops": []
+    },
+    {
+      "page": "help",
+      "version": "after",
+      "device": "desktop",
+      "commit": "c016453be737d49f95e06f96e275cdc2abb99217",
+      "capturedAt": "2026-10-02T11:04:37.069Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 2079,
+      "tiles": [
+        {
+          "avif": "captures/help/after/desktop/tile-00.avif",
+          "webp": "captures/help/after/desktop/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/help/after/desktop/tile-01.avif",
+          "webp": "captures/help/after/desktop/tile-01.webp",
+          "top": 2000,
+          "height": 79
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "questions",
+          "top": 521
+        },
+        {
+          "id": "more-help",
+          "top": 1455
+        },
+        {
+          "id": "footer",
+          "top": 1811
+        }
+      ],
+      "pinned": [
+        {
+          "id": "breadcrumbs",
+          "x": 0,
+          "y": 429.7,
+          "width": 1440,
+          "stickTop": 67,
+          "releaseAt": 2079,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/help/after/desktop/pinned-breadcrumbs-0.png",
+              "height": 47,
+              "blur": 10
+            }
+          ]
+        },
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "stickTop": 0,
+          "releaseAt": 2079,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/help/after/desktop/pinned-header-0.png",
+              "height": 67,
+              "blur": 10
+            }
+          ]
+        }
+      ],
+      "loops": []
+    },
+    {
+      "page": "help",
+      "version": "after",
+      "device": "mobile",
+      "commit": "c016453be737d49f95e06f96e275cdc2abb99217",
+      "capturedAt": "2026-10-02T11:04:51.542Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 3597,
+      "tiles": [
+        {
+          "avif": "captures/help/after/mobile/tile-00.avif",
+          "webp": "captures/help/after/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/help/after/mobile/tile-01.avif",
+          "webp": "captures/help/after/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 1597
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "questions",
+          "top": 503
+        },
+        {
+          "id": "more-help",
+          "top": 2322
+        },
+        {
+          "id": "footer",
+          "top": 3059
+        }
+      ],
+      "pinned": [
+        {
+          "id": "breadcrumbs",
+          "x": 0,
+          "y": 430,
+          "width": 390,
+          "stickTop": 69,
+          "releaseAt": 3597,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/help/after/mobile/pinned-breadcrumbs-0.png",
+              "height": 45,
+              "blur": 10
+            }
+          ]
+        },
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "stickTop": 0,
+          "releaseAt": 3597,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/help/after/mobile/pinned-header-0.png",
+              "height": 69,
+              "blur": 10
+            }
+          ]
+        }
+      ],
+      "loops": []
     }
   ],
   "tokens": {
