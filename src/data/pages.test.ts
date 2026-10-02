@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CHANGES } from "./changes";
+import { CHANGES, changesFor } from "./changes";
 import { addressOf, isPageId, PAGE_IDS, PAGES, sectionIds, sectionLabel } from "./pages";
 import { VIEWS } from "./views";
 
@@ -38,6 +38,10 @@ describe("pages", () => {
     expect(isPageId("home-2025")).toBe(true);
     expect(isPageId("faq")).toBe(false);
     expect(isPageId(null)).toBe(false);
+  });
+
+  it("counts the 2025 homepage's reviews as its source listed them", () => {
+    expect(changesFor("home-2025", "proof-how")[1]).toMatch(/^Twelve star-rated reviews /);
   });
 
   it("gives an intro to the main page's comparisons only", () => {

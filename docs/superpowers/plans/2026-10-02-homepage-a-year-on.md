@@ -509,7 +509,7 @@ export const VIEWS = {
     ],
     "proof-how": [
       "Reviews move above how it works.",
-      "Thirteen star-rated reviews in a strip that scrolls sideways become one testimonials section, with headline figures under the quotes.",
+      "Twelve star-rated reviews in a strip that scrolls sideways become one testimonials section, with headline figures under the quotes.",
       "Three bulleted steps become a looping product vignette each, labelled Step 1, Step 2, Step 3.",
     ],
     "faq-about": [

@@ -24,7 +24,7 @@ week." in May 2026 (#8439). Top to bottom: the NHS organisation header
 ("Bookable", the NHS logo, "Providing NHS services"); a hero on an NHS-blue band, "Get an
 appointment with a new GP surgery this week.", over a white box holding an "appointments available"
 count and a postcode form; "How it works", three bulleted steps; "What people say about Bookable",
-13 star-rated reviews in a strip that scrolls sideways; "Frequently asked questions", five
+12 star-rated reviews in a strip that scrolls sideways; "Frequently asked questions", five
 accordions and a "See all frequently asked questions" link; the NHS footer.
 
 The local sanny clone is shallow (its develop history starts on 9 June 2026). This machine's clone
@@ -81,7 +81,7 @@ An absent group has no height, so the 2025 side holds still while v2 scrolls thr
 | Group | Notes |
 |---|---|
 | `hero` | The headline "Get an appointment with a new GP surgery this week." becomes "Register and book with an NHS GP". · A boxed postcode form under an "appointments available" count becomes the hero's single control: one postcode search, with a reel of appointment cards beside it on desktop. · The NHS-blue header and its "Providing NHS services" logo give way to Bookable's own, which lies clear over the hero until the page moves. |
-| `proof-how` | Reviews move above how it works. · Thirteen star-rated reviews in a strip that scrolls sideways become one testimonials section, with headline figures under the quotes. · Three bulleted steps become a looping product vignette each, labelled Step 1, Step 2, Step 3. |
+| `proof-how` | Reviews move above how it works. · Twelve star-rated reviews in a strip that scrolls sideways become one testimonials section, with headline figures under the quotes. · Three bulleted steps become a looping product vignette each, labelled Step 1, Step 2, Step 3. |
 | `faq-about` | Five NHS accordions under "Frequently asked questions" become a new five under "Questions before you start". · New in v2: "About finding an NHS GP in England" follows them. |
 | `areas` | New in v2: "Find an NHS GP surgery in your area", with the areas where Bookable is live underneath. · The 2025 homepage had no areas section, so its side waits here while v2 scrolls past. |
 | `footer` | The NHS footer, with three links, "Made with 💙 in Stratford" and a copyright line, becomes the site-wide v2 footer: brand, inline nav, the 111/999 disclaimer and legal links. · On phones the nav becomes 56px full-width rows and the legal links a two-column grid. |
