@@ -27,8 +27,8 @@ count and a postcode form; "How it works", three bulleted steps; "What people sa
 13 star-rated reviews in a strip that scrolls sideways; "Frequently asked questions", five
 accordions and a "See all frequently asked questions" link; the NHS footer.
 
-The local sanny clone is shallow (its history starts on 9 June 2026), so this commit is not in it
-(§4.1).
+The local sanny clone is shallow (its develop history starts on 9 June 2026). This machine's clone
+still holds the commit object; a clone that lacks it fetches it (§4.1).
 
 ## 3. The view
 
