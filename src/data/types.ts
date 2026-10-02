@@ -6,6 +6,18 @@ export type Rect = { x: number; y: number; width: number; height: number };
 
 export type Tile = { avif: string; webp: string; top: number; height: number };
 
+export type PinnedState = { from: number; src: string; height: number; blur: number | null };
+
+export type PinnedLayer = {
+  id: string;
+  x: number;
+  y: number;
+  width: number;
+  stickTop: number;
+  releaseAt: number;
+  states: PinnedState[];
+};
+
 export type SectionTop = { id: SectionId; top: number };
 
 export type HeaderState = {
