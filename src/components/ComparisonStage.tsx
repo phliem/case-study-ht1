@@ -15,7 +15,12 @@ import { StageControls } from "./StageControls";
 import { StageIntro } from "./StageIntro";
 import { StageViewport, type StageViewportHandle } from "./StageViewport";
 
-type ComparisonStageProps = { page: PageId; options: UrlOptions; eager: boolean };
+type ComparisonStageProps = {
+  page: PageId;
+  options: UrlOptions;
+  eager: boolean;
+  labelledBy?: string;
+};
 
 type StageLayout = {
   root: string;
@@ -78,12 +83,13 @@ function initialDevice(): Device {
   return window.innerWidth < 768 ? "mobile" : "desktop";
 }
 
-export function ComparisonStage({ page, options, eager }: ComparisonStageProps) {
+export function ComparisonStage({ page, options, eager, labelledBy }: ComparisonStageProps) {
   const { reduced } = useMotionPreference();
   const info = PAGES[page];
   const maps = MAPS[page];
   const recording = options.record !== null;
   const headingId = useId();
+  const ownIntro = !recording && labelledBy === undefined;
   const layout = options.record === null ? PAGE_LAYOUT : RECORD_LAYOUTS[options.record];
   const [device, setDevice] = useState<Device>(() => (recording ? "desktop" : initialDevice()));
   const [group, setGroup] = useState<SectionId>(info.sections[0].id);
@@ -154,17 +160,22 @@ export function ComparisonStage({ page, options, eager }: ComparisonStageProps) 
     [maps, reduced],
   );
 
+  if (ownIntro && info.intro === null) {
+    throw new Error(
+      `The ${page} comparison has no intro, so it needs the id of the heading that names it`,
+    );
+  }
   const after = captureFor(page, "after", device);
   return (
     <section
       ref={stage}
-      aria-labelledby={recording ? undefined : headingId}
+      aria-labelledby={recording ? undefined : (labelledBy ?? headingId)}
       aria-label={recording ? info.name : undefined}
       data-group={group}
       className={layout.root}
     >
       <LayoutGroup id={page}>
-        {!recording && info.intro && (
+        {ownIntro && info.intro && (
           <StageIntro page={page} intro={info.intro} headingId={headingId} />
         )}
         <div className={layout.box}>

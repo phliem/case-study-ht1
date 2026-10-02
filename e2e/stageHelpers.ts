@@ -1,10 +1,17 @@
 import { expect, type Locator, type Page } from "@playwright/test";
+import { A_YEAR_ON } from "../src/data/caseStudy";
 import { PAGES } from "../src/data/pages";
 import type { Capture, PageId } from "../src/data/types";
 import { anchorOf } from "./captureData";
 
+const NAMED_BY_VIEW: Partial<Record<PageId, string>> = { "home-2025": A_YEAR_ON.title };
+
+export function stageName(id: PageId): string {
+  return NAMED_BY_VIEW[id] ?? PAGES[id].name;
+}
+
 export function stageRegion(page: Page, id: PageId = "home"): Locator {
-  return page.getByRole("region", { name: PAGES[id].name, exact: true });
+  return page.getByRole("region", { name: stageName(id), exact: true });
 }
 
 export function dividerSlider(page: Page, id: PageId = "home"): Locator {

@@ -1,11 +1,9 @@
 import { LazyMotion, MotionConfig, useReducedMotion } from "motion/react";
 import { useMemo } from "react";
-import { CaseHeader } from "./components/CaseHeader";
 import { ComparisonStage } from "./components/ComparisonStage";
-import { DeferredDesignDiff } from "./components/DeferredDesignDiff";
 import { GlowBackground } from "./components/GlowBackground";
-import { SiteCredits } from "./components/SiteCredits";
-import { VIEWS } from "./data/views";
+import { MainView } from "./components/MainView";
+import { YearOnView } from "./components/YearOnView";
 import { MotionPreferenceContext } from "./hooks/useMotionPreference";
 import { parseUrlOptions } from "./lib/urlOptions";
 
@@ -25,14 +23,11 @@ export function App() {
           {options.record === null ? (
             <>
               <GlowBackground />
-              <CaseHeader />
-              <main className="pb-24">
-                {VIEWS.main.map((page, index) => (
-                  <ComparisonStage key={page} page={page} options={options} eager={index === 0} />
-                ))}
-                <DeferredDesignDiff />
-              </main>
-              <SiteCredits />
+              {options.view === "main" ? (
+                <MainView options={options} />
+              ) : (
+                <YearOnView options={options} />
+              )}
             </>
           ) : (
             <ComparisonStage page={options.page} options={options} eager />
