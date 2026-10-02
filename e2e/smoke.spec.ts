@@ -45,6 +45,24 @@ test("shows the three comparisons, each under its own names", async ({ page }) =
   }
 });
 
+test("lines the comparison headings up with the page's other headings", async ({ page }) => {
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    const lefts = await page
+      .getByRole("heading", { level: 1 })
+      .or(page.getByRole("heading", { level: 2 }))
+      .evaluateAll((headings) =>
+        headings.map((heading) => Math.round(heading.getBoundingClientRect().left)),
+      );
+    expect(lefts.length).toBeGreaterThanOrEqual(5);
+    expect(new Set(lefts).size, `${viewport.width}px: ${lefts.join(", ")}`).toBe(1);
+  }
+});
+
 test("@review the page top", async ({ page }) => {
   test.skip(!process.env.REVIEW, "Run with pnpm review");
   await page.goto("/");

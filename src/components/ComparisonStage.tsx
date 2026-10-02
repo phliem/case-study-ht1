@@ -45,8 +45,8 @@ const MAPS: Record<PageId, DeviceMaps> = {
 const INPUTS = ["pointerdown", "wheel", "keydown", "touchstart"] as const;
 
 const PAGE_LAYOUT: StageLayout = {
-  root: "@container/stage relative mx-auto w-full max-w-[1480px] px-4 sm:px-6",
-  box: "",
+  root: "relative w-full",
+  box: "@container/stage relative mx-auto w-full max-w-[1480px] px-4 sm:px-6",
   grid: "grid gap-5 @min-[1100px]/stage:h-[min(86svh,940px)] @min-[1100px]/stage:min-h-[600px] @min-[1100px]/stage:grid-cols-[160px_minmax(0,1fr)_300px] @min-[1100px]/stage:gap-8",
   frame:
     "grid h-[min(78svh,760px)] min-h-[420px] place-items-center [container-type:size] @min-[1100px]/stage:h-auto @min-[1100px]/stage:min-h-0",
