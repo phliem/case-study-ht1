@@ -1,12 +1,12 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { chromium } from "@playwright/test";
-import type { Capture, CapturesFile, Device, Version } from "../src/data/types";
+import type { CapturesFile, Device, MeasuredTokens, Version } from "../src/data/types";
 import { BUILDS, prepareBuild, type ServedBuild, serveBuild } from "./builds";
 import { extractObjectLiteral, paletteGroups } from "./literal";
 import { DATA_FILE } from "./paths";
 import { DEVICE_PROFILES } from "./profiles";
-import { capturePage } from "./shoot";
+import { type CaptureResult, capturePage } from "./shoot";
 
 const DEVICES: readonly Device[] = ["desktop", "mobile"];
 const skipLoops = process.argv.includes("--skip-loops");
@@ -34,13 +34,14 @@ async function main() {
     const before = servedFor(served, "before");
     const after = servedFor(served, "after");
     const browser = await chromium.launch();
-    const captures: Capture[] = [];
+    const results: CaptureResult[] = [];
     try {
       for (const build of [before, after]) {
         for (const device of DEVICES) {
           console.log(`Capturing ${build.version} on ${device}`);
-          captures.push(
+          results.push(
             await capturePage(browser, {
+              page: "home",
               version: build.version,
               commit: build.fullCommit,
               url: build.url,
@@ -54,8 +55,16 @@ async function main() {
     } finally {
       await browser.close();
     }
+    const tokensOf = (version: Version): MeasuredTokens => {
+      const found = results.find(
+        ({ capture }) => capture.version === version && capture.device === "desktop",
+      );
+      if (!found) throw new Error(`There is no ${version} desktop capture to take tokens from`);
+      return found.tokens;
+    };
     const file: CapturesFile = {
-      captures,
+      captures: results.map(({ capture }) => capture),
+      tokens: { before: tokensOf("before"), after: tokensOf("after") },
       palettes: {
         before: paletteGroups(
           extractObjectLiteral(

@@ -12,7 +12,8 @@ const GAP = 40;
 async function main() {
   const file = JSON.parse(readFileSync(DATA_FILE, "utf8")) as CapturesFile;
   const after = file.captures.find(
-    (capture) => capture.version === "after" && capture.device === "desktop",
+    (capture) =>
+      capture.page === "home" && capture.version === "after" && capture.device === "desktop",
   );
   if (!after) throw new Error("There is no after capture for desktop");
   const { width, height } = after.viewport;

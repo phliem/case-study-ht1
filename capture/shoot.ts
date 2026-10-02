@@ -2,7 +2,15 @@ import { mkdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import type { Browser, BrowserContext, Page } from "@playwright/test";
 import sharp, { type OverlayOptions } from "sharp";
-import type { Capture, StickyHeader, Tile, Version } from "../src/data/types";
+import type {
+  Capture,
+  MeasuredTokens,
+  PageId,
+  PinnedLayer,
+  PinnedState,
+  Tile,
+  Version,
+} from "../src/data/types";
 import {
   addSpecimenInPage,
   floatingElementsInPage,
@@ -28,6 +36,7 @@ export type RawImage = {
 };
 
 export type PageJob = {
+  page: PageId;
   version: Version;
   commit: string;
   url: string;
@@ -35,6 +44,8 @@ export type PageJob = {
   withLoops: boolean;
   withSpecimen: boolean;
 };
+
+export type CaptureResult = { capture: Capture; tokens: MeasuredTokens };
 
 const HIDDEN_SELECTORS = [".phone-help-bubble", ".cookie-banner-ssr"];
 
@@ -162,7 +173,7 @@ async function shootHeader(
   return { height: Math.round(box.height), blur: await page.evaluate(headerBlurInPage) };
 }
 
-async function captureHeaderStates(page: Page, outDir: string): Promise<StickyHeader> {
+async function captureHeaderStates(page: Page, outDir: string): Promise<PinnedState[]> {
   await page.evaluate(() =>
     document.querySelector("header")?.removeAttribute("data-capture-hidden"),
   );
@@ -183,18 +194,15 @@ async function captureHeaderStates(page: Page, outDir: string): Promise<StickyHe
   await isolation.evaluate((node) => {
     node.parentNode?.removeChild(node);
   });
-  return {
-    flipAt,
-    states: [
-      { id: "top", src: publicPath(top), height: topShot.height, blur: null },
-      {
-        id: "scrolled",
-        src: publicPath(scrolled),
-        height: scrolledShot.height,
-        blur: scrolledShot.blur,
-      },
-    ],
-  };
+  return [
+    { from: 0, src: publicPath(top), height: topShot.height, blur: null },
+    {
+      from: flipAt,
+      src: publicPath(scrolled),
+      height: scrolledShot.height,
+      blur: scrolledShot.blur,
+    },
+  ];
 }
 
 async function captureSpecimen(page: Page): Promise<void> {
@@ -209,7 +217,7 @@ async function captureSpecimen(page: Page): Promise<void> {
   });
 }
 
-export async function capturePage(browser: Browser, job: PageJob): Promise<Capture> {
+export async function capturePage(browser: Browser, job: PageJob): Promise<CaptureResult> {
   const { context, page } = await openPage(browser, job.url, job.profile);
   try {
     await page.evaluate(settleInPage);
@@ -225,25 +233,40 @@ export async function capturePage(browser: Browser, job: PageJob): Promise<Captu
         `Unexpected fixed or sticky elements: ${floating.join(", ")}. Add them to HIDDEN_SELECTORS in capture/shoot.ts.`,
       );
     }
-    const outDir = captureDir(job.version, job.profile.device);
+    const outDir = captureDir(job.page, job.version, job.profile.device);
     rmSync(outDir, { recursive: true, force: true });
     mkdirSync(outDir, { recursive: true });
     const { tiles, pageHeight, full } = await captureTiles(page, outDir);
     const loops = job.withLoops ? await captureLoops(page, job.profile.device, outDir, full) : [];
-    const header = sticky ? await captureHeaderStates(page, outDir) : null;
+    const pinned: PinnedLayer[] = sticky
+      ? [
+          {
+            id: "header",
+            x: 0,
+            y: 0,
+            width: job.profile.viewport.width,
+            stickTop: 0,
+            releaseAt: pageHeight,
+            states: await captureHeaderStates(page, outDir),
+          },
+        ]
+      : [];
     if (job.withSpecimen) await captureSpecimen(page);
     return {
-      version: job.version,
-      device: job.profile.device,
-      commit: job.commit,
-      capturedAt: new Date().toISOString(),
-      viewport: job.profile.viewport,
-      scale: SCALE,
-      pageHeight,
-      tiles,
-      sections,
-      header,
-      loops,
+      capture: {
+        page: job.page,
+        version: job.version,
+        device: job.profile.device,
+        commit: job.commit,
+        capturedAt: new Date().toISOString(),
+        viewport: job.profile.viewport,
+        scale: SCALE,
+        pageHeight,
+        tiles,
+        sections,
+        pinned,
+        loops,
+      },
       tokens,
     };
   } finally {

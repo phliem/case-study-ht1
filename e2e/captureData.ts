@@ -1,15 +1,15 @@
 import { readFileSync } from "node:fs";
-import type { Capture, CapturesFile, Device, SectionId, Version } from "../src/data/types";
+import type { Capture, CapturesFile, Device, PageId, SectionId, Version } from "../src/data/types";
 
 const FILE = JSON.parse(
   readFileSync(new URL("../src/data/captures.json", import.meta.url), "utf8"),
 ) as CapturesFile;
 
-export function captureOf(version: Version, device: Device): Capture {
+export function captureOf(page: PageId, version: Version, device: Device): Capture {
   const capture = FILE.captures.find(
-    (entry) => entry.version === version && entry.device === device,
+    (entry) => entry.page === page && entry.version === version && entry.device === device,
   );
-  if (!capture) throw new Error(`No ${version} capture for ${device}`);
+  if (!capture) throw new Error(`No ${page} ${version} capture for ${device}`);
   return capture;
 }
 

@@ -1,3 +1,4 @@
+export type PageId = "home" | "article" | "help";
 export type Version = "before" | "after";
 export type Device = "desktop" | "mobile";
 export type SectionId = "hero" | "proof" | "how" | "faq-about" | "areas" | "footer";
@@ -19,15 +20,6 @@ export type PinnedLayer = {
 };
 
 export type SectionTop = { id: SectionId; top: number };
-
-export type HeaderState = {
-  id: "top" | "scrolled";
-  src: string;
-  height: number;
-  blur: number | null;
-};
-
-export type StickyHeader = { flipAt: number; states: HeaderState[] };
 
 export type Loop = {
   id: string;
@@ -52,6 +44,7 @@ export type MeasuredTokens = {
 };
 
 export type Capture = {
+  page: PageId;
   version: Version;
   device: Device;
   commit: string;
@@ -61,15 +54,15 @@ export type Capture = {
   pageHeight: number;
   tiles: Tile[];
   sections: SectionTop[];
-  header: StickyHeader | null;
+  pinned: PinnedLayer[];
   loops: Loop[];
-  tokens: MeasuredTokens;
 };
 
 export type PaletteGroup = { name: string; swatches: { name: string; hex: string }[] };
 
 export type CapturesFile = {
   captures: Capture[];
+  tokens: { before: MeasuredTokens; after: MeasuredTokens };
   palettes: { before: PaletteGroup[]; after: PaletteGroup[] };
   radiusScale: string[];
   specimens: { frutiger: string };

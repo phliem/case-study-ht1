@@ -21,10 +21,10 @@ const jsBytes = scripts.reduce(
 
 const data = JSON.parse(readFileSync(join(ROOT, "src/data/captures.json"), "utf8")) as CapturesFile;
 const firstPaint = data.captures
-  .filter((capture) => capture.device === "desktop")
+  .filter((capture) => capture.page === "home" && capture.device === "desktop")
   .flatMap((capture) => [
     capture.tiles[0].avif,
-    ...(capture.header?.states.map((state) => state.src) ?? []),
+    ...capture.pinned.flatMap((layer) => layer.states.map((state) => state.src)),
   ]);
 const imageBytes = firstPaint.reduce((total, path) => total + statSync(join(DIST, path)).size, 0);
 

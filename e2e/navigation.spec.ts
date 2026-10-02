@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { captureOf, scrollToMiddleOf } from "./captureData";
 import { scrollAfterTo, stageRegion } from "./stageHelpers";
 
-const AFTER = captureOf("after", "desktop");
+const AFTER = captureOf("home", "after", "desktop");
 
 test("the rail follows the scroll", async ({ page }) => {
   await page.goto("/");
@@ -26,7 +26,7 @@ test("switching device keeps the section", async ({ page }) => {
   await page.getByRole("button", { name: "Mobile" }).click();
   await expect(page.getByTestId("after-scroller").locator("img").first()).toHaveAttribute(
     "src",
-    /captures\/after\/mobile\//,
+    /captures\/home\/after\/mobile\//,
   );
   await expect(stageRegion(page)).toHaveAttribute("data-group", "faq-about");
 });

@@ -1,6 +1,7 @@
 {
   "captures": [
     {
+      "page": "home",
       "version": "before",
       "device": "desktop",
       "commit": "0a143c682087965a3f0e489c382ccb68285b1e6a",
@@ -13,20 +14,20 @@
       "pageHeight": 4435,
       "tiles": [
         {
-          "avif": "captures/before/desktop/tile-00.avif",
-          "webp": "captures/before/desktop/tile-00.webp",
+          "avif": "captures/home/before/desktop/tile-00.avif",
+          "webp": "captures/home/before/desktop/tile-00.webp",
           "top": 0,
           "height": 2000
         },
         {
-          "avif": "captures/before/desktop/tile-01.avif",
-          "webp": "captures/before/desktop/tile-01.webp",
+          "avif": "captures/home/before/desktop/tile-01.avif",
+          "webp": "captures/home/before/desktop/tile-01.webp",
           "top": 2000,
           "height": 2000
         },
         {
-          "avif": "captures/before/desktop/tile-02.avif",
-          "webp": "captures/before/desktop/tile-02.webp",
+          "avif": "captures/home/before/desktop/tile-02.avif",
+          "webp": "captures/home/before/desktop/tile-02.webp",
           "top": 4000,
           "height": 435
         }
@@ -57,28 +58,11 @@
           "top": 3958
         }
       ],
-      "header": null,
-      "loops": [],
-      "tokens": {
-        "headline": {
-          "fontFamily": "frutiger, \"frutiger Fallback\", Arial, Helvetica, sans-serif",
-          "fontSize": "64px",
-          "lineHeight": "72px",
-          "letterSpacing": "normal",
-          "fontWeight": "700"
-        },
-        "heroGround": "rgb(0, 94, 184)",
-        "search": {
-          "borderRadius": "16px",
-          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.24) 0px 8px 48px 0px, rgb(216, 221, 224) 0px 4px 0px 0px"
-        },
-        "card": {
-          "borderRadius": "0px 0px 8px 8px",
-          "boxShadow": "none"
-        }
-      }
+      "pinned": [],
+      "loops": []
     },
     {
+      "page": "home",
       "version": "before",
       "device": "mobile",
       "commit": "0a143c682087965a3f0e489c382ccb68285b1e6a",
@@ -91,26 +75,26 @@
       "pageHeight": 6922,
       "tiles": [
         {
-          "avif": "captures/before/mobile/tile-00.avif",
-          "webp": "captures/before/mobile/tile-00.webp",
+          "avif": "captures/home/before/mobile/tile-00.avif",
+          "webp": "captures/home/before/mobile/tile-00.webp",
           "top": 0,
           "height": 2000
         },
         {
-          "avif": "captures/before/mobile/tile-01.avif",
-          "webp": "captures/before/mobile/tile-01.webp",
+          "avif": "captures/home/before/mobile/tile-01.avif",
+          "webp": "captures/home/before/mobile/tile-01.webp",
           "top": 2000,
           "height": 2000
         },
         {
-          "avif": "captures/before/mobile/tile-02.avif",
-          "webp": "captures/before/mobile/tile-02.webp",
+          "avif": "captures/home/before/mobile/tile-02.avif",
+          "webp": "captures/home/before/mobile/tile-02.webp",
           "top": 4000,
           "height": 2000
         },
         {
-          "avif": "captures/before/mobile/tile-03.avif",
-          "webp": "captures/before/mobile/tile-03.webp",
+          "avif": "captures/home/before/mobile/tile-03.avif",
+          "webp": "captures/home/before/mobile/tile-03.webp",
           "top": 6000,
           "height": 922
         }
@@ -141,28 +125,11 @@
           "top": 6175
         }
       ],
-      "header": null,
-      "loops": [],
-      "tokens": {
-        "headline": {
-          "fontFamily": "frutiger, \"frutiger Fallback\", Arial, Helvetica, sans-serif",
-          "fontSize": "40px",
-          "lineHeight": "48px",
-          "letterSpacing": "normal",
-          "fontWeight": "700"
-        },
-        "heroGround": "rgb(0, 94, 184)",
-        "search": {
-          "borderRadius": "16px",
-          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.24) 0px 8px 48px 0px, rgb(216, 221, 224) 0px 4px 0px 0px"
-        },
-        "card": {
-          "borderRadius": "0px 0px 8px 8px",
-          "boxShadow": "none"
-        }
-      }
+      "pinned": [],
+      "loops": []
     },
     {
+      "page": "home",
       "version": "after",
       "device": "desktop",
       "commit": "c016453be737d49f95e06f96e275cdc2abb99217",
@@ -175,14 +142,14 @@
       "pageHeight": 3772,
       "tiles": [
         {
-          "avif": "captures/after/desktop/tile-00.avif",
-          "webp": "captures/after/desktop/tile-00.webp",
+          "avif": "captures/home/after/desktop/tile-00.avif",
+          "webp": "captures/home/after/desktop/tile-00.webp",
           "top": 0,
           "height": 2000
         },
         {
-          "avif": "captures/after/desktop/tile-01.avif",
-          "webp": "captures/after/desktop/tile-01.webp",
+          "avif": "captures/home/after/desktop/tile-01.avif",
+          "webp": "captures/home/after/desktop/tile-01.webp",
           "top": 2000,
           "height": 1772
         }
@@ -213,23 +180,30 @@
           "top": 3504
         }
       ],
-      "header": {
-        "flipAt": 1,
-        "states": [
-          {
-            "id": "top",
-            "src": "captures/after/desktop/header-top.png",
-            "height": 67,
-            "blur": null
-          },
-          {
-            "id": "scrolled",
-            "src": "captures/after/desktop/header-scrolled.png",
-            "height": 67,
-            "blur": 10
-          }
-        ]
-      },
+      "pinned": [
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "stickTop": 0,
+          "releaseAt": 3772,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/home/after/desktop/header-top.png",
+              "height": 67,
+              "blur": null
+            },
+            {
+              "from": 1,
+              "src": "captures/home/after/desktop/header-scrolled.png",
+              "height": 67,
+              "blur": 10
+            }
+          ]
+        }
+      ],
       "loops": [
         {
           "id": "hero",
@@ -245,8 +219,8 @@
             0,
             0
           ],
-          "mp4": "captures/after/desktop/loop-hero.mp4",
-          "webm": "captures/after/desktop/loop-hero.webm",
+          "mp4": "captures/home/after/desktop/loop-hero.mp4",
+          "webm": "captures/home/after/desktop/loop-hero.webm",
           "duration": 10.2
         },
         {
@@ -263,8 +237,8 @@
             0,
             0
           ],
-          "mp4": "captures/after/desktop/loop-how-1.mp4",
-          "webm": "captures/after/desktop/loop-how-1.webm",
+          "mp4": "captures/home/after/desktop/loop-how-1.mp4",
+          "webm": "captures/home/after/desktop/loop-how-1.webm",
           "duration": 21
         },
         {
@@ -281,8 +255,8 @@
             0,
             0
           ],
-          "mp4": "captures/after/desktop/loop-how-2.mp4",
-          "webm": "captures/after/desktop/loop-how-2.webm",
+          "mp4": "captures/home/after/desktop/loop-how-2.mp4",
+          "webm": "captures/home/after/desktop/loop-how-2.webm",
           "duration": 7
         },
         {
@@ -299,31 +273,14 @@
             0,
             0
           ],
-          "mp4": "captures/after/desktop/loop-how-3.mp4",
-          "webm": "captures/after/desktop/loop-how-3.webm",
+          "mp4": "captures/home/after/desktop/loop-how-3.mp4",
+          "webm": "captures/home/after/desktop/loop-how-3.webm",
           "duration": 7
         }
-      ],
-      "tokens": {
-        "headline": {
-          "fontFamily": "\"Hanken Grotesk\", \"Hanken Grotesk Fallback\", system-ui, sans-serif",
-          "fontSize": "64px",
-          "lineHeight": "64px",
-          "letterSpacing": "-2.24px",
-          "fontWeight": "800"
-        },
-        "heroGround": "radial-gradient(125% 130% at 12% 0px, rgb(19, 135, 204) 0px, rgb(10, 99, 172) 40%, rgb(8, 63, 128) 72%, rgb(5, 47, 96) 100%)",
-        "search": {
-          "borderRadius": "16px",
-          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(3, 20, 45, 0.42) 0px 30px 72px 0px"
-        },
-        "card": {
-          "borderRadius": "16px",
-          "boxShadow": "none"
-        }
-      }
+      ]
     },
     {
+      "page": "home",
       "version": "after",
       "device": "mobile",
       "commit": "c016453be737d49f95e06f96e275cdc2abb99217",
@@ -336,20 +293,20 @@
       "pageHeight": 5530,
       "tiles": [
         {
-          "avif": "captures/after/mobile/tile-00.avif",
-          "webp": "captures/after/mobile/tile-00.webp",
+          "avif": "captures/home/after/mobile/tile-00.avif",
+          "webp": "captures/home/after/mobile/tile-00.webp",
           "top": 0,
           "height": 2000
         },
         {
-          "avif": "captures/after/mobile/tile-01.avif",
-          "webp": "captures/after/mobile/tile-01.webp",
+          "avif": "captures/home/after/mobile/tile-01.avif",
+          "webp": "captures/home/after/mobile/tile-01.webp",
           "top": 2000,
           "height": 2000
         },
         {
-          "avif": "captures/after/mobile/tile-02.avif",
-          "webp": "captures/after/mobile/tile-02.webp",
+          "avif": "captures/home/after/mobile/tile-02.avif",
+          "webp": "captures/home/after/mobile/tile-02.webp",
           "top": 4000,
           "height": 1530
         }
@@ -380,23 +337,30 @@
           "top": 4992
         }
       ],
-      "header": {
-        "flipAt": 1,
-        "states": [
-          {
-            "id": "top",
-            "src": "captures/after/mobile/header-top.png",
-            "height": 69,
-            "blur": null
-          },
-          {
-            "id": "scrolled",
-            "src": "captures/after/mobile/header-scrolled.png",
-            "height": 69,
-            "blur": 10
-          }
-        ]
-      },
+      "pinned": [
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "stickTop": 0,
+          "releaseAt": 5530,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/home/after/mobile/header-top.png",
+              "height": 69,
+              "blur": null
+            },
+            {
+              "from": 1,
+              "src": "captures/home/after/mobile/header-scrolled.png",
+              "height": 69,
+              "blur": 10
+            }
+          ]
+        }
+      ],
       "loops": [
         {
           "id": "how-1",
@@ -412,8 +376,8 @@
             0,
             0
           ],
-          "mp4": "captures/after/mobile/loop-how-1.mp4",
-          "webm": "captures/after/mobile/loop-how-1.webm",
+          "mp4": "captures/home/after/mobile/loop-how-1.mp4",
+          "webm": "captures/home/after/mobile/loop-how-1.webm",
           "duration": 21
         },
         {
@@ -430,8 +394,8 @@
             0,
             0
           ],
-          "mp4": "captures/after/mobile/loop-how-2.mp4",
-          "webm": "captures/after/mobile/loop-how-2.webm",
+          "mp4": "captures/home/after/mobile/loop-how-2.mp4",
+          "webm": "captures/home/after/mobile/loop-how-2.webm",
           "duration": 7
         },
         {
@@ -448,31 +412,51 @@
             0,
             0
           ],
-          "mp4": "captures/after/mobile/loop-how-3.mp4",
-          "webm": "captures/after/mobile/loop-how-3.webm",
+          "mp4": "captures/home/after/mobile/loop-how-3.mp4",
+          "webm": "captures/home/after/mobile/loop-how-3.webm",
           "duration": 7
         }
-      ],
-      "tokens": {
-        "headline": {
-          "fontFamily": "\"Hanken Grotesk\", \"Hanken Grotesk Fallback\", system-ui, sans-serif",
-          "fontSize": "48px",
-          "lineHeight": "48px",
-          "letterSpacing": "-1.68px",
-          "fontWeight": "800"
-        },
-        "heroGround": "radial-gradient(125% 130% at 12% 0px, rgb(19, 135, 204) 0px, rgb(10, 99, 172) 40%, rgb(8, 63, 128) 72%, rgb(5, 47, 96) 100%)",
-        "search": {
-          "borderRadius": "0px",
-          "boxShadow": "none"
-        },
-        "card": {
-          "borderRadius": "16px",
-          "boxShadow": "none"
-        }
-      }
+      ]
     }
   ],
+  "tokens": {
+    "before": {
+      "headline": {
+        "fontFamily": "frutiger, \"frutiger Fallback\", Arial, Helvetica, sans-serif",
+        "fontSize": "64px",
+        "lineHeight": "72px",
+        "letterSpacing": "normal",
+        "fontWeight": "700"
+      },
+      "heroGround": "rgb(0, 94, 184)",
+      "search": {
+        "borderRadius": "16px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.24) 0px 8px 48px 0px, rgb(216, 221, 224) 0px 4px 0px 0px"
+      },
+      "card": {
+        "borderRadius": "0px 0px 8px 8px",
+        "boxShadow": "none"
+      }
+    },
+    "after": {
+      "headline": {
+        "fontFamily": "\"Hanken Grotesk\", \"Hanken Grotesk Fallback\", system-ui, sans-serif",
+        "fontSize": "64px",
+        "lineHeight": "64px",
+        "letterSpacing": "-2.24px",
+        "fontWeight": "800"
+      },
+      "heroGround": "radial-gradient(125% 130% at 12% 0px, rgb(19, 135, 204) 0px, rgb(10, 99, 172) 40%, rgb(8, 63, 128) 72%, rgb(5, 47, 96) 100%)",
+      "search": {
+        "borderRadius": "16px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(3, 20, 45, 0.42) 0px 30px 72px 0px"
+      },
+      "card": {
+        "borderRadius": "16px",
+        "boxShadow": "none"
+      }
+    }
+  },
   "palettes": {
     "before": [
       {

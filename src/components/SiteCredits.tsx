@@ -1,6 +1,6 @@
 import { captureFor } from "../data/captures";
 
-const CAPTURED_ON = new Date(captureFor("after", "desktop").capturedAt).toLocaleDateString(
+const CAPTURED_ON = new Date(captureFor("home", "after", "desktop").capturedAt).toLocaleDateString(
   "en-GB",
   {
     day: "numeric",

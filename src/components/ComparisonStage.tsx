@@ -25,8 +25,8 @@ type StageLayout = {
 };
 
 function mapFor(device: Device): SectionMap {
-  const after = captureFor("after", device);
-  return createSectionMap(after, captureFor("before", device), after.viewport.height);
+  const after = captureFor("home", "after", device);
+  return createSectionMap(after, captureFor("home", "before", device), after.viewport.height);
 }
 
 const MAPS: Record<Device, SectionMap> = { desktop: mapFor("desktop"), mobile: mapFor("mobile") };
@@ -137,7 +137,7 @@ export function ComparisonStage({ options }: ComparisonStageProps) {
     [reduced],
   );
 
-  const after = captureFor("after", device);
+  const after = captureFor("home", "after", device);
   return (
     <section
       ref={stage}

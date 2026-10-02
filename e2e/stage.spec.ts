@@ -2,8 +2,8 @@ import { expect, test } from "@playwright/test";
 import { captureOf, scrollToMiddleOf, spanOf } from "./captureData";
 import { beforeAnchor, scrollAfterTo, stageRegion } from "./stageHelpers";
 
-const AFTER = captureOf("after", "desktop");
-const BEFORE = captureOf("before", "desktop");
+const AFTER = captureOf("home", "after", "desktop");
+const BEFORE = captureOf("home", "before", "desktop");
 
 test("the divider follows the arrow keys and a drag", async ({ page }) => {
   await page.goto("/");
@@ -52,7 +52,7 @@ test.describe("on a phone-sized screen", () => {
     await page.goto("/");
     await expect(page.getByTestId("after-scroller").locator("img").first()).toHaveAttribute(
       "src",
-      /captures\/after\/mobile\//,
+      /captures\/home\/after\/mobile\//,
     );
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth - window.innerWidth,

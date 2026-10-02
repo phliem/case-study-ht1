@@ -2,14 +2,14 @@ import { expect, test } from "@playwright/test";
 import { captureOf } from "./captureData";
 import { scrollAfterTo, stageRegion } from "./stageHelpers";
 
-const AFTER = captureOf("after", "desktop");
+const AFTER = captureOf("home", "after", "desktop");
 
 test("the v2 header lies clear over the hero and turns solid once the page moves", async ({
   page,
 }) => {
   await page.goto("/");
   await stageRegion(page).scrollIntoViewIfNeeded();
-  const solid = page.getByTestId("header-scrolled");
+  const solid = page.getByTestId("pinned-header-1");
   await expect(solid).toHaveCSS("opacity", "0");
   await scrollAfterTo(page, 120);
   await expect(solid).toHaveCSS("opacity", "1");

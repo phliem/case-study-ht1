@@ -1,4 +1,4 @@
-import { CAPTURES, captureFor } from "../data/captures";
+import { CAPTURES } from "../data/captures";
 import {
   colourCount,
   groundSummary,
@@ -15,9 +15,8 @@ import { TokenCard } from "./TokenCard";
 import { TypefaceDemo } from "./TypefaceDemo";
 
 export function DesignDiff() {
-  const before = captureFor("before", "desktop").tokens;
-  const after = captureFor("after", "desktop").tokens;
-  const { palettes, radiusScale, specimens } = CAPTURES;
+  const { tokens, palettes, radiusScale, specimens } = CAPTURES;
+  const { before, after } = tokens;
   return (
     <section aria-labelledby="diff-heading" className="mx-auto w-full max-w-[1240px] px-6 pt-32">
       <p className="caption text-mint">Design system</p>

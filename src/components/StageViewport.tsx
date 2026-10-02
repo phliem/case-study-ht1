@@ -9,7 +9,7 @@ import { useMotionPreference } from "../hooks/useMotionPreference";
 import { easeInOutCubic, lerp } from "../lib/math";
 import type { SectionMap } from "../lib/sectionMap";
 import { PageLayer } from "./PageLayer";
-import { StickyHeaderOverlay } from "./StickyHeaderOverlay";
+import { PinnedLayers } from "./PinnedLayers";
 import { VersionLabels } from "./VersionLabels";
 import { WipeDivider } from "./WipeDivider";
 
@@ -41,8 +41,8 @@ export function StageViewport({
   ref,
 }: StageViewportProps) {
   const { reduced } = useMotionPreference();
-  const before = captureFor("before", device);
-  const after = captureFor("after", device);
+  const before = captureFor("home", "before", device);
+  const after = captureFor("home", "after", device);
   const [measure, size] = useElementSize<HTMLDivElement>();
   const scale = size.width / after.viewport.width;
   const scroller = useRef<HTMLElement>(null);
@@ -148,14 +148,12 @@ export function StageViewport({
           />
         </div>
       </section>
-      {after.header && (
-        <StickyHeaderOverlay
-          header={after.header}
-          width={after.viewport.width}
-          scale={scale}
-          scroll={scrollA}
-        />
-      )}
+      <PinnedLayers
+        layers={after.pinned}
+        width={after.viewport.width}
+        scale={scale}
+        scroll={scrollA}
+      />
       <div
         ref={outerClip.ref}
         className="pointer-events-none absolute inset-0 overflow-hidden will-change-transform"
@@ -180,14 +178,12 @@ export function StageViewport({
               alt={`Before: the Bookable homepage on the NHS design system, ${device}`}
             />
           </div>
-          {before.header && (
-            <StickyHeaderOverlay
-              header={before.header}
-              width={before.viewport.width}
-              scale={scale}
-              scroll={scrollB}
-            />
-          )}
+          <PinnedLayers
+            layers={before.pinned}
+            width={before.viewport.width}
+            scale={scale}
+            scroll={scrollB}
+          />
         </div>
       </div>
       <WipeDivider divider={divider} />
