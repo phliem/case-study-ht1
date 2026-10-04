@@ -18,7 +18,7 @@ test("loads with its title and no console errors", async ({ page }) => {
 
 test("introduces the case study", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText("Front-end engineering")).toBeVisible();
+  await expect(page.getByRole("banner").getByText("Role", { exact: true })).toHaveCount(0);
   await expect(page.getByRole("banner")).toContainText("In 2026 Bookable's homepage");
   await expect(page.getByRole("link", { name: "bookable.health", exact: true })).toHaveAttribute(
     "href",
