@@ -19,17 +19,30 @@ test("loads with its title and no console errors", async ({ page }) => {
 test("introduces the case study", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByText("Front-end engineering")).toBeVisible();
-  await expect(page.getByRole("banner").getByText("Sept 2026", { exact: true })).toBeVisible();
+  await expect(page.getByRole("banner")).toContainText("In 2026 Bookable's homepage");
   await expect(page.getByRole("link", { name: "bookable.health", exact: true })).toHaveAttribute(
     "href",
     "https://bookable.health",
   );
 });
 
+test("names the year once, in the intro, and no exact dates", async ({ page }) => {
+  await page.goto("/?page=help");
+  await page.getByTestId("design-diff").scrollIntoViewIfNeeded();
+  await expect(page.getByRole("region", { name: "The system underneath" })).toBeVisible();
+  const text = await page.locator("body").innerText();
+  const month =
+    /\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.? \d{4}\b|\b\d{1,2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/;
+  expect(text.match(month)).toBeNull();
+  expect(text.match(/\b2026\b/g)).toEqual(["2026"]);
+});
+
 test("credits the captures", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("contentinfo")).toContainText("Frutiger is licensed to the NHS");
-  await expect(page.getByRole("contentinfo")).toContainText(/Screens captured (on|between) \d/);
+  await expect(page.getByRole("contentinfo")).toContainText(
+    "Screens captured from production builds of each version.",
+  );
 });
 
 test("shows the three comparisons, each under its own names", async ({ page }) => {

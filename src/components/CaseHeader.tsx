@@ -36,7 +36,6 @@ export function CaseHeader() {
       </m.p>
       <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-6 text-sm">
         <MetaItem term="Role">{CASE_STUDY.role}</MetaItem>
-        <MetaItem term="Shipped">{CASE_STUDY.shipped}</MetaItem>
         <MetaItem term="Stack">
           <ul className="flex flex-wrap gap-2">
             {CASE_STUDY.stack.map((item) => (

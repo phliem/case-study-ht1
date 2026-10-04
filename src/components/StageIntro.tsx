@@ -5,7 +5,7 @@ import { MetaItem } from "./MetaItem";
 type StageIntroProps = { page: PageId; headingId: string };
 
 export function StageIntro({ page, headingId }: StageIntroProps) {
-  const { number, name, summary, route, shipped } = PAGES[page];
+  const { number, name, summary, route } = PAGES[page];
   return (
     <div className="mx-auto w-full max-w-[1240px] px-6 pt-20 pb-10 sm:pt-28">
       <p className="caption text-mint">{number}</p>
@@ -26,7 +26,6 @@ export function StageIntro({ page, headingId }: StageIntroProps) {
             <code>{route.after}</code>
           </span>
         </MetaItem>
-        <MetaItem term="Shipped">{shipped}</MetaItem>
       </dl>
     </div>
   );

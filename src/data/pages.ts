@@ -9,7 +9,6 @@ export type PageInfo = {
   noun: string;
   summary: string;
   route: { before: string; after: string };
-  shipped: string;
   sections: readonly PageSection[];
 };
 
@@ -50,7 +49,6 @@ export const PAGES: Record<PageId, PageInfo> = {
     summary:
       "The landing page: one postcode search at the heart of the hero, one testimonials section in place of three proof blocks, and a live vignette for each step of how it works.",
     route: { before: "/", after: "/" },
-    shipped: "29 Sept 2026",
     sections: HOME_SECTIONS,
   },
   article: {
@@ -61,7 +59,6 @@ export const PAGES: Record<PageId, PageInfo> = {
     summary:
       "A how-to page on the NHS design system becomes the v2 article template: a hero, a summary up top, a contents list that follows the reader on desktop, and questions answered in place.",
     route: { before: "/how-to/book-doctor-appointment-nhs", after: "/book-a-gp-appointment" },
-    shipped: "22 Sept 2026",
     sections: ARTICLE_SECTIONS,
   },
   help: {
@@ -72,7 +69,6 @@ export const PAGES: Record<PageId, PageInfo> = {
     summary:
       "One long page of FAQ accordions becomes a help centre you can search, with popular questions up front and a page for every topic.",
     route: { before: "/faq", after: "/help" },
-    shipped: "11 Sept 2026",
     sections: HELP_SECTIONS,
   },
 };

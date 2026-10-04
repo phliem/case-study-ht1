@@ -1,7 +1,7 @@
 # Bookable, before & after
 
 An interactive, animated before and after of three Bookable pages (bookable.health) as they moved
-from the NHS design system to Bookable's own (v2) in September 2026: the homepage, a guide article
+from the NHS design system to Bookable's own (v2) in 2026: the homepage, a guide article
 and the help centre. Drag a divider, scroll inside a frame (both versions stay on the same section),
 switch Desktop and Mobile, or press Play.
 
