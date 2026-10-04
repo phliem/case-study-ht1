@@ -15,12 +15,7 @@ import { StageControls } from "./StageControls";
 import { StageIntro } from "./StageIntro";
 import { StageViewport, type StageViewportHandle } from "./StageViewport";
 
-type ComparisonStageProps = {
-  page: PageId;
-  options: UrlOptions;
-  eager: boolean;
-  labelledBy?: string;
-};
+type ComparisonStageProps = { page: PageId; options: UrlOptions; eager: boolean };
 
 type StageLayout = {
   root: string;
@@ -45,7 +40,6 @@ const MAPS: Record<PageId, DeviceMaps> = {
   home: mapsFor("home"),
   article: mapsFor("article"),
   help: mapsFor("help"),
-  "home-2025": mapsFor("home-2025"),
 };
 
 const INPUTS = ["pointerdown", "wheel", "keydown", "touchstart"] as const;
@@ -83,13 +77,12 @@ function initialDevice(): Device {
   return window.innerWidth < 768 ? "mobile" : "desktop";
 }
 
-export function ComparisonStage({ page, options, eager, labelledBy }: ComparisonStageProps) {
+export function ComparisonStage({ page, options, eager }: ComparisonStageProps) {
   const { reduced } = useMotionPreference();
   const info = PAGES[page];
   const maps = MAPS[page];
   const recording = options.record !== null;
   const headingId = useId();
-  const ownIntro = !recording && labelledBy === undefined;
   const layout = options.record === null ? PAGE_LAYOUT : RECORD_LAYOUTS[options.record];
   const [device, setDevice] = useState<Device>(() => (recording ? "desktop" : initialDevice()));
   const [group, setGroup] = useState<SectionId>(info.sections[0].id);
@@ -160,24 +153,17 @@ export function ComparisonStage({ page, options, eager, labelledBy }: Comparison
     [maps, reduced],
   );
 
-  if (ownIntro && info.intro === null) {
-    throw new Error(
-      `The ${page} comparison has no intro, so it needs the id of the heading that names it`,
-    );
-  }
   const after = captureFor(page, "after", device);
   return (
     <section
       ref={stage}
-      aria-labelledby={recording ? undefined : (labelledBy ?? headingId)}
+      aria-labelledby={recording ? undefined : headingId}
       aria-label={recording ? info.name : undefined}
       data-group={group}
       className={layout.root}
     >
       <LayoutGroup id={page}>
-        {ownIntro && info.intro && (
-          <StageIntro page={page} intro={info.intro} headingId={headingId} />
-        )}
+        {!recording && <StageIntro page={page} headingId={headingId} />}
         <div className={layout.box}>
           <div data-testid="stage-grid" className={layout.grid}>
             <div className={layout.side}>

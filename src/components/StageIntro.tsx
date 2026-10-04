@@ -1,12 +1,11 @@
-import { PAGES, type StageIntroCopy } from "../data/pages";
+import { PAGES } from "../data/pages";
 import type { PageId } from "../data/types";
 import { MetaItem } from "./MetaItem";
 
-type StageIntroProps = { page: PageId; intro: StageIntroCopy; headingId: string };
+type StageIntroProps = { page: PageId; headingId: string };
 
-export function StageIntro({ page, intro, headingId }: StageIntroProps) {
-  const { name, route } = PAGES[page];
-  const { number, summary, shipped } = intro;
+export function StageIntro({ page, headingId }: StageIntroProps) {
+  const { number, name, summary, route, shipped } = PAGES[page];
   return (
     <div className="mx-auto w-full max-w-[1240px] px-6 pt-20 pb-10 sm:pt-28">
       <p className="caption text-mint">{number}</p>

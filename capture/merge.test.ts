@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { PAGE_IDS } from "../src/data/pages";
-import { isReused } from "../src/data/reuse";
 import type {
   Capture,
   CapturesFile,
@@ -32,7 +31,7 @@ function fake(page: PageId, version: Version, device: Device, commit: string): C
 }
 
 function pageCaptures(page: PageId, commit: string): Capture[] {
-  return VERSIONS.filter((version) => !isReused(page, version)).flatMap((version) =>
+  return VERSIONS.flatMap((version) =>
     DEVICES.map((device) => fake(page, version, device, commit)),
   );
 }
@@ -71,38 +70,16 @@ describe("mergeCaptures", () => {
       ...Array.from({ length: 4 }, () => "home:old"),
       ...Array.from({ length: 4 }, () => "article:new"),
       ...Array.from({ length: 4 }, () => "help:old"),
-      ...Array.from({ length: 2 }, () => "home-2025:old"),
     ]);
     const untouched = (file: CapturesFile) =>
       JSON.stringify(file.captures.filter((capture) => capture.page !== "article"));
     expect(untouched(merged)).toBe(untouched(EXISTING));
   });
 
-  it("replaces only the 2025 homepage's two captures", () => {
-    const merged = mergeCaptures(EXISTING, pageCaptures("home-2025", "new"), null);
-    expect(
-      merged.captures
-        .slice(12)
-        .map((capture) => `${capture.page} ${capture.version} ${capture.device}:${capture.commit}`),
-    ).toEqual(["home-2025 before desktop:new", "home-2025 before mobile:new"]);
-    const untouched = (file: CapturesFile) =>
-      JSON.stringify(file.captures.filter((capture) => capture.page !== "home-2025"));
-    expect(untouched(merged)).toBe(untouched(EXISTING));
-  });
-
-  it("refuses a stored capture for a side that reuses another page's", () => {
-    const stray = fake("home-2025", "after", "desktop", "new");
-    expect(() =>
-      mergeCaptures(EXISTING, [...pageCaptures("home-2025", "new"), stray], null),
-    ).toThrow(
-      "captures.json would hold a home-2025 after desktop capture, but that side reuses another page's",
-    );
-  });
-
   it("orders captures by page, then version, then device", () => {
     const merged = mergeCaptures(EXISTING, pageCaptures("help", "new").reverse(), null);
     expect(
-      merged.captures.slice(8, 12).map((capture) => `${capture.version} ${capture.device}`),
+      merged.captures.slice(8).map((capture) => `${capture.version} ${capture.device}`),
     ).toEqual(["before desktop", "before mobile", "after desktop", "after mobile"]);
   });
 

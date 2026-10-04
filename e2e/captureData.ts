@@ -1,5 +1,4 @@
 import { readFileSync } from "node:fs";
-import { findCapture } from "../src/data/reuse";
 import type { Capture, CapturesFile, Device, PageId, SectionId, Version } from "../src/data/types";
 
 const FILE = JSON.parse(
@@ -7,7 +6,11 @@ const FILE = JSON.parse(
 ) as CapturesFile;
 
 export function captureOf(page: PageId, version: Version, device: Device): Capture {
-  return findCapture(FILE, page, version, device);
+  const capture = FILE.captures.find(
+    (entry) => entry.page === page && entry.version === version && entry.device === device,
+  );
+  if (!capture) throw new Error(`No ${page} ${version} capture for ${device}`);
+  return capture;
 }
 
 export function spanOf(capture: Capture, id: SectionId): { start: number; end: number } {

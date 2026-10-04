@@ -1,27 +1,10 @@
 import { expect, type Locator, type Page } from "@playwright/test";
-import { A_YEAR_ON } from "../src/data/caseStudy";
 import { PAGES } from "../src/data/pages";
 import type { Capture, PageId } from "../src/data/types";
-import { VIEW_IDS, VIEWS, viewHref } from "../src/data/views";
 import { anchorOf } from "./captureData";
 
-const NAMED_BY_VIEW: Partial<Record<PageId, string>> = { "home-2025": A_YEAR_ON.title };
-
-export function stageName(id: PageId): string {
-  return NAMED_BY_VIEW[id] ?? PAGES[id].name;
-}
-
-export function viewUrl(id: PageId): string {
-  const view = VIEW_IDS.find((key) => {
-    const pages: readonly PageId[] = VIEWS[key];
-    return pages.includes(id);
-  });
-  if (!view) throw new Error(`${id} is in no view`);
-  return viewHref("/", view);
-}
-
 export function stageRegion(page: Page, id: PageId = "home"): Locator {
-  return page.getByRole("region", { name: stageName(id), exact: true });
+  return page.getByRole("region", { name: PAGES[id].name, exact: true });
 }
 
 export function dividerSlider(page: Page, id: PageId = "home"): Locator {

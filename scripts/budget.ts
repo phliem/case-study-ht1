@@ -1,9 +1,7 @@
 import { readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { gzipSync } from "node:zlib";
-import { findCapture } from "../src/data/reuse";
 import type { CapturesFile } from "../src/data/types";
-import { VIEW_IDS, VIEWS } from "../src/data/views";
 
 const ROOT = join(import.meta.dirname, "..");
 const DIST = join(ROOT, "dist");
@@ -22,24 +20,18 @@ const jsBytes = scripts.reduce(
 );
 
 const data = JSON.parse(readFileSync(join(ROOT, "src/data/captures.json"), "utf8")) as CapturesFile;
+const firstPaint = data.captures
+  .filter((capture) => capture.page === "home" && capture.device === "desktop")
+  .flatMap((capture) => [
+    capture.tiles[0].avif,
+    ...capture.pinned.flatMap((layer) => layer.states.map((state) => state.src)),
+  ]);
+const imageBytes = firstPaint.reduce((total, path) => total + statSync(join(DIST, path)).size, 0);
 
 console.log(
   `Initial JS: ${(jsBytes / 1024).toFixed(1)} KB gzipped (budget ${JS_BUDGET / 1024} KB)`,
 );
-let over = jsBytes > JS_BUDGET;
-for (const view of VIEW_IDS) {
-  const [first] = VIEWS[view];
-  const firstPaint = (["before", "after"] as const).flatMap((version) => {
-    const capture = findCapture(data, first, version, "desktop");
-    return [
-      capture.tiles[0].avif,
-      ...capture.pinned.flatMap((layer) => layer.states.map((state) => state.src)),
-    ];
-  });
-  const imageBytes = firstPaint.reduce((total, path) => total + statSync(join(DIST, path)).size, 0);
-  console.log(
-    `First-paint images (${view}): ${(imageBytes / 1024 / 1024).toFixed(2)} MB (budget ${IMAGE_BUDGET / 1024 / 1024} MB)`,
-  );
-  if (imageBytes > IMAGE_BUDGET) over = true;
-}
-if (over) process.exitCode = 1;
+console.log(
+  `First-paint images: ${(imageBytes / 1024 / 1024).toFixed(2)} MB (budget ${IMAGE_BUDGET / 1024 / 1024} MB)`,
+);
+if (jsBytes > JS_BUDGET || imageBytes > IMAGE_BUDGET) process.exitCode = 1;

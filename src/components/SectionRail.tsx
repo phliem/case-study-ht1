@@ -18,12 +18,6 @@ const LIST: Record<RailLayout, string> = {
   horizontal: "flex flex-wrap justify-center gap-1",
 };
 
-const LABEL: Record<RailLayout, string> = {
-  responsive: "whitespace-nowrap @min-[1100px]/stage:whitespace-normal",
-  vertical: "whitespace-normal",
-  horizontal: "whitespace-nowrap",
-};
-
 export function SectionRail({ page, active, onSelect, layout }: SectionRailProps) {
   const { name, sections } = PAGES[page];
   return (
@@ -35,7 +29,7 @@ export function SectionRail({ page, active, onSelect, layout }: SectionRailProps
               type="button"
               onClick={() => onSelect(id)}
               aria-current={id === active ? "true" : undefined}
-              className={`relative w-full rounded-full px-3.5 py-2 text-left font-bold text-mist/60 text-sm transition-colors hover:text-mist aria-[current=true]:text-ink ${LABEL[layout]}`}
+              className="relative w-full whitespace-nowrap rounded-full px-3.5 py-2 text-left font-bold text-mist/60 text-sm transition-colors hover:text-mist aria-[current=true]:text-ink"
             >
               {id === active && (
                 <m.span

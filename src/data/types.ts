@@ -1,16 +1,10 @@
-export type PageId = "home" | "article" | "help" | "home-2025";
+export type PageId = "home" | "article" | "help";
 export type Version = "before" | "after";
 export type Device = "desktop" | "mobile";
 export type HomeSectionId = "hero" | "proof" | "how" | "faq-about" | "areas" | "footer";
 export type ArticleSectionId = "title" | "guide" | "questions" | "next" | "footer";
 export type HelpSectionId = "title" | "questions" | "more-help" | "footer";
-export type Home2025SectionId = "hero" | "proof-how" | "faq-about" | "areas" | "footer";
-export type SectionIdOf = {
-  home: HomeSectionId;
-  article: ArticleSectionId;
-  help: HelpSectionId;
-  "home-2025": Home2025SectionId;
-};
+export type SectionIdOf = { home: HomeSectionId; article: ArticleSectionId; help: HelpSectionId };
 export type SectionId = SectionIdOf[PageId];
 
 export type Rect = { x: number; y: number; width: number; height: number };

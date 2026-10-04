@@ -1,5 +1,4 @@
 import { sectionIds } from "../src/data/pages";
-import type { ReusedPage } from "../src/data/reuse";
 import type { Device, PageId, SectionId, SectionIdOf, Version } from "../src/data/types";
 import type { BuildName } from "./builds";
 import type { TokenSelectors } from "./inPage";
@@ -14,23 +13,7 @@ type PageSide<P extends PageId> = {
   pinned: readonly PinnedQuery[];
 };
 
-type PageSource<P extends PageId> = {
-  before: PageSide<P>;
-  after: P extends ReusedPage ? null : PageSide<P>;
-};
-
-export type ShotSide = {
-  page: PageId;
-  version: Version;
-  side: {
-    build: BuildName;
-    path: string;
-    anchors: Partial<Record<SectionId, SectionAnchor>>;
-    pinned: readonly PinnedQuery[];
-  };
-};
-
-const VERSIONS: readonly Version[] = ["before", "after"];
+type PageSource<P extends PageId> = { before: PageSide<P>; after: PageSide<P> };
 
 const BOTH: readonly Device[] = ["desktop", "mobile"];
 const HEADER: PinnedQuery = { id: "header", selector: "header", devices: BOTH };
@@ -127,21 +110,6 @@ export const PAGE_SOURCES: { [P in PageId]: PageSource<P> } = {
       pinned: [HEADER, BREADCRUMBS],
     },
   },
-  "home-2025": {
-    before: {
-      build: "home-2025",
-      path: "/",
-      anchors: {
-        hero: { kind: "page-top" },
-        "proof-how": { kind: "main-child-with-heading", text: "How it works" },
-        "faq-about": { kind: "main-child-with-heading", text: "Frequently asked questions" },
-        areas: { kind: "absent" },
-        footer: { kind: "footer-after-main" },
-      },
-      pinned: [],
-    },
-    after: null,
-  },
 };
 
 export const HOME_TOKEN_SELECTORS: Record<Version, TokenSelectors> = {
@@ -159,25 +127,19 @@ export const HOME_TOKEN_SELECTORS: Record<Version, TokenSelectors> = {
   },
 };
 
-export function shotSides(pages: readonly PageId[]): ShotSide[] {
-  return pages.flatMap((page) =>
-    VERSIONS.flatMap((version): ShotSide[] => {
-      const side: ShotSide["side"] | null = PAGE_SOURCES[page][version];
-      return side === null ? [] : [{ page, version, side }];
-    }),
-  );
-}
-
 export function anchorList(page: PageId, version: Version): [SectionId, SectionAnchor][] {
-  const side: ShotSide["side"] | null = PAGE_SOURCES[page][version];
-  if (side === null) throw new Error(`The ${page} ${version} side reuses another page's capture`);
+  const anchors: Partial<Record<SectionId, SectionAnchor>> = PAGE_SOURCES[page][version].anchors;
   return sectionIds(page).map((id): [SectionId, SectionAnchor] => {
-    const anchor = side.anchors[id];
+    const anchor = anchors[id];
     if (!anchor) throw new Error(`The ${page} ${version} page has no anchor for ${id}`);
     return [id, anchor];
   });
 }
 
 export function buildsFor(pages: readonly PageId[]): BuildName[] {
-  return [...new Set(shotSides(pages).map(({ side }) => side.build))];
+  const names = pages.flatMap((page) => [
+    PAGE_SOURCES[page].before.build,
+    PAGE_SOURCES[page].after.build,
+  ]);
+  return [...new Set(names)];
 }

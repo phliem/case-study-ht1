@@ -109,21 +109,6 @@ describe("TOURS", () => {
     ]);
   });
 
-  it("tours the 2025 homepage through its own groups", () => {
-    expect(durationOf(TOURS["home-2025"].full)).toBe(30_400);
-    expect(durationOf(TOURS["home-2025"].short)).toBe(14_800);
-    expect(glideStops(TOURS["home-2025"].full)).toEqual([
-      "proof-how",
-      "faq-about",
-      "areas",
-      "footer",
-      "top",
-      "proof-how",
-      "faq-about",
-      "top",
-    ]);
-  });
-
   it("only glides to groups of its own page", () => {
     for (const page of PAGE_IDS) {
       const groups = new Set<string>(["top", ...sectionIds(page)]);

@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { PAGES } from "../src/data/pages";
-import { VIEWS } from "../src/data/views";
+import { PAGE_IDS, PAGES } from "../src/data/pages";
 import { dividerSlider, openStage } from "./stageHelpers";
 
 test("loads with its title and no console errors", async ({ page }) => {
@@ -35,7 +34,7 @@ test("credits the captures", async ({ page }) => {
 
 test("shows the three comparisons, each under its own names", async ({ page }) => {
   await page.goto("/?page=help");
-  for (const id of VIEWS.main) {
+  for (const id of PAGE_IDS) {
     const { name } = PAGES[id];
     await expect(page.getByRole("region", { name, exact: true })).toHaveCount(1);
     await expect(
@@ -71,14 +70,4 @@ test("@review the page top", async ({ page }) => {
   await page.goto("/");
   await page.waitForTimeout(1500);
   await page.screenshot({ path: ".capture/review/01-top.png" });
-});
-
-test("names the homepage's sides by design system", async ({ page }) => {
-  await page.goto("/");
-  const stage = await openStage(page);
-  await expect(stage.getByText("Before · NHS design system", { exact: true })).toBeVisible();
-  await expect(stage.getByText("After · v2", { exact: true })).toBeVisible();
-  await stage.getByRole("button", { name: "Mobile" }).click();
-  await expect(stage.getByText("Before", { exact: true })).toBeVisible();
-  await expect(stage.getByText("After", { exact: true })).toBeVisible();
 });

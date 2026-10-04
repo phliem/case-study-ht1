@@ -1,18 +1,16 @@
 import type { MotionValue } from "motion/react";
-import { PAGES } from "../data/pages";
-import type { Device, PageId } from "../data/types";
+import type { Device } from "../data/types";
 import { useLiveStyle } from "../hooks/useLiveStyle";
 import { clamp } from "../lib/math";
 
-type VersionLabelsProps = { page: PageId; device: Device; divider: MotionValue<number> };
+type VersionLabelsProps = { device: Device; divider: MotionValue<number> };
 
 const CHIP =
   "rounded-full px-3 py-1.5 font-extrabold text-[11px] uppercase leading-none tracking-[0.09em] backdrop-blur";
 
 const FADE_SHARE = 0.12;
 
-export function VersionLabels({ page, device, divider }: VersionLabelsProps) {
-  const { sides } = PAGES[page];
+export function VersionLabels({ device, divider }: VersionLabelsProps) {
   const beforeChip = useLiveStyle<HTMLSpanElement>(divider, "opacity", (share) =>
     String(clamp(share / FADE_SHARE, 0, 1)),
   );
@@ -26,10 +24,10 @@ export function VersionLabels({ page, device, divider }: VersionLabelsProps) {
       className="pointer-events-none absolute inset-x-4 bottom-4 flex justify-between"
     >
       <span ref={beforeChip.ref} className={`${CHIP} bg-ink/75 text-mist`} style={beforeChip.style}>
-        {compact ? sides.before.short : sides.before.long}
+        {compact ? "Before" : "Before · NHS design system"}
       </span>
       <span ref={afterChip.ref} className={`${CHIP} bg-mint text-ink`} style={afterChip.style}>
-        {compact ? sides.after.short : sides.after.long}
+        {compact ? "After" : "After · v2"}
       </span>
     </div>
   );

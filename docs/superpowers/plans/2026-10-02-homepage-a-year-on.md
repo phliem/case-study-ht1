@@ -1,5 +1,7 @@
 # The homepage, a year on — Implementation Plan
 
+> **Removed on 2026-10-04** at Liem's request: the year-on view was deleted and its code reverted. Kept as a record.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Add a second view, `/?view=a-year-on`, that sets Bookable's homepage from 30 September 2025 against v2 on the existing comparison stage, leaving the main page as it is apart from one link.

@@ -6,11 +6,12 @@ import { parseCaptureArgs } from "./args";
 import { BUILDS, type BuildName, prepareBuild, type ServedBuild, serveBuild } from "./builds";
 import { extractObjectLiteral, paletteGroups } from "./literal";
 import { type HomeExtras, mergeCaptures } from "./merge";
-import { anchorList, buildsFor, HOME_TOKEN_SELECTORS, shotSides } from "./pages";
+import { anchorList, buildsFor, HOME_TOKEN_SELECTORS, PAGE_SOURCES } from "./pages";
 import { DATA_FILE } from "./paths";
 import { DEVICE_PROFILES } from "./profiles";
 import { type CaptureResult, capturePage } from "./shoot";
 
+const VERSIONS: readonly Version[] = ["before", "after"];
 const DEVICES: readonly Device[] = ["desktop", "mobile"];
 
 function servedFor(served: ReadonlyMap<BuildName, ServedBuild>, name: BuildName): ServedBuild {
@@ -75,24 +76,27 @@ async function main() {
     const browser = await chromium.launch();
     const results: CaptureResult[] = [];
     try {
-      for (const { page, version, side } of shotSides(pages)) {
-        const build = servedFor(served, side.build);
-        for (const device of DEVICES) {
-          console.log(`Capturing the ${page} ${version} page on ${device}`);
-          results.push(
-            await capturePage(browser, {
-              page,
-              version,
-              commit: build.fullCommit,
-              url: `${build.url}${side.path}`,
-              profile: DEVICE_PROFILES[device],
-              anchors: anchorList(page, version),
-              pinned: side.pinned.filter((query) => query.devices.includes(device)),
-              tokens: page === "home" ? HOME_TOKEN_SELECTORS[version] : null,
-              withLoops: page === "home" && version === "after" && !skipLoops,
-              withSpecimen: page === "home" && version === "before" && device === "desktop",
-            }),
-          );
+      for (const page of pages) {
+        for (const version of VERSIONS) {
+          const side = PAGE_SOURCES[page][version];
+          const build = servedFor(served, side.build);
+          for (const device of DEVICES) {
+            console.log(`Capturing the ${page} ${version} page on ${device}`);
+            results.push(
+              await capturePage(browser, {
+                page,
+                version,
+                commit: build.fullCommit,
+                url: `${build.url}${side.path}`,
+                profile: DEVICE_PROFILES[device],
+                anchors: anchorList(page, version),
+                pinned: side.pinned.filter((query) => query.devices.includes(device)),
+                tokens: page === "home" ? HOME_TOKEN_SELECTORS[version] : null,
+                withLoops: page === "home" && version === "after" && !skipLoops,
+                withSpecimen: page === "home" && version === "before" && device === "desktop",
+              }),
+            );
+          }
         }
       }
     } finally {

@@ -1,6 +1,6 @@
 # The homepage, a year on — design
 
-Date: 2026-10-02 · Owner: Liem Pham · Status: approved in conversation; extends
+Date: 2026-10-02 · Owner: Liem Pham · Status: removed on 2026-10-04 at Liem's request (code reverted); kept as a record. Extended
 [the showcase design](2026-10-01-before-after-showcase-design.md) and
 [the article and help-centre comparisons](2026-10-01-article-and-help-comparisons-design.md), which
 still hold wherever this document is silent.
