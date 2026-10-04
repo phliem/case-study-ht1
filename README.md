@@ -1,4 +1,4 @@
-# Bookable, before & after
+# Bookable redesign
 
 An interactive, animated before and after of three Bookable pages (bookable.health) as they moved
 from the NHS design system to Bookable's own (v2) in 2026: the homepage, a guide article

@@ -11,8 +11,8 @@ test("loads with its title and no console errors", async ({ page }) => {
 
   await page.goto("/");
 
-  await expect(page).toHaveTitle("Bookable, before & after");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Bookable, before & after");
+  await expect(page).toHaveTitle("Bookable redesign");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Bookable redesign");
   expect(errors).toEqual([]);
 });
 
