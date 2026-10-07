@@ -3,7 +3,10 @@ import { parseCaptureArgs } from "./args";
 
 describe("parseCaptureArgs", () => {
   it("captures every page with loops by default", () => {
-    expect(parseCaptureArgs([])).toEqual({ pages: ["home", "article", "help"], skipLoops: false });
+    expect(parseCaptureArgs([])).toEqual({
+      pages: ["home", "article", "help", "search", "gp", "clinician"],
+      skipLoops: false,
+    });
   });
 
   it("captures only the pages asked for, in page order", () => {
@@ -19,10 +22,10 @@ describe("parseCaptureArgs", () => {
 
   it("rejects a page it does not know, or none", () => {
     expect(() => parseCaptureArgs(["--page", "faq"])).toThrow(
-      "--page takes home, article, help, not faq",
+      "--page takes home, article, help, search, gp, clinician, not faq",
     );
     expect(() => parseCaptureArgs(["--page"])).toThrow(
-      "--page takes home, article, help, not nothing",
+      "--page takes home, article, help, search, gp, clinician, not nothing",
     );
   });
 

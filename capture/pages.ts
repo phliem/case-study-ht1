@@ -11,6 +11,9 @@ type PageSide<P extends PageId> = {
   path: string;
   anchors: Record<SectionIdOf[P], SectionAnchor>;
   pinned: readonly PinnedQuery[];
+  unstick?: readonly string[];
+  nhsFooter?: true;
+  nhsHeader?: true;
 };
 
 type PageSource<P extends PageId> = { before: PageSide<P>; after: PageSide<P> };
@@ -23,6 +26,19 @@ const BREADCRUMBS: PinnedQuery = {
   devices: BOTH,
 };
 const CONTENTS: PinnedQuery = { id: "contents", selector: "main aside", devices: ["desktop"] };
+
+// The surgery and clinician rail sticks both ways and is taller than the window, which a pinned
+// layer cannot show, so the capture lets it scroll with the page.
+const RAIL = "main aside";
+const GP_PATH = "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu?postcode=IG1%202UT";
+const CLINICIAN_PATH = "/clinician/cli_9a5qmmqhn4r5?postcode=IG1%202UT";
+const SEARCH_PATH = "/gp/search?postcode=IG1%202UT";
+const SEARCH_ANCHORS: Record<SectionIdOf["search"], SectionAnchor> = {
+  title: { kind: "page-top" },
+  results: { kind: "element", selector: '[data-testid="search-results"]' },
+  about: { kind: "main-child-with-heading", text: "About finding an NHS GP in England" },
+  footer: { kind: "footer-after-main" },
+};
 
 export const PAGE_SOURCES: { [P in PageId]: PageSource<P> } = {
   home: {
@@ -110,6 +126,79 @@ export const PAGE_SOURCES: { [P in PageId]: PageSource<P> } = {
       pinned: [HEADER, BREADCRUMBS],
     },
   },
+  search: {
+    before: {
+      build: "search-before",
+      path: SEARCH_PATH,
+      anchors: SEARCH_ANCHORS,
+      pinned: [],
+      nhsFooter: true,
+    },
+    after: {
+      build: "latest",
+      path: SEARCH_PATH,
+      anchors: SEARCH_ANCHORS,
+      pinned: [HEADER],
+    },
+  },
+  gp: {
+    before: {
+      build: "gp-before",
+      path: GP_PATH,
+      anchors: {
+        title: { kind: "page-top" },
+        reviews: { kind: "element", selector: "main h3", text: "Ratings and reviews" },
+        team: { kind: "element", selector: "main h3", text: "Meet the team" },
+        questions: { kind: "absent" },
+        footer: { kind: "footer-after-main" },
+      },
+      pinned: [],
+      nhsHeader: true,
+      nhsFooter: true,
+    },
+    after: {
+      build: "latest",
+      path: GP_PATH,
+      anchors: {
+        title: { kind: "page-top" },
+        reviews: { kind: "element", selector: "main h2", text: "What patients say" },
+        team: { kind: "element", selector: "main h2", text: "Care team" },
+        questions: {
+          kind: "element",
+          selector: "main h2",
+          text: "Common questions about John Smith Medical Centre",
+        },
+        footer: { kind: "footer-after-main" },
+      },
+      pinned: [HEADER],
+      unstick: [RAIL],
+    },
+  },
+  clinician: {
+    before: {
+      build: "clinician-before",
+      path: CLINICIAN_PATH,
+      anchors: {
+        title: { kind: "page-top" },
+        details: { kind: "element", selector: "main h3", text: "Directions" },
+        footer: { kind: "footer-after-main" },
+      },
+      pinned: [],
+      nhsHeader: true,
+      nhsFooter: true,
+    },
+    after: {
+      build: "latest",
+      path: CLINICIAN_PATH,
+      anchors: {
+        title: { kind: "page-top" },
+        details: { kind: "main-child", index: 2 },
+        footer: { kind: "footer-after-main" },
+      },
+      pinned: [HEADER],
+      unstick: [RAIL],
+    },
+  },
 };
 
 export const HOME_TOKEN_SELECTORS: Record<Version, TokenSelectors> = {
@@ -136,10 +225,28 @@ export function anchorList(page: PageId, version: Version): [SectionId, SectionA
   });
 }
 
+// Pages built after the v2 footer landed (7721c5b954) wear the last NHS footer instead, shot
+// from the homepage before build, so every before page dates from before v2.
+export const NHS_FOOTER_BUILD: BuildName = "home-before";
+
+export function needsNhsFooter(pages: readonly PageId[]): boolean {
+  return pages.some((page) => PAGE_SOURCES[page].before.nhsFooter === true);
+}
+
+// Pages built after the v2 header landed (9a5d90ba1d) wear the NHS header and Back bar that the
+// same route had just before it.
+export const NHS_HEADER_BUILD: BuildName = "header-before";
+
+export function needsNhsHeader(pages: readonly PageId[]): boolean {
+  return pages.some((page) => PAGE_SOURCES[page].before.nhsHeader === true);
+}
+
 export function buildsFor(pages: readonly PageId[]): BuildName[] {
   const names = pages.flatMap((page) => [
     PAGE_SOURCES[page].before.build,
     PAGE_SOURCES[page].after.build,
   ]);
+  if (needsNhsFooter(pages)) names.push(NHS_FOOTER_BUILD);
+  if (needsNhsHeader(pages)) names.push(NHS_HEADER_BUILD);
   return [...new Set(names)];
 }

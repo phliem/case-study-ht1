@@ -3,13 +3,17 @@ import { join } from "node:path";
 import type { Browser, BrowserContext, Page } from "@playwright/test";
 import sharp, { type OverlayOptions } from "sharp";
 import type { Capture, MeasuredTokens, PageId, SectionId, Tile, Version } from "../src/data/types";
+import { recordedAt, serveApiFromFixtures, takeMissingFixtures } from "./apiFixtures";
 import { CAPTURE_CSS, isolateCss } from "./css";
 import {
   addSpecimenInPage,
   floatingElementsInPage,
+  footerBoxInPage,
   hidePinnedInPage,
+  mastheadInPage,
   measureTokensInPage,
   pauseInfiniteAnimationsInPage,
+  replaceFooterInPage,
   scrollInPage,
   sectionTopsInPage,
   settleInPage,
@@ -36,17 +40,24 @@ export type PageJob = {
   profile: DeviceProfile;
   anchors: [SectionId, SectionAnchor][];
   pinned: readonly PinnedQuery[];
+  unstick: readonly string[];
+  footer: SwapImage | null;
+  masthead: SwapImage | null;
   tokens: TokenSelectors | null;
   withLoops: boolean;
   withSpecimen: boolean;
 };
 
+export type SwapImage = { image: Buffer; height: number };
+
 export type CaptureResult = { capture: Capture; tokens: MeasuredTokens | null };
 
 async function openPage(
   browser: Browser,
+  pageId: PageId,
   url: string,
   profile: DeviceProfile,
+  unstick: readonly string[],
 ): Promise<{ context: BrowserContext; page: Page }> {
   const context = await browser.newContext({
     viewport: profile.viewport,
@@ -64,15 +75,21 @@ async function openPage(
   await context.addInitScript({
     content: `localStorage.setItem("SOCS", ${JSON.stringify(SOCS_REJECTED)}); localStorage.removeItem("wglang");`,
   });
+  await serveApiFromFixtures(context, pageId);
+  await context.clock.setFixedTime(recordedAt(pageId));
   const page = await context.newPage();
   await page.goto(url, { waitUntil: "networkidle" });
   await page.addStyleTag({ content: CAPTURE_CSS });
+  if (unstick.length > 0) {
+    await page.addStyleTag({ content: `${unstick.join(", ")} { position: static !important; }` });
+  }
   return { context, page };
 }
 
 async function captureTiles(
   page: Page,
   outDir: string,
+  overlays: readonly OverlayOptions[],
 ): Promise<{ tiles: Tile[]; pageHeight: number; full: RawImage }> {
   const { pageHeight, viewportHeight, width } = await page.evaluate(() => ({
     pageHeight: document.documentElement.scrollHeight,
@@ -94,6 +111,7 @@ async function captureTiles(
     });
     composites.push({ input, top: stop.pageTop * SCALE, left: 0 });
   }
+  composites.push(...overlays);
   const { data, info } = await sharp({
     create: {
       width: width * SCALE,
@@ -133,6 +151,45 @@ async function captureTiles(
   return { tiles, pageHeight, full };
 }
 
+export async function shootFooter(
+  browser: Browser,
+  url: string,
+  profile: DeviceProfile,
+): Promise<SwapImage> {
+  const { context, page } = await openPage(browser, "home", url, profile, []);
+  try {
+    await page.evaluate(settleInPage);
+    const box = await page.evaluate(footerBoxInPage);
+    const width = await page.evaluate(() => document.documentElement.clientWidth);
+    const image = await page.screenshot({
+      clip: { x: 0, y: box.top, width, height: box.height },
+      fullPage: true,
+      caret: "hide",
+    });
+    return { image, height: box.height };
+  } finally {
+    await context.close();
+  }
+}
+
+export async function shootMasthead(
+  browser: Browser,
+  pageId: PageId,
+  url: string,
+  profile: DeviceProfile,
+): Promise<SwapImage> {
+  const { context, page } = await openPage(browser, pageId, url, profile, []);
+  try {
+    await page.evaluate(settleInPage);
+    const height = await page.evaluate(mastheadInPage, null);
+    const width = await page.evaluate(() => document.documentElement.clientWidth);
+    const image = await page.screenshot({ clip: { x: 0, y: 0, width, height }, caret: "hide" });
+    return { image, height };
+  } finally {
+    await context.close();
+  }
+}
+
 async function captureSpecimen(page: Page): Promise<void> {
   await page.evaluate(addSpecimenInPage);
   const isolation = await page.addStyleTag({ content: isolateCss("#capture-specimen") });
@@ -146,10 +203,18 @@ async function captureSpecimen(page: Page): Promise<void> {
 }
 
 export async function capturePage(browser: Browser, job: PageJob): Promise<CaptureResult> {
-  const { context, page } = await openPage(browser, job.url, job.profile);
+  const { context, page } = await openPage(browser, job.page, job.url, job.profile, job.unstick);
   try {
     await page.evaluate(settleInPage);
+    const missing = takeMissingFixtures();
+    if (missing.length > 0) {
+      throw new Error(
+        `These API calls have no fixture (writes always need one):\n${missing.join("\n")}`,
+      );
+    }
     await page.evaluate(pauseInfiniteAnimationsInPage);
+    if (job.footer) await page.evaluate(replaceFooterInPage, job.footer.height);
+    if (job.masthead) await page.evaluate(mastheadInPage, job.masthead.height);
     const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
     const sections = resolveSections(
       job.page,
@@ -163,7 +228,13 @@ export async function capturePage(browser: Browser, job: PageJob): Promise<Captu
     const outDir = captureDir(job.page, job.version, job.profile.device);
     rmSync(outDir, { recursive: true, force: true });
     mkdirSync(outDir, { recursive: true });
-    const { tiles, full, pageHeight: tiledHeight } = await captureTiles(page, outDir);
+    const overlays: OverlayOptions[] = [];
+    if (job.masthead) overlays.push({ input: job.masthead.image, top: 0, left: 0 });
+    if (job.footer) {
+      const { top } = await page.evaluate(footerBoxInPage);
+      overlays.push({ input: job.footer.image, top: top * SCALE, left: 0 });
+    }
+    const { tiles, full, pageHeight: tiledHeight } = await captureTiles(page, outDir, overlays);
     if (tiledHeight !== pageHeight) {
       throw new Error(
         `The page changed from ${pageHeight}px to ${tiledHeight}px while it was shot`,

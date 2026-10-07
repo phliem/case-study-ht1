@@ -70,6 +70,9 @@ describe("mergeCaptures", () => {
       ...Array.from({ length: 4 }, () => "home:old"),
       ...Array.from({ length: 4 }, () => "article:new"),
       ...Array.from({ length: 4 }, () => "help:old"),
+      ...Array.from({ length: 4 }, () => "search:old"),
+      ...Array.from({ length: 4 }, () => "gp:old"),
+      ...Array.from({ length: 4 }, () => "clinician:old"),
     ]);
     const untouched = (file: CapturesFile) =>
       JSON.stringify(file.captures.filter((capture) => capture.page !== "article"));
@@ -79,7 +82,7 @@ describe("mergeCaptures", () => {
   it("orders captures by page, then version, then device", () => {
     const merged = mergeCaptures(EXISTING, pageCaptures("help", "new").reverse(), null);
     expect(
-      merged.captures.slice(8).map((capture) => `${capture.version} ${capture.device}`),
+      merged.captures.slice(8, 12).map((capture) => `${capture.version} ${capture.device}`),
     ).toEqual(["before desktop", "before mobile", "after desktop", "after mobile"]);
   });
 

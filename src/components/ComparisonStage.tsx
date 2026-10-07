@@ -40,6 +40,9 @@ const MAPS: Record<PageId, DeviceMaps> = {
   home: mapsFor("home"),
   article: mapsFor("article"),
   help: mapsFor("help"),
+  search: mapsFor("search"),
+  gp: mapsFor("gp"),
+  clinician: mapsFor("clinician"),
 };
 
 const INPUTS = ["pointerdown", "wheel", "keydown", "touchstart"] as const;

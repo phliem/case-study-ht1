@@ -1041,6 +1041,672 @@
         }
       ],
       "loops": []
+    },
+    {
+      "page": "search",
+      "version": "before",
+      "device": "desktop",
+      "commit": "33ac329e60304ba06cac09dd234c302be2804e90",
+      "capturedAt": "2026-10-06T11:21:53.125Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 3066,
+      "tiles": [
+        {
+          "avif": "captures/search/before/desktop/tile-00.avif",
+          "webp": "captures/search/before/desktop/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/search/before/desktop/tile-01.avif",
+          "webp": "captures/search/before/desktop/tile-01.webp",
+          "top": 2000,
+          "height": 1066
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "results",
+          "top": 540
+        },
+        {
+          "id": "about",
+          "top": 2144
+        },
+        {
+          "id": "footer",
+          "top": 2589
+        }
+      ],
+      "pinned": [],
+      "loops": []
+    },
+    {
+      "page": "search",
+      "version": "before",
+      "device": "mobile",
+      "commit": "33ac329e60304ba06cac09dd234c302be2804e90",
+      "capturedAt": "2026-10-06T11:22:00.442Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 4519,
+      "tiles": [
+        {
+          "avif": "captures/search/before/mobile/tile-00.avif",
+          "webp": "captures/search/before/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/search/before/mobile/tile-01.avif",
+          "webp": "captures/search/before/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/search/before/mobile/tile-02.avif",
+          "webp": "captures/search/before/mobile/tile-02.webp",
+          "top": 4000,
+          "height": 519
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "results",
+          "top": 292
+        },
+        {
+          "id": "about",
+          "top": 2961
+        },
+        {
+          "id": "footer",
+          "top": 3772
+        }
+      ],
+      "pinned": [],
+      "loops": []
+    },
+    {
+      "page": "search",
+      "version": "after",
+      "device": "desktop",
+      "commit": "3362f7fc39d1f78551a8189b878e6894588ebcf3",
+      "capturedAt": "2026-10-06T11:22:19.984Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 3098,
+      "tiles": [
+        {
+          "avif": "captures/search/after/desktop/tile-00.avif",
+          "webp": "captures/search/after/desktop/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/search/after/desktop/tile-01.avif",
+          "webp": "captures/search/after/desktop/tile-01.webp",
+          "top": 2000,
+          "height": 1098
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "results",
+          "top": 716
+        },
+        {
+          "id": "about",
+          "top": 2385
+        },
+        {
+          "id": "footer",
+          "top": 2830
+        }
+      ],
+      "pinned": [
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "stickTop": 0,
+          "releaseAt": 3098,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/search/after/desktop/pinned-header-0.png",
+              "height": 67,
+              "blur": 10
+            }
+          ]
+        }
+      ],
+      "loops": []
+    },
+    {
+      "page": "search",
+      "version": "after",
+      "device": "mobile",
+      "commit": "3362f7fc39d1f78551a8189b878e6894588ebcf3",
+      "capturedAt": "2026-10-06T11:22:40.310Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 4584,
+      "tiles": [
+        {
+          "avif": "captures/search/after/mobile/tile-00.avif",
+          "webp": "captures/search/after/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/search/after/mobile/tile-01.avif",
+          "webp": "captures/search/after/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 2000
+        },
+        {
+          "avif": "captures/search/after/mobile/tile-02.avif",
+          "webp": "captures/search/after/mobile/tile-02.webp",
+          "top": 4000,
+          "height": 584
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "results",
+          "top": 426
+        },
+        {
+          "id": "about",
+          "top": 3235
+        },
+        {
+          "id": "footer",
+          "top": 4046
+        }
+      ],
+      "pinned": [
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "stickTop": 0,
+          "releaseAt": 4584,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/search/after/mobile/pinned-header-0.png",
+              "height": 69,
+              "blur": 10
+            }
+          ]
+        }
+      ],
+      "loops": []
+    },
+    {
+      "page": "gp",
+      "version": "before",
+      "device": "desktop",
+      "commit": "9013329e77b15086310ed2a2c8686222a702f65c",
+      "capturedAt": "2026-10-06T11:32:13.464Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 2003,
+      "tiles": [
+        {
+          "avif": "captures/gp/before/desktop/tile-00.avif",
+          "webp": "captures/gp/before/desktop/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/gp/before/desktop/tile-01.avif",
+          "webp": "captures/gp/before/desktop/tile-01.webp",
+          "top": 2000,
+          "height": 3
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "reviews",
+          "top": 814
+        },
+        {
+          "id": "team",
+          "top": 818
+        },
+        {
+          "id": "questions",
+          "top": 1526
+        },
+        {
+          "id": "footer",
+          "top": 1526
+        }
+      ],
+      "pinned": [],
+      "loops": []
+    },
+    {
+      "page": "gp",
+      "version": "before",
+      "device": "mobile",
+      "commit": "9013329e77b15086310ed2a2c8686222a702f65c",
+      "capturedAt": "2026-10-06T11:32:21.856Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 3488,
+      "tiles": [
+        {
+          "avif": "captures/gp/before/mobile/tile-00.avif",
+          "webp": "captures/gp/before/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/gp/before/mobile/tile-01.avif",
+          "webp": "captures/gp/before/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 1488
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "reviews",
+          "top": 1037
+        },
+        {
+          "id": "team",
+          "top": 2019
+        },
+        {
+          "id": "questions",
+          "top": 2741
+        },
+        {
+          "id": "footer",
+          "top": 2741
+        }
+      ],
+      "pinned": [],
+      "loops": []
+    },
+    {
+      "page": "gp",
+      "version": "after",
+      "device": "desktop",
+      "commit": "3362f7fc39d1f78551a8189b878e6894588ebcf3",
+      "capturedAt": "2026-10-06T11:32:33.286Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 1940,
+      "tiles": [
+        {
+          "avif": "captures/gp/after/desktop/tile-00.avif",
+          "webp": "captures/gp/after/desktop/tile-00.webp",
+          "top": 0,
+          "height": 1940
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "reviews",
+          "top": 466
+        },
+        {
+          "id": "team",
+          "top": 737
+        },
+        {
+          "id": "questions",
+          "top": 1085
+        },
+        {
+          "id": "footer",
+          "top": 1672
+        }
+      ],
+      "pinned": [
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "stickTop": 0,
+          "releaseAt": 1940,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/gp/after/desktop/pinned-header-0.png",
+              "height": 67,
+              "blur": 10
+            }
+          ]
+        }
+      ],
+      "loops": []
+    },
+    {
+      "page": "gp",
+      "version": "after",
+      "device": "mobile",
+      "commit": "3362f7fc39d1f78551a8189b878e6894588ebcf3",
+      "capturedAt": "2026-10-06T11:32:49.677Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 3615,
+      "tiles": [
+        {
+          "avif": "captures/gp/after/mobile/tile-00.avif",
+          "webp": "captures/gp/after/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/gp/after/mobile/tile-01.avif",
+          "webp": "captures/gp/after/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 1615
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "reviews",
+          "top": 1427
+        },
+        {
+          "id": "team",
+          "top": 1722
+        },
+        {
+          "id": "questions",
+          "top": 2390
+        },
+        {
+          "id": "footer",
+          "top": 3077
+        }
+      ],
+      "pinned": [
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "stickTop": 0,
+          "releaseAt": 3615,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/gp/after/mobile/pinned-header-0.png",
+              "height": 69,
+              "blur": 10
+            }
+          ]
+        }
+      ],
+      "loops": []
+    },
+    {
+      "page": "clinician",
+      "version": "before",
+      "device": "desktop",
+      "commit": "a809a26d2dda5770310b2d391d77169fb0ac2e68",
+      "capturedAt": "2026-10-06T11:32:59.407Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 2103,
+      "tiles": [
+        {
+          "avif": "captures/clinician/before/desktop/tile-00.avif",
+          "webp": "captures/clinician/before/desktop/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/clinician/before/desktop/tile-01.avif",
+          "webp": "captures/clinician/before/desktop/tile-01.webp",
+          "top": 2000,
+          "height": 103
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "details",
+          "top": 469
+        },
+        {
+          "id": "footer",
+          "top": 1626
+        }
+      ],
+      "pinned": [],
+      "loops": []
+    },
+    {
+      "page": "clinician",
+      "version": "before",
+      "device": "mobile",
+      "commit": "a809a26d2dda5770310b2d391d77169fb0ac2e68",
+      "capturedAt": "2026-10-06T11:33:09.178Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 3295,
+      "tiles": [
+        {
+          "avif": "captures/clinician/before/mobile/tile-00.avif",
+          "webp": "captures/clinician/before/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/clinician/before/mobile/tile-01.avif",
+          "webp": "captures/clinician/before/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 1295
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "details",
+          "top": 2158
+        },
+        {
+          "id": "footer",
+          "top": 2548
+        }
+      ],
+      "pinned": [],
+      "loops": []
+    },
+    {
+      "page": "clinician",
+      "version": "after",
+      "device": "desktop",
+      "commit": "3362f7fc39d1f78551a8189b878e6894588ebcf3",
+      "capturedAt": "2026-10-06T11:33:16.881Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scale": 2,
+      "pageHeight": 1373,
+      "tiles": [
+        {
+          "avif": "captures/clinician/after/desktop/tile-00.avif",
+          "webp": "captures/clinician/after/desktop/tile-00.webp",
+          "top": 0,
+          "height": 1373
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "details",
+          "top": 422
+        },
+        {
+          "id": "footer",
+          "top": 1105
+        }
+      ],
+      "pinned": [
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "stickTop": 0,
+          "releaseAt": 1373,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/clinician/after/desktop/pinned-header-0.png",
+              "height": 67,
+              "blur": 10
+            }
+          ]
+        }
+      ],
+      "loops": []
+    },
+    {
+      "page": "clinician",
+      "version": "after",
+      "device": "mobile",
+      "commit": "3362f7fc39d1f78551a8189b878e6894588ebcf3",
+      "capturedAt": "2026-10-06T11:33:27.336Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 2,
+      "pageHeight": 2182,
+      "tiles": [
+        {
+          "avif": "captures/clinician/after/mobile/tile-00.avif",
+          "webp": "captures/clinician/after/mobile/tile-00.webp",
+          "top": 0,
+          "height": 2000
+        },
+        {
+          "avif": "captures/clinician/after/mobile/tile-01.avif",
+          "webp": "captures/clinician/after/mobile/tile-01.webp",
+          "top": 2000,
+          "height": 182
+        }
+      ],
+      "sections": [
+        {
+          "id": "title",
+          "top": 0
+        },
+        {
+          "id": "details",
+          "top": 498
+        },
+        {
+          "id": "footer",
+          "top": 1644
+        }
+      ],
+      "pinned": [
+        {
+          "id": "header",
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "stickTop": 0,
+          "releaseAt": 2182,
+          "states": [
+            {
+              "from": 0,
+              "src": "captures/clinician/after/mobile/pinned-header-0.png",
+              "height": 69,
+              "blur": 10
+            }
+          ]
+        }
+      ],
+      "loops": []
     }
   ],
   "tokens": {

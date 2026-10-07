@@ -1,0 +1,22 @@
+{
+  "method": "POST",
+  "url": "https://api.ht1.uk/v2/booking_search_terms",
+  "requestBody": "{\"sessionId\":\"8fecc7da-a8df-4fd6-9f46-a2fcad4b051f\",\"postcodeSearchTerm\":\"IG12UT\",\"coordinates\":{\"latitude\":51.54968,\"longitude\":0.087149},\"parliamentaryConstituency\":\"Ilford South\"}",
+  "status": 201,
+  "contentType": "application/json; charset=utf-8",
+  "body": {
+    "json": {
+      "id": "bst_9a5qnj598isu",
+      "createdAt": "2026-10-06T10:43:53.084+00:00",
+      "updatedAt": "2026-10-06T10:43:53.084+00:00",
+      "sessionId": "8fecc7da-a8df-4fd6-9f46-a2fcad4b051f",
+      "postcodeSearchTerm": "IG12UT",
+      "areaSearchTerm": null,
+      "parliamentaryConstituency": "Ilford South",
+      "coordinates": {
+        "longitude": 0.087149,
+        "latitude": 51.54968
+      }
+    }
+  }
+}

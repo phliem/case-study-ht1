@@ -1,0 +1,21 @@
+{
+  "method": "GET",
+  "url": "https://api.ht1.uk/v2/locations/loc_9a5qmmkpexdu/reviews",
+  "requestBody": null,
+  "status": 200,
+  "contentType": "application/json; charset=utf-8",
+  "body": {
+    "json": {
+      "reviews": [
+        {
+          "sourceFormId": "6ab398dece18ebf8518c75a9",
+          "sourceFormKey": "99a9259a-3ac7-493b-95a6-eb8bac144007",
+          "score": 5,
+          "clinicianId": "cli_9a5qmmkr4e4h",
+          "submittedAt": "2026-09-23T09:18:00.253+00:00",
+          "ageBand": "18 to 29"
+        }
+      ]
+    }
+  }
+}

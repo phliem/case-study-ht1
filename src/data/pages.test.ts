@@ -27,6 +27,8 @@ describe("pages", () => {
     expect(addressOf("home")).toBe("bookable.health");
     expect(addressOf("article")).toBe("bookable.health/book-a-gp-appointment");
     expect(addressOf("help")).toBe("bookable.health/help");
+    expect(addressOf("search")).toBe("bookable.health/gp/search");
+    expect(addressOf("clinician")).toBe("bookable.health/clinician/cli_9a5qmmqhn4r5");
   });
 
   it("recognises page ids", () => {

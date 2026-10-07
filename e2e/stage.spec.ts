@@ -4,7 +4,14 @@ import type { PageId, SectionId } from "../src/data/types";
 import { captureOf, scrollForAnchor, scrollToMiddleOf, spanOf } from "./captureData";
 import { beforeAnchor, dividerSlider, openStage, scrollAfterTo, stageRegion } from "./stageHelpers";
 
-const MIDDLE: Record<PageId, SectionId> = { home: "how", article: "guide", help: "questions" };
+const MIDDLE: Record<PageId, SectionId> = {
+  home: "how",
+  article: "guide",
+  help: "questions",
+  search: "results",
+  gp: "reviews",
+  clinician: "details",
+};
 
 for (const id of PAGE_IDS) {
   const after = captureOf(id, "after", "desktop");

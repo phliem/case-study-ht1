@@ -38,7 +38,28 @@ const HELP_SECTIONS = [
   { id: "footer", label: "Footer" },
 ] as const satisfies SectionsOf<"help">;
 
-export const PAGE_IDS: readonly PageId[] = ["home", "article", "help"];
+const SEARCH_SECTIONS = [
+  { id: "title", label: "Search & switch" },
+  { id: "results", label: "Results" },
+  { id: "about", label: "About" },
+  { id: "footer", label: "Footer" },
+] as const satisfies SectionsOf<"search">;
+
+const GP_SECTIONS = [
+  { id: "title", label: "Surgery & booking" },
+  { id: "reviews", label: "Reviews" },
+  { id: "team", label: "Care team" },
+  { id: "questions", label: "Common questions" },
+  { id: "footer", label: "Footer" },
+] as const satisfies SectionsOf<"gp">;
+
+const CLINICIAN_SECTIONS = [
+  { id: "title", label: "Profile & booking" },
+  { id: "details", label: "Where & how" },
+  { id: "footer", label: "Footer" },
+] as const satisfies SectionsOf<"clinician">;
+
+export const PAGE_IDS: readonly PageId[] = ["home", "article", "help", "search", "gp", "clinician"];
 
 export const PAGES: Record<PageId, PageInfo> = {
   home: {
@@ -70,6 +91,39 @@ export const PAGES: Record<PageId, PageInfo> = {
       "One long page of FAQ accordions becomes a help centre you can search, with popular questions up front and a page for every topic.",
     route: { before: "/faq", after: "/help" },
     sections: HELP_SECTIONS,
+  },
+  search: {
+    id: "search",
+    number: "04",
+    name: "GP search",
+    noun: "GP search",
+    summary:
+      "The results page searched GP surgeries and nothing else. In v2 a switch searches by GP surgery or by clinician, under a bar that says why and where you are searching.",
+    route: { before: "/gp/search", after: "/gp/search" },
+    sections: SEARCH_SECTIONS,
+  },
+  gp: {
+    id: "gp",
+    number: "05",
+    name: "GP surgery page",
+    noun: "GP surgery page",
+    summary:
+      "The page most patients book from. An NHS-blue banner over an inline calendar becomes a v2 surgery page: a booking card up top, the care team and common questions below, and a rail with the map and opening hours.",
+    route: {
+      before: "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu",
+      after: "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu",
+    },
+    sections: GP_SECTIONS,
+  },
+  clinician: {
+    id: "clinician",
+    number: "06",
+    name: "Clinician page",
+    noun: "clinician page",
+    summary:
+      "A clinician's own page, reached from the Clinicians side of the search. It used to put a calendar straight on the page; in v2 it reads like a GP surgery page and books through the same booker.",
+    route: { before: "/clinician/cli_9a5qmmqhn4r5", after: "/clinician/cli_9a5qmmqhn4r5" },
+    sections: CLINICIAN_SECTIONS,
   },
 };
 

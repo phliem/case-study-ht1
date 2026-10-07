@@ -88,6 +88,18 @@ export const TOURS: Record<PageId, Tours> = {
     full: fullTour(["questions", "more-help", "footer"], ["questions", "more-help"]),
     short: shortTour(["questions", "more-help"]),
   },
+  search: {
+    full: fullTour(["results", "about", "footer"], ["results", "about"]),
+    short: shortTour(["results", "about"]),
+  },
+  gp: {
+    full: fullTour(["reviews", "team", "questions", "footer"], ["reviews", "team"]),
+    short: shortTour(["reviews", "team"]),
+  },
+  clinician: {
+    full: fullTour(["details", "footer"], ["details"]),
+    short: shortTour(["details", "footer"]),
+  },
 };
 
 export function durationOf(script: PlayScript): number {

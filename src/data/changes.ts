@@ -70,6 +70,63 @@ export const CHANGES: PageChanges = {
       "On phones its nav becomes full-width rows and the legal links a two-column grid.",
     ],
   },
+  search: {
+    title: [
+      "Search used to find GP surgeries only. A GP surgeries / Clinicians switch now sits beside Filters and Sort, so patients can search by surgery or by the clinician they want to see.",
+      "A new bar on top shows the reason for the appointment and the location, and either can be changed from there.",
+      "On phones Filters, the switch and Sort each get a full-width row.",
+    ],
+    results: [
+      'NHS cards become v2 cards: a photo tile, "NHS GP surgery · address", and rating and distance chips.',
+      'One "Register and book" button becomes the action each surgery offers: Book appointment, Register with this GP surgery, or View GP surgery details.',
+    ],
+    about: [
+      'The "About finding an NHS GP in England" panel is unchanged: the redesign covered the results column.',
+      "It is the last part of the page still drawn in the NHS design system.",
+    ],
+    footer: [
+      "The NHS footer becomes the site-wide footer the homepage ends on.",
+      "On phones its nav becomes full-width rows and the legal links a two-column grid.",
+    ],
+  },
+  gp: {
+    title: [
+      "The NHS-blue banner becomes a v2 header: breadcrumbs back to the search, then the surgery's name, rating, distance and phone number.",
+      'The inline "Book an appointment" box becomes a booking card with the earliest slot, Book appointment and Register without appointment. The calendar now opens in a dialog.',
+      "The photo, map, address and opening hours move into a rail that stays in view on desktop.",
+    ],
+    reviews: [
+      '"Ratings and reviews", with a bar for each star, becomes "What patients say": the score and the latest review.',
+      'The Google and Bookable breakdowns give way to a single "Read reviews on Google" link.',
+    ],
+    team: [
+      '"Meet the team" showed three people behind a See more link. "Care team" shows nine in a grid, with initials and roles.',
+      "A bigger team folds behind Show more and Show fewer.",
+    ],
+    questions: [
+      "New in v2: common questions about the surgery, answered on the page.",
+      "The old page had none, so the before side waits here while they scroll past.",
+    ],
+    footer: [
+      "The NHS footer becomes the site-wide footer the homepage ends on.",
+      "On phones its nav becomes full-width rows and the legal links a two-column grid.",
+    ],
+  },
+  clinician: {
+    title: [
+      "The NHS-blue banner becomes the GP surgery page's header: avatar, role, name and nearest surgery.",
+      "The calendar on the page gives way to a booking card with the earliest time, Book appointment and Register without appointment.",
+      "Booking opens the v2 booker, which asks where to go when the clinician works at more than one surgery.",
+    ],
+    details: [
+      'New in v2: "Where they work", "How you can be seen" and "Languages spoken".',
+      "They take over from the Directions box, which gave one address and a Google Maps link.",
+    ],
+    footer: [
+      "The NHS footer becomes the site-wide footer the homepage ends on.",
+      "On phones its nav becomes full-width rows and the legal links a two-column grid.",
+    ],
+  },
 };
 
 export function changesFor(page: PageId, id: SectionId): readonly string[] {

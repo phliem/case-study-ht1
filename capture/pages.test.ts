@@ -28,7 +28,7 @@ describe("PAGE_SOURCES", () => {
     }
   });
 
-  it("leaves only the old how-to page without common questions", () => {
+  it("leaves only the old how-to and surgery pages without common questions", () => {
     const absent = PAGE_IDS.flatMap((page) =>
       VERSIONS.flatMap((version) =>
         anchorList(page, version)
@@ -36,14 +36,30 @@ describe("PAGE_SOURCES", () => {
           .map(([id]) => `${page} ${version} ${id}`),
       ),
     );
-    expect(absent).toEqual(["article before questions"]);
+    expect(absent).toEqual(["article before questions", "gp before questions"]);
   });
 
   it("pins the new pages' sticky parts and none of the old pages'", () => {
-    expect(PAGE_IDS.map((page) => pinnedIds(page, "before"))).toEqual([[], [], []]);
+    expect(PAGE_IDS.map((page) => pinnedIds(page, "before"))).toEqual([[], [], [], [], [], []]);
     expect(pinnedIds("home", "after")).toEqual(["header"]);
     expect(pinnedIds("article", "after")).toEqual(["header", "breadcrumbs", "contents"]);
     expect(pinnedIds("help", "after")).toEqual(["header", "breadcrumbs"]);
+    expect(pinnedIds("search", "after")).toEqual(["header"]);
+    expect(pinnedIds("gp", "after")).toEqual(["header"]);
+    expect(pinnedIds("clinician", "after")).toEqual(["header"]);
+  });
+});
+
+describe("NHS header and footer", () => {
+  it("gives the NHS footer to exactly the before pages built after the v2 footer", () => {
+    const wearing = PAGE_IDS.filter((page) => PAGE_SOURCES[page].before.nhsFooter === true);
+    expect(wearing).toEqual(["search", "gp", "clinician"]);
+    expect(PAGE_IDS.filter((page) => PAGE_SOURCES[page].after.nhsFooter === true)).toEqual([]);
+  });
+
+  it("gives the NHS header to exactly the before pages built after the v2 header", () => {
+    const wearing = PAGE_IDS.filter((page) => PAGE_SOURCES[page].before.nhsHeader === true);
+    expect(wearing).toEqual(["gp", "clinician"]);
   });
 });
 
@@ -51,5 +67,13 @@ describe("buildsFor", () => {
   it("builds only what the chosen pages need", () => {
     expect(buildsFor(["home"])).toEqual(["home-before", "after"]);
     expect(buildsFor(["article", "help"])).toEqual(["article-before", "after", "help-before"]);
+    expect(buildsFor(["search"])).toEqual(["search-before", "latest", "home-before"]);
+    expect(buildsFor(["gp", "clinician"])).toEqual([
+      "gp-before",
+      "latest",
+      "clinician-before",
+      "home-before",
+      "header-before",
+    ]);
   });
 });

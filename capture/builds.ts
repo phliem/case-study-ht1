@@ -2,25 +2,43 @@ import { type ChildProcess, execFileSync, execSync, spawn } from "node:child_pro
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
+import { API_ORIGIN } from "./apiFixtures";
 import { WORK_DIR } from "./paths";
 
-export type BuildName = "home-before" | "after" | "article-before" | "help-before";
+export type BuildName =
+  | "home-before"
+  | "after"
+  | "article-before"
+  | "help-before"
+  | "search-before"
+  | "gp-before"
+  | "clinician-before"
+  | "header-before"
+  | "latest";
 export type BuildSpec = { name: BuildName; commit: string; port: number };
 export type PreparedBuild = BuildSpec & { dir: string; fullCommit: string };
 export type ServedBuild = PreparedBuild & { url: string; stop: () => Promise<void> };
 
-// The two older commits are the last before their pages were replaced: 1e021d8370 swapped the
-// how-to pages for the guide pages, and 38facb0a65 swapped /faq for /help.
+// The older commits are the last before their pages were replaced: 1e021d8370 swapped the
+// how-to pages for the guide pages, 38facb0a65 swapped /faq for /help, 801e381b9a put the
+// GP surgeries / Clinicians switch on /gp/search, 96766b8a9c rebuilt the GP surgery page and
+// 5a4e8c4cdf the clinician page. Those last three landed after the shared after commit, so their
+// after pages come from the later latest commit.
 export const BUILDS: Record<BuildName, BuildSpec> = {
   "home-before": { name: "home-before", commit: "0a143c6820", port: 3061 },
   after: { name: "after", commit: "c016453be7", port: 3062 },
   "article-before": { name: "article-before", commit: "1e021d8370^", port: 3063 },
   "help-before": { name: "help-before", commit: "38facb0a65^", port: 3064 },
+  "search-before": { name: "search-before", commit: "801e381b9a^", port: 3065 },
+  latest: { name: "latest", commit: "3362f7fc39", port: 3066 },
+  "gp-before": { name: "gp-before", commit: "96766b8a9c^", port: 3067 },
+  "clinician-before": { name: "clinician-before", commit: "5a4e8c4cdf^", port: 3068 },
+  "header-before": { name: "header-before", commit: "9a5d90ba1d^", port: 3069 },
 };
 
 export const SANNY_REPO = process.env.SANNY_REPO ?? join(homedir(), "Desktop/repos/sanny");
 
-const PRODUCTION_API = "https://api.ht1.uk/v2";
+const PRODUCTION_API = `${API_ORIGIN}/v2`;
 const WEGLOT_KEY = "NEXT_PUBLIC_WEGLOT_API_KEY_BOOKABLE";
 
 function run(command: string, args: readonly string[], cwd: string) {
