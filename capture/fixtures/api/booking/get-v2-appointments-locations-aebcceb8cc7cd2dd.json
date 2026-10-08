@@ -1,0 +1,207 @@
+{
+  "method": "GET",
+  "url": "https://api.ht1.uk/v2/appointments/locations?location=loc_9a5qmmkpexdu&service=medical&clinicianId=cli_9a5qmmkr4e4h&format=phone&feature=withAppointments&role=doctor&maxDistanceMiles=5&inCatchmentArea=true&longitude=0.087149&latitude=51.54968&postcode=IG12UT&sortBy=relevance",
+  "requestBody": null,
+  "status": 200,
+  "contentType": "application/json; charset=utf-8",
+  "body": {
+    "json": {
+      "locations": [
+        {
+          "id": "loc_9a5qmmkpexdu",
+          "name": "John Smith Medical Centre",
+          "longitude": 0.11215,
+          "latitude": 51.53889,
+          "addressLine1": "145-207 Bevan Avenue",
+          "addressLine2": "",
+          "addressLine3": "",
+          "postTown": "Barking",
+          "postcode": "IG11 9LL",
+          "accessibility": [],
+          "ratingReviewCount": 171,
+          "ratingScore": 4.2,
+          "bookableRatingTotal": 5,
+          "bookableRatingScore": 5,
+          "bookableRatingCount": 1,
+          "blendedRatingScore": 4.2,
+          "blendedRatingCount": 172,
+          "blendedRatingRank": 4.192,
+          "triageUrl": "https://johnsmithgp.co.uk/appointments/",
+          "phoneNumber": "+442085949013",
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/locations/loc_9a5qmmkpexdu/square/2c5876410c550988d77b61519dfc59e42fdf1796c04acf8c95be3959aea8240d.jpg",
+          "distanceInMetres": 2109.33538822,
+          "organisationKind": "gp",
+          "bookableCapabilities": {
+            "canBook": true,
+            "canRegister": true
+          },
+          "appointmentCount": 3,
+          "earliestAppointmentAt": "2026-10-12T10:40:00.000+00:00",
+          "appointments": [
+            {
+              "id": "c2xvXzlhNXFxendsOTU4OA",
+              "durationMinutes": 10,
+              "multipleSlotReason": null,
+              "format": "phone",
+              "startsAt": "2026-10-12T10:40:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmkr4e4h",
+                "prefix": "Dr",
+                "firstName": "Melody",
+                "lastName": "Tsai",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": ["english"],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmkpexdu"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFxenhhc3FzbA",
+              "durationMinutes": 10,
+              "multipleSlotReason": null,
+              "format": "phone",
+              "startsAt": "2026-10-20T10:20:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmkr4e4h",
+                "prefix": "Dr",
+                "firstName": "Melody",
+                "lastName": "Tsai",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": ["english"],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmkpexdu"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFxenhhdHNjdw",
+              "durationMinutes": 10,
+              "multipleSlotReason": null,
+              "format": "phone",
+              "startsAt": "2026-10-20T10:30:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmkr4e4h",
+                "prefix": "Dr",
+                "firstName": "Melody",
+                "lastName": "Tsai",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": ["english"],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmkpexdu"
+              }
+            }
+          ]
+        }
+      ],
+      "recommended": {
+        "overall": {
+          "id": "loc_9a5qmmkpexdu",
+          "name": "John Smith Medical Centre",
+          "longitude": 0.11215,
+          "latitude": 51.53889,
+          "addressLine1": "145-207 Bevan Avenue",
+          "addressLine2": "",
+          "addressLine3": "",
+          "postTown": "Barking",
+          "postcode": "IG11 9LL",
+          "accessibility": [],
+          "ratingReviewCount": 171,
+          "ratingScore": 4.2,
+          "bookableRatingTotal": 5,
+          "bookableRatingScore": 5,
+          "bookableRatingCount": 1,
+          "blendedRatingScore": 4.2,
+          "blendedRatingCount": 172,
+          "blendedRatingRank": 4.192,
+          "triageUrl": "https://johnsmithgp.co.uk/appointments/",
+          "phoneNumber": "+442085949013",
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/locations/loc_9a5qmmkpexdu/square/2c5876410c550988d77b61519dfc59e42fdf1796c04acf8c95be3959aea8240d.jpg",
+          "distanceInMetres": 2109.33538822,
+          "organisationKind": "gp",
+          "bookableCapabilities": {
+            "canBook": true,
+            "canRegister": true
+          },
+          "appointmentCount": 3,
+          "earliestAppointmentAt": "2026-10-12T10:40:00.000+00:00",
+          "appointments": [
+            {
+              "id": "c2xvXzlhNXFxendsOTU4OA",
+              "durationMinutes": 10,
+              "multipleSlotReason": null,
+              "format": "phone",
+              "startsAt": "2026-10-12T10:40:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmkr4e4h",
+                "prefix": "Dr",
+                "firstName": "Melody",
+                "lastName": "Tsai",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": ["english"],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmkpexdu"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFxenhhc3FzbA",
+              "durationMinutes": 10,
+              "multipleSlotReason": null,
+              "format": "phone",
+              "startsAt": "2026-10-20T10:20:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmkr4e4h",
+                "prefix": "Dr",
+                "firstName": "Melody",
+                "lastName": "Tsai",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": ["english"],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmkpexdu"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFxenhhdHNjdw",
+              "durationMinutes": 10,
+              "multipleSlotReason": null,
+              "format": "phone",
+              "startsAt": "2026-10-20T10:30:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmkr4e4h",
+                "prefix": "Dr",
+                "firstName": "Melody",
+                "lastName": "Tsai",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": ["english"],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmkpexdu"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -4,12 +4,15 @@ import { chromium } from "@playwright/test";
 import type { CapturesFile, Device, MeasuredTokens, Version } from "../src/data/types";
 import { parseCaptureArgs } from "./args";
 import { BUILDS, type BuildName, prepareBuild, type ServedBuild, serveBuild } from "./builds";
+import { captureFlow } from "./flowShoot";
+import { FLOW_SOURCES } from "./flows";
 import { extractObjectLiteral, paletteGroups } from "./literal";
 import { type HomeExtras, mergeCaptures } from "./merge";
 import {
   anchorList,
   buildsFor,
   HOME_TOKEN_SELECTORS,
+  isFlowPage,
   NHS_FOOTER_BUILD,
   NHS_HEADER_BUILD,
   needsNhsFooter,
@@ -102,6 +105,26 @@ async function main() {
         }
       }
       for (const page of pages) {
+        if (isFlowPage(page)) {
+          for (const version of VERSIONS) {
+            const side = FLOW_SOURCES[page][version];
+            const build = servedFor(served, side.build);
+            for (const device of DEVICES) {
+              console.log(`Capturing the ${page} ${version} flow on ${device}`);
+              const capture = await captureFlow(browser, {
+                page,
+                version,
+                commit: build.fullCommit,
+                baseUrl: build.url,
+                profile: DEVICE_PROFILES[device],
+                script: side.script,
+                footer: side.nhsFooter ? (nhsFooters.get(device) ?? null) : null,
+              });
+              results.push({ capture, tokens: null });
+            }
+          }
+          continue;
+        }
         for (const version of VERSIONS) {
           const side = PAGE_SOURCES[page][version];
           const build = servedFor(served, side.build);

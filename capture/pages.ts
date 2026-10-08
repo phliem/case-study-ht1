@@ -1,6 +1,14 @@
 import { sectionIds } from "../src/data/pages";
-import type { Device, PageId, SectionId, SectionIdOf, Version } from "../src/data/types";
+import type {
+  Device,
+  FlowPageId,
+  PageId,
+  SectionId,
+  SectionIdOf,
+  Version,
+} from "../src/data/types";
 import type { BuildName } from "./builds";
+import { FLOW_SOURCES } from "./flows";
 import type { TokenSelectors } from "./inPage";
 import type { SectionAnchor } from "./sections";
 
@@ -17,6 +25,12 @@ type PageSide<P extends PageId> = {
 };
 
 type PageSource<P extends PageId> = { before: PageSide<P>; after: PageSide<P> };
+
+export type StaticPageId = Exclude<PageId, FlowPageId>;
+
+export function isFlowPage(page: PageId): page is FlowPageId {
+  return page in FLOW_SOURCES;
+}
 
 const BOTH: readonly Device[] = ["desktop", "mobile"];
 const HEADER: PinnedQuery = { id: "header", selector: "header", devices: BOTH };
@@ -40,7 +54,7 @@ const SEARCH_ANCHORS: Record<SectionIdOf["search"], SectionAnchor> = {
   footer: { kind: "footer-after-main" },
 };
 
-export const PAGE_SOURCES: { [P in PageId]: PageSource<P> } = {
+export const PAGE_SOURCES: { [P in StaticPageId]: PageSource<P> } = {
   home: {
     before: {
       build: "home-before",
@@ -130,9 +144,20 @@ export const PAGE_SOURCES: { [P in PageId]: PageSource<P> } = {
     before: {
       build: "search-before",
       path: SEARCH_PATH,
-      anchors: SEARCH_ANCHORS,
-      pinned: [],
-      nhsFooter: true,
+      anchors: {
+        title: { kind: "page-top" },
+        results: { kind: "element", selector: 'main [class~="lg:col-span-7"]' },
+        about: { kind: "absent" },
+        footer: { kind: "footer-after-main" },
+      },
+      pinned: [
+        {
+          id: "controls",
+          selector: '[class*="z-index-control-bar-sticky"]',
+          devices: ["desktop", "mobile"],
+        },
+        { id: "map", selector: 'main .sticky[class*="h-[60vh]"]', devices: ["desktop"] },
+      ],
     },
     after: {
       build: "latest",
@@ -216,7 +241,7 @@ export const HOME_TOKEN_SELECTORS: Record<Version, TokenSelectors> = {
   },
 };
 
-export function anchorList(page: PageId, version: Version): [SectionId, SectionAnchor][] {
+export function anchorList(page: StaticPageId, version: Version): [SectionId, SectionAnchor][] {
   const anchors: Partial<Record<SectionId, SectionAnchor>> = PAGE_SOURCES[page][version].anchors;
   return sectionIds(page).map((id): [SectionId, SectionAnchor] => {
     const anchor = anchors[id];
@@ -230,7 +255,11 @@ export function anchorList(page: PageId, version: Version): [SectionId, SectionA
 export const NHS_FOOTER_BUILD: BuildName = "home-before";
 
 export function needsNhsFooter(pages: readonly PageId[]): boolean {
-  return pages.some((page) => PAGE_SOURCES[page].before.nhsFooter === true);
+  return pages.some((page) =>
+    isFlowPage(page)
+      ? FLOW_SOURCES[page].before.nhsFooter === true
+      : PAGE_SOURCES[page].before.nhsFooter === true,
+  );
 }
 
 // Pages built after the v2 header landed (9a5d90ba1d) wear the NHS header and Back bar that the
@@ -238,14 +267,14 @@ export function needsNhsFooter(pages: readonly PageId[]): boolean {
 export const NHS_HEADER_BUILD: BuildName = "header-before";
 
 export function needsNhsHeader(pages: readonly PageId[]): boolean {
-  return pages.some((page) => PAGE_SOURCES[page].before.nhsHeader === true);
+  return pages.some((page) => !isFlowPage(page) && PAGE_SOURCES[page].before.nhsHeader === true);
 }
 
 export function buildsFor(pages: readonly PageId[]): BuildName[] {
-  const names = pages.flatMap((page) => [
-    PAGE_SOURCES[page].before.build,
-    PAGE_SOURCES[page].after.build,
-  ]);
+  const names = pages.flatMap((page) => {
+    const source = isFlowPage(page) ? FLOW_SOURCES[page] : PAGE_SOURCES[page];
+    return [source.before.build, source.after.build];
+  });
   if (needsNhsFooter(pages)) names.push(NHS_FOOTER_BUILD);
   if (needsNhsHeader(pages)) names.push(NHS_HEADER_BUILD);
   return [...new Set(names)];

@@ -1,0 +1,323 @@
+{
+  "method": "GET",
+  "url": "https://api.ht1.uk/v2/appointments/locations?feature=withAppointments&service=medical&maxDistanceMiles=5&inCatchmentArea=true&sortBy=distance",
+  "requestBody": null,
+  "status": 200,
+  "contentType": "application/json; charset=utf-8",
+  "body": {
+    "json": {
+      "locations": [],
+      "recommended": {
+        "overall": {
+          "id": "loc_9a5qmmpen34f",
+          "name": "Portishead Medical Group",
+          "longitude": -2.767318,
+          "latitude": 51.482805,
+          "addressLine1": "Victoria Square",
+          "addressLine2": "",
+          "addressLine3": "",
+          "postTown": "Portishead",
+          "postcode": "BS20 6AQ",
+          "accessibility": [],
+          "ratingReviewCount": null,
+          "ratingScore": null,
+          "bookableRatingTotal": null,
+          "bookableRatingScore": null,
+          "bookableRatingCount": null,
+          "blendedRatingScore": null,
+          "blendedRatingCount": null,
+          "blendedRatingRank": null,
+          "triageUrl": "https://accurx.nhs.uk/patient-initiated/l81004",
+          "phoneNumber": "+441275841630",
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/locations/loc_9a5qmmpen34f/square/8e53c7cbbef60f26ca7ea51ece0fad990b6f9a108a3677f8d68f0ee50990a19b.jpg",
+          "distanceInMetres": null,
+          "organisationKind": "gp",
+          "bookableCapabilities": {
+            "canBook": true,
+            "canRegister": true
+          },
+          "appointmentCount": 12,
+          "earliestAppointmentAt": "2026-10-12T07:45:00.000+00:00",
+          "appointments": [
+            {
+              "id": "c2xvXzlhNXFyMGx6aTl6aw",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T14:00:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmtp7ffa",
+                "prefix": "Dr",
+                "firstName": "Jane",
+                "lastName": "Spilsbury",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx6anlzcg",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T14:30:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmtp7ffa",
+                "prefix": "Dr",
+                "firstName": "Jane",
+                "lastName": "Spilsbury",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx5dDhhag",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T07:45:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmtpaiiq",
+                "prefix": "Dr",
+                "firstName": "Vanessa",
+                "lastName": "Agosti",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx5dXZ6dw",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T08:00:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmtpaiiq",
+                "prefix": "Dr",
+                "firstName": "Vanessa",
+                "lastName": "Agosti",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx5d28wag",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T08:30:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmtpaiiq",
+                "prefix": "Dr",
+                "firstName": "Vanessa",
+                "lastName": "Agosti",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx6MWdpNA",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T09:00:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmtpaiiq",
+                "prefix": "Dr",
+                "firstName": "Vanessa",
+                "lastName": "Agosti",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx6NDl5Yw",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T10:15:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmtpaiiq",
+                "prefix": "Dr",
+                "firstName": "Vanessa",
+                "lastName": "Agosti",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx6ODVlMg",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T10:45:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmtpaiiq",
+                "prefix": "Dr",
+                "firstName": "Vanessa",
+                "lastName": "Agosti",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx6ZXh1Mw",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T13:15:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmtpaiiq",
+                "prefix": "Dr",
+                "firstName": "Vanessa",
+                "lastName": "Agosti",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx6Zm9wMw",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T13:30:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmtpaiiq",
+                "prefix": "Dr",
+                "firstName": "Vanessa",
+                "lastName": "Agosti",
+                "gender": "female",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx5eTIxaA",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T08:30:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmttcbl1",
+                "prefix": "Dr",
+                "firstName": "Robin",
+                "lastName": "Pullen",
+                "gender": "male",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            },
+            {
+              "id": "c2xvXzlhNXFyMGx5eWNjYw",
+              "durationMinutes": 15,
+              "multipleSlotReason": null,
+              "format": "face-to-face",
+              "startsAt": "2026-10-12T08:45:00.000+00:00",
+              "serviceType": "medical",
+              "clinician": {
+                "id": "cli_9a5qmmttcbl1",
+                "prefix": "Dr",
+                "firstName": "Robin",
+                "lastName": "Pullen",
+                "gender": "male",
+                "role": "doctor",
+                "languagesSpoken": [
+                  "english"
+                ],
+                "displayImageUrl": null
+              },
+              "location": {
+                "id": "loc_9a5qmmpen34f"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

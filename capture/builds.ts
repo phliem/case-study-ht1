@@ -19,18 +19,20 @@ export type BuildSpec = { name: BuildName; commit: string; port: number };
 export type PreparedBuild = BuildSpec & { dir: string; fullCommit: string };
 export type ServedBuild = PreparedBuild & { url: string; stop: () => Promise<void> };
 
-// The older commits are the last before their pages were replaced: 1e021d8370 swapped the
-// how-to pages for the guide pages, 38facb0a65 swapped /faq for /help, 801e381b9a put the
-// GP surgeries / Clinicians switch on /gp/search, 96766b8a9c rebuilt the GP surgery page and
-// 5a4e8c4cdf the clinician page. Those last three landed after the shared after commit, so their
-// after pages come from the later latest commit.
+// Each before commit is the last one before its page or flow was replaced: 1e021d8370 swapped the
+// how-to pages for the guide pages, 38facb0a65 swapped /faq for /help, 96766b8a9c rebuilt the GP
+// surgery page and moved booking into the v2 booker, 5a4e8c4cdf rebuilt the clinician page, and
+// e055a4e3c8 moved care navigation into a modal. The GP search before is end-of-January develop.
+// The booking and care navigation flows run before on 9a5d90ba1d^, the last commit with the NHS
+// header, which already has /choose and still books through the v0 pages.
+// The pages rebuilt after the shared after commit take their after side from latest.
 export const BUILDS: Record<BuildName, BuildSpec> = {
   "home-before": { name: "home-before", commit: "0a143c6820", port: 3061 },
   after: { name: "after", commit: "c016453be7", port: 3062 },
   "article-before": { name: "article-before", commit: "1e021d8370^", port: 3063 },
   "help-before": { name: "help-before", commit: "38facb0a65^", port: 3064 },
-  "search-before": { name: "search-before", commit: "801e381b9a^", port: 3065 },
-  latest: { name: "latest", commit: "3362f7fc39", port: 3066 },
+  "search-before": { name: "search-before", commit: "d304517e90", port: 3065 },
+  latest: { name: "latest", commit: "9732397e02", port: 3066 },
   "gp-before": { name: "gp-before", commit: "96766b8a9c^", port: 3067 },
   "clinician-before": { name: "clinician-before", commit: "5a4e8c4cdf^", port: 3068 },
   "header-before": { name: "header-before", commit: "9a5d90ba1d^", port: 3069 },
@@ -68,7 +70,9 @@ export function prepareBuild(spec: BuildSpec): PreparedBuild {
   ).trim();
   const dir = join(WORK_DIR, spec.name);
   const marker = join(dir, ".capture-commit");
-  const built = existsSync(join(dir, "packages/bookable/.next/BUILD_ID"));
+  const built =
+    existsSync(join(dir, "packages/bookable/.next/BUILD_ID")) &&
+    existsSync(join(dir, "packages/bookable/node_modules/next/dist/server/require-hook.js"));
   if (built && existsSync(marker) && readFileSync(marker, "utf8").trim() === fullCommit) {
     console.log(`Reusing the ${spec.name} build at ${dir}`);
     return { ...spec, dir, fullCommit };

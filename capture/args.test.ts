@@ -4,7 +4,7 @@ import { parseCaptureArgs } from "./args";
 describe("parseCaptureArgs", () => {
   it("captures every page with loops by default", () => {
     expect(parseCaptureArgs([])).toEqual({
-      pages: ["home", "article", "help", "search", "gp", "clinician"],
+      pages: ["home", "article", "help", "carenav", "search", "gp", "booking", "clinician"],
       skipLoops: false,
     });
   });
@@ -22,10 +22,10 @@ describe("parseCaptureArgs", () => {
 
   it("rejects a page it does not know, or none", () => {
     expect(() => parseCaptureArgs(["--page", "faq"])).toThrow(
-      "--page takes home, article, help, search, gp, clinician, not faq",
+      "--page takes home, article, help, carenav, search, gp, booking, clinician, not faq",
     );
     expect(() => parseCaptureArgs(["--page"])).toThrow(
-      "--page takes home, article, help, search, gp, clinician, not nothing",
+      "--page takes home, article, help, carenav, search, gp, booking, clinician, not nothing",
     );
   });
 

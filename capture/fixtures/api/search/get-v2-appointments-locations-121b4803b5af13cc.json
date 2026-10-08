@@ -1,0 +1,45 @@
+{
+  "method": "GET",
+  "url": "https://api.ht1.uk/v2/appointments/locations?feature=none&maxDistanceMiles=5&inCatchmentArea=true&service=medical&sortBy=distance",
+  "requestBody": null,
+  "status": 200,
+  "contentType": "application/json; charset=utf-8",
+  "body": {
+    "json": {
+      "locations": [],
+      "recommended": {
+        "overall": {
+          "id": "loc_9a5qmml4mkfz",
+          "name": "The Densham Surgery",
+          "longitude": -1.318999,
+          "latitude": 54.561637,
+          "addressLine1": "Health Centre",
+          "addressLine2": "Lawson Street",
+          "addressLine3": "",
+          "postTown": null,
+          "postcode": "TS18 1HU",
+          "accessibility": [],
+          "ratingReviewCount": null,
+          "ratingScore": null,
+          "bookableRatingTotal": null,
+          "bookableRatingScore": null,
+          "bookableRatingCount": null,
+          "blendedRatingScore": null,
+          "blendedRatingCount": null,
+          "blendedRatingRank": null,
+          "triageUrl": null,
+          "phoneNumber": "+441642672351",
+          "displayImageUrl": null,
+          "distanceInMetres": null,
+          "organisationKind": "gp",
+          "bookableCapabilities": {
+            "canBook": false,
+            "canRegister": false
+          },
+          "appointmentCount": 0,
+          "appointments": []
+        }
+      }
+    }
+  }
+}

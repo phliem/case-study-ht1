@@ -1,11 +1,12 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import type { BrowserContext } from "@playwright/test";
+import type { BrowserContext, Request } from "@playwright/test";
 import type { PageId } from "../src/data/types";
 import { ROOT } from "./paths";
 
 export const API_ORIGIN = "https://api.ht1.uk";
+const POSTCODES_ORIGIN = "https://api.postcodes.io";
 
 export type ApiFixture = {
   method: string;
@@ -69,19 +70,24 @@ export function recordedAt(page: PageId): Date {
   return now;
 }
 
-// API calls are answered from capture/fixtures/api. A read with no fixture yet is fetched once
+// API calls (and postcodes.io lookups) are answered from capture/fixtures/api. A read with no fixture yet is fetched once
 // from production and saved, so later captures never reach the API. Writes are never sent: each
 // needs a fixture written by hand. The production API only allows CORS from bookable.health, so
 // every answer carries headers that let a local build read it.
+export function corsHeaders(request: Request): Record<string, string> {
+  return {
+    "access-control-allow-origin": request.headers().origin ?? "*",
+    "access-control-allow-credentials": "true",
+    "access-control-allow-headers": request.headers()["access-control-request-headers"] ?? "*",
+    "access-control-allow-methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+  };
+}
+
 export async function serveApiFromFixtures(context: BrowserContext, page: PageId): Promise<void> {
-  await context.route(`${API_ORIGIN}/**`, async (route) => {
+  const origins = new RegExp(`^(${API_ORIGIN}|${POSTCODES_ORIGIN})/`);
+  await context.route(origins, async (route) => {
     const request = route.request();
-    const cors = {
-      "access-control-allow-origin": request.headers().origin ?? "*",
-      "access-control-allow-credentials": "true",
-      "access-control-allow-headers": request.headers()["access-control-request-headers"] ?? "*",
-      "access-control-allow-methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
-    };
+    const cors = corsHeaders(request);
     if (request.method() === "OPTIONS") {
       await route.fulfill({ status: 204, headers: cors });
       return;

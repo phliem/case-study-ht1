@@ -96,6 +96,14 @@ export const TOURS: Record<PageId, Tours> = {
     full: fullTour(["reviews", "team", "questions", "footer"], ["reviews", "team"]),
     short: shortTour(["reviews", "team"]),
   },
+  booking: {
+    full: fullTour(["time", "review", "details", "verify", "confirmed"], ["time", "details"]),
+    short: shortTour(["time", "details"]),
+  },
+  carenav: {
+    full: fullTour(["about", "reason", "emergency", "result"], ["about", "reason"]),
+    short: shortTour(["about", "reason"]),
+  },
   clinician: {
     full: fullTour(["details", "footer"], ["details"]),
     short: shortTour(["details", "footer"]),

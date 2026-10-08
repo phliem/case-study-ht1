@@ -1,4 +1,5 @@
-export type PageId = "home" | "article" | "help" | "search" | "gp" | "clinician";
+export type FlowPageId = "booking" | "carenav";
+export type PageId = "home" | "article" | "help" | "search" | "gp" | "clinician" | FlowPageId;
 export type Version = "before" | "after";
 export type Device = "desktop" | "mobile";
 export type HomeSectionId = "hero" | "proof" | "how" | "faq-about" | "areas" | "footer";
@@ -7,6 +8,8 @@ export type HelpSectionId = "title" | "questions" | "more-help" | "footer";
 export type SearchSectionId = "title" | "results" | "about" | "footer";
 export type GpSectionId = "title" | "reviews" | "team" | "questions" | "footer";
 export type ClinicianSectionId = "title" | "details" | "footer";
+export type BookingSectionId = "patient" | "time" | "review" | "details" | "verify" | "confirmed";
+export type CarenavSectionId = "start" | "about" | "reason" | "emergency" | "result";
 export type SectionIdOf = {
   home: HomeSectionId;
   article: ArticleSectionId;
@@ -14,6 +17,8 @@ export type SectionIdOf = {
   search: SearchSectionId;
   gp: GpSectionId;
   clinician: ClinicianSectionId;
+  booking: BookingSectionId;
+  carenav: CarenavSectionId;
 };
 export type SectionId = SectionIdOf[PageId];
 

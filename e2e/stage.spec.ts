@@ -11,6 +11,8 @@ const MIDDLE: Record<PageId, SectionId> = {
   search: "results",
   gp: "reviews",
   clinician: "details",
+  booking: "details",
+  carenav: "reason",
 };
 
 for (const id of PAGE_IDS) {

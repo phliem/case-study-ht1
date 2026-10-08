@@ -2,11 +2,12 @@ import { mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { chromium } from "@playwright/test";
 import sharp from "sharp";
+import { PAGES } from "../src/data/pages";
 import type { CapturesFile, PageId } from "../src/data/types";
 import { pinnedStateIndex, pinnedTop } from "../src/lib/pinned";
 import { parseCaptureArgs } from "./args";
 import { HIDDEN_SELECTORS } from "./css";
-import { PAGE_SOURCES } from "./pages";
+import { isFlowPage, PAGE_SOURCES } from "./pages";
 import { DATA_FILE, PUBLIC_DIR, ROOT } from "./paths";
 import { SCALE, SOCS_REJECTED } from "./profiles";
 
@@ -51,7 +52,10 @@ async function liveTop(page: PageId, width: number, height: number): Promise<Buf
       content: `localStorage.setItem("SOCS", ${JSON.stringify(SOCS_REJECTED)});`,
     });
     const tab = await context.newPage();
-    await tab.goto(`${LIVE_URL}${PAGE_SOURCES[page].after.path}`, { waitUntil: "networkidle" });
+    await tab.goto(
+      `${LIVE_URL}${isFlowPage(page) ? PAGES[page].route.after : PAGE_SOURCES[page].after.path}`,
+      { waitUntil: "networkidle" },
+    );
     await tab.addStyleTag({
       content: `${HIDDEN_SELECTORS.join(", ")} { display: none !important; }`,
     });

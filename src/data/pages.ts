@@ -59,7 +59,33 @@ const CLINICIAN_SECTIONS = [
   { id: "footer", label: "Footer" },
 ] as const satisfies SectionsOf<"clinician">;
 
-export const PAGE_IDS: readonly PageId[] = ["home", "article", "help", "search", "gp", "clinician"];
+const CARENAV_SECTIONS = [
+  { id: "start", label: "Start" },
+  { id: "about", label: "About you" },
+  { id: "reason", label: "Reason" },
+  { id: "emergency", label: "Emergency check" },
+  { id: "result", label: "Results" },
+] as const satisfies SectionsOf<"carenav">;
+
+const BOOKING_SECTIONS = [
+  { id: "patient", label: "New patient?" },
+  { id: "time", label: "Time" },
+  { id: "review", label: "Review" },
+  { id: "details", label: "Your details" },
+  { id: "verify", label: "Code check" },
+  { id: "confirmed", label: "Confirmed" },
+] as const satisfies SectionsOf<"booking">;
+
+export const PAGE_IDS: readonly PageId[] = [
+  "home",
+  "article",
+  "help",
+  "carenav",
+  "search",
+  "gp",
+  "booking",
+  "clinician",
+];
 
 export const PAGES: Record<PageId, PageInfo> = {
   home: {
@@ -94,17 +120,17 @@ export const PAGES: Record<PageId, PageInfo> = {
   },
   search: {
     id: "search",
-    number: "04",
+    number: "05",
     name: "GP search",
     noun: "GP search",
     summary:
-      "The results page searched GP surgeries and nothing else. In v2 a switch searches by GP surgery or by clinician, under a bar that says why and where you are searching.",
+      "In January the GP search listed surgeries and nothing else, beside a map that stayed in view. In v2 a switch searches by GP surgery or by clinician, under a bar that says why and where you are searching.",
     route: { before: "/gp/search", after: "/gp/search" },
     sections: SEARCH_SECTIONS,
   },
   gp: {
     id: "gp",
-    number: "05",
+    number: "06",
     name: "GP surgery page",
     noun: "GP surgery page",
     summary:
@@ -117,13 +143,36 @@ export const PAGES: Record<PageId, PageInfo> = {
   },
   clinician: {
     id: "clinician",
-    number: "06",
+    number: "08",
     name: "Clinician page",
     noun: "clinician page",
     summary:
       "A clinician's own page, reached from the Clinicians side of the search. It used to put a calendar straight on the page; in v2 it reads like a GP surgery page and books through the same booker.",
     route: { before: "/clinician/cli_9a5qmmqhn4r5", after: "/clinician/cli_9a5qmmqhn4r5" },
     sections: CLINICIAN_SECTIONS,
+  },
+  carenav: {
+    id: "carenav",
+    number: "04",
+    name: "Care navigation",
+    noun: "care navigation",
+    summary:
+      "Finding the right care for a reason used to take three question pages and a drawer. In v2 it is a two-step window over the GP search, and the reason stays on the results. The answers are fictional.",
+    route: { before: "/choose", after: "/choose" },
+    sections: CARENAV_SECTIONS,
+  },
+  booking: {
+    id: "booking",
+    number: "07",
+    name: "Booking",
+    noun: "booking journey",
+    summary:
+      "Booking used to cross four pages: the surgery page, contact details, a code check and the confirmation. In v2 the first steps happen in one window over the surgery page. Every input is filled in with fictional details.",
+    route: {
+      before: "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu",
+      after: "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu",
+    },
+    sections: BOOKING_SECTIONS,
   },
 };
 

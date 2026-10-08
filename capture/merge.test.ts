@@ -70,8 +70,10 @@ describe("mergeCaptures", () => {
       ...Array.from({ length: 4 }, () => "home:old"),
       ...Array.from({ length: 4 }, () => "article:new"),
       ...Array.from({ length: 4 }, () => "help:old"),
+      ...Array.from({ length: 4 }, () => "carenav:old"),
       ...Array.from({ length: 4 }, () => "search:old"),
       ...Array.from({ length: 4 }, () => "gp:old"),
+      ...Array.from({ length: 4 }, () => "booking:old"),
       ...Array.from({ length: 4 }, () => "clinician:old"),
     ]);
     const untouched = (file: CapturesFile) =>

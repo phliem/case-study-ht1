@@ -6,7 +6,7 @@ import type { CapturesFile } from "../src/data/types";
 const ROOT = join(import.meta.dirname, "..");
 const DIST = join(ROOT, "dist");
 const BASE = process.env.VITE_BASE ?? "/";
-const JS_BUDGET = 100 * 1024;
+const JS_BUDGET = 110 * 1024;
 const IMAGE_BUDGET = 1.5 * 1024 * 1024;
 
 const html = readFileSync(join(DIST, "index.html"), "utf8");

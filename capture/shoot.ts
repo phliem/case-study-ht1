@@ -48,11 +48,15 @@ export type PageJob = {
   withSpecimen: boolean;
 };
 
+// Captures must not count as visits in Bookable's analytics.
+const ANALYTICS =
+  /^https:\/\/([^/]+\.)?(posthog\.com|one-less-task\.bookable\.health|googletagmanager\.com|google-analytics\.com)\//;
+
 export type SwapImage = { image: Buffer; height: number };
 
 export type CaptureResult = { capture: Capture; tokens: MeasuredTokens | null };
 
-async function openPage(
+export async function openPage(
   browser: Browser,
   pageId: PageId,
   url: string,
@@ -75,6 +79,7 @@ async function openPage(
   await context.addInitScript({
     content: `localStorage.setItem("SOCS", ${JSON.stringify(SOCS_REJECTED)}); localStorage.removeItem("wglang");`,
   });
+  await context.route(ANALYTICS, (route) => route.abort());
   await serveApiFromFixtures(context, pageId);
   await context.clock.setFixedTime(recordedAt(pageId));
   const page = await context.newPage();
@@ -128,6 +133,16 @@ async function captureTiles(
     info: { width: info.width, height: info.height, channels: info.channels },
   };
 
+  const tiles = await writeTiles(full, pageHeight, width, outDir);
+  return { tiles, pageHeight, full };
+}
+
+export async function writeTiles(
+  full: RawImage,
+  pageHeight: number,
+  width: number,
+  outDir: string,
+): Promise<Tile[]> {
   const tiles: Tile[] = [];
   for (const [index, band] of tileBands(pageHeight, TILE_HEIGHT).entries()) {
     const name = `tile-${String(index).padStart(2, "0")}`;
@@ -148,7 +163,7 @@ async function captureTiles(
       height: band.height,
     });
   }
-  return { tiles, pageHeight, full };
+  return tiles;
 }
 
 export async function shootFooter(

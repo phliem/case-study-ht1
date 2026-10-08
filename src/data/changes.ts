@@ -73,19 +73,19 @@ export const CHANGES: PageChanges = {
   search: {
     title: [
       "Search used to find GP surgeries only. A GP surgeries / Clinicians switch now sits beside Filters and Sort, so patients can search by surgery or by the clinician they want to see.",
-      "A new bar on top shows the reason for the appointment and the location, and either can be changed from there.",
-      "On phones Filters, the switch and Sort each get a full-width row.",
+      "The postcode box in the header and the row of filter chips give way to a bar with the reason for the appointment and the location, and either can be changed from there.",
+      'The heading counts surgeries, not appointments: "26 GP surgeries near you", near IG1 2UT within 5 miles.',
     ],
     results: [
-      'NHS cards become v2 cards: a photo tile, "NHS GP surgery · address", and rating and distance chips.',
-      'One "Register and book" button becomes the action each surgery offers: Book appointment, Register with this GP surgery, or View GP surgery details.',
+      "A long list of links beside a map that stayed in view becomes a map above pages of v2 cards.",
+      "Each card says what you can do there: Book appointment, Register with this GP surgery or View GP surgery details. Walking and driving times give way to rating and distance chips.",
     ],
     about: [
-      'The "About finding an NHS GP in England" panel is unchanged: the redesign covered the results column.',
-      "It is the last part of the page still drawn in the NHS design system.",
+      'New since January: an "About finding an NHS GP in England" panel under the results.',
+      "The January page had none, so the before side waits here while it scrolls past.",
     ],
     footer: [
-      "The NHS footer becomes the site-wide footer the homepage ends on.",
+      "The January footer, a list of support links, becomes the site-wide footer the homepage ends on.",
       "On phones its nav becomes full-width rows and the legal links a two-column grid.",
     ],
   },
@@ -125,6 +125,54 @@ export const CHANGES: PageChanges = {
     footer: [
       "The NHS footer becomes the site-wide footer the homepage ends on.",
       "On phones its nav becomes full-width rows and the legal links a two-column grid.",
+    ],
+  },
+  carenav: {
+    start: [
+      'Both start on /choose, "What would you like to do?", with Book an appointment and Register with a GP surgery.',
+      "Book an appointment used to open the first of three question pages. Now it opens the GP search with a care navigation window on top.",
+    ],
+    about: [
+      "Date of birth and sex were two pages, each with its own Continue. They are now one step in the window.",
+      'The window reads the date back as you type: "14 June 1990, age 36".',
+    ],
+    reason: [
+      '"How can we help?" was a page of its own. In v2 the reason is step 2 of 2, with the answers so far underneath and Change to go back.',
+      "Sending it asks for the right care for that reason, as Continue did before.",
+    ],
+    emergency: [
+      'The "Call 999 now for any of these:" check stays, as a dialog over the window instead of a drawer over the page.',
+      "I have none of these carries on to the results either way.",
+    ],
+    result: [
+      "Both end on the GP search, filtered to the care that suits the reason given.",
+      "In v2 the bar on top shows the reason, Cough, and Change reopens care navigation without leaving the results.",
+    ],
+  },
+  booking: {
+    patient: [
+      'Both ask "Are you a new patient at John Smith Medical Centre?" first.',
+      "Before, the question sat on the surgery page itself. Now it is step 1 of 3 in a booking window over the page.",
+    ],
+    time: [
+      "The calendar on the page, with appointment type, day and time, becomes step 2: Choose your time, with the day behind a Change button.",
+      'The window keeps the choice in view at the bottom, "Monday, 12 October · Morning", while you decide.',
+    ],
+    review: [
+      "Before, Book appointment opened a Review drawer to confirm the date, time and clinician.",
+      "v2 drops the step, because the window has shown the choice all along, so the after side has nothing here.",
+    ],
+    details: [
+      "Contact details were a page of their own, with a timer for how long the time is held. They are now step 3 in the same window.",
+      "The fields are the same: reason, name, date of birth, postcode, email and mobile, filled in here with fictional details.",
+    ],
+    verify: [
+      "Both still check the mobile number with a six-digit code on a page of its own.",
+      "The window hands over to it once the details are in.",
+    ],
+    confirmed: [
+      'Both end on "Your booking is confirmed." with the appointment and the details given.',
+      "These last two pages have not moved to v2 yet, so they look alike on either side.",
     ],
   },
 };
