@@ -9,8 +9,11 @@ export type PageInfo = {
   noun: string;
   summary: string;
   route: { before: string; after: string };
+  when: { before: string; after: string };
   sections: readonly PageSection[];
 };
+
+const JANUARY_TO_TODAY = { before: "January 2026", after: "October 2026" } as const;
 
 type SectionsOf<P extends PageId> = readonly { id: SectionIdOf[P]; label: string }[];
 
@@ -94,8 +97,9 @@ export const PAGES: Record<PageId, PageInfo> = {
     name: "Homepage",
     noun: "homepage",
     summary:
-      "The landing page: one postcode search at the heart of the hero, one testimonials section in place of three proof blocks, and a live vignette for each step of how it works.",
+      "January's homepage was a blue band with a postcode box, three numbered steps, five short reviews and a list of questions. Today's leads with one search, puts testimonials first, shows each step as a live vignette and ends on the areas Bookable covers.",
     route: { before: "/", after: "/" },
+    when: JANUARY_TO_TODAY,
     sections: HOME_SECTIONS,
   },
   article: {
@@ -104,8 +108,12 @@ export const PAGES: Record<PageId, PageInfo> = {
     name: "Guide article",
     noun: "guide article",
     summary:
-      "A how-to page on the NHS design system becomes the v2 article template: a hero, a summary up top, a contents list that follows the reader on desktop, and questions answered in place.",
-    route: { before: "/how-to/book-doctor-appointment-nhs", after: "/book-a-gp-appointment" },
+      "January's how-to page, plain NHS text with one button at the end, becomes today's article template: a hero, a summary up top, a contents list that follows the reader on desktop, and questions answered in place.",
+    route: {
+      before: "/how-to/book-doctor-appointment-nhs",
+      after: "/articles/book-a-gp-appointment",
+    },
+    when: JANUARY_TO_TODAY,
     sections: ARTICLE_SECTIONS,
   },
   help: {
@@ -114,8 +122,9 @@ export const PAGES: Record<PageId, PageInfo> = {
     name: "Help centre",
     noun: "help centre",
     summary:
-      "One long page of FAQ accordions becomes a help centre you can search, with popular questions up front and a page for every topic.",
+      "January's FAQ, one long page of accordions in eleven sections, becomes a help centre you can search, with popular questions up front and a page for every topic.",
     route: { before: "/faq", after: "/help" },
+    when: JANUARY_TO_TODAY,
     sections: HELP_SECTIONS,
   },
   search: {
@@ -126,6 +135,7 @@ export const PAGES: Record<PageId, PageInfo> = {
     summary:
       "In January the GP search listed surgeries and nothing else, beside a map that stayed in view. In v2 a switch searches by GP surgery or by clinician, under a bar that says why and where you are searching.",
     route: { before: "/gp/search", after: "/gp/search" },
+    when: JANUARY_TO_TODAY,
     sections: SEARCH_SECTIONS,
   },
   gp: {
@@ -134,11 +144,12 @@ export const PAGES: Record<PageId, PageInfo> = {
     name: "GP surgery page",
     noun: "GP surgery page",
     summary:
-      "The page most patients book from. An NHS-blue banner over an inline calendar becomes a v2 surgery page: a booking card up top, the care team and common questions below, and a rail with the map and opening hours.",
+      "The page most patients book from. January stacked NHS cards: a score box, a calendar with a Book bar docked to the window, directions and the team. Today it is a v2 surgery page with a booking card, what patients say, the care team, common questions and a rail with the map and opening hours.",
     route: {
       before: "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu",
       after: "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu",
     },
+    when: JANUARY_TO_TODAY,
     sections: GP_SECTIONS,
   },
   clinician: {
@@ -147,8 +158,9 @@ export const PAGES: Record<PageId, PageInfo> = {
     name: "Clinician page",
     noun: "clinician page",
     summary:
-      "A clinician's own page, reached from the Clinicians side of the search. It used to put a calendar straight on the page; in v2 it reads like a GP surgery page and books through the same booker.",
+      "Clinician pages did not exist in January, so the left side is the page as it first shipped in September, still on the NHS design system with a calendar straight on the page. Today it reads like a GP surgery page and books through the same window.",
     route: { before: "/clinician/cli_9a5qmmqhn4r5", after: "/clinician/cli_9a5qmmqhn4r5" },
+    when: { before: "September 2026", after: "October 2026" },
     sections: CLINICIAN_SECTIONS,
   },
   carenav: {
@@ -157,8 +169,9 @@ export const PAGES: Record<PageId, PageInfo> = {
     name: "Care navigation",
     noun: "care navigation",
     summary:
-      "Finding the right care for a reason used to take three question pages and a drawer. In v2 it is a two-step window over the GP search, and the reason stays on the results. The answers are fictional.",
-    route: { before: "/choose", after: "/choose" },
+      "In January the homepage search led into four question pages before the results. Today Book an appointment opens a two-step window over the GP search, and the reason stays on the results. The answers are fictional.",
+    route: { before: "/", after: "/choose" },
+    when: JANUARY_TO_TODAY,
     sections: CARENAV_SECTIONS,
   },
   booking: {
@@ -167,11 +180,12 @@ export const PAGES: Record<PageId, PageInfo> = {
     name: "Booking",
     noun: "booking journey",
     summary:
-      "Booking used to cross four pages: the surgery page, contact details, a code check and the confirmation. In v2 the first steps happen in one window over the surgery page. Every input is filled in with fictional details.",
+      "In January booking took a calendar and a drawer on the surgery page, then a contact page, a code page and the confirmation. Today the question, the time, your details and the code all happen in one window over the surgery page. Every input is filled in with fictional details.",
     route: {
       before: "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu",
       after: "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu",
     },
+    when: JANUARY_TO_TODAY,
     sections: BOOKING_SECTIONS,
   },
 };

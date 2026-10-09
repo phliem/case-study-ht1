@@ -197,7 +197,7 @@ export function StageViewport({
         </div>
       </div>
       <WipeDivider divider={divider} label={`${name}: divider between before and after`} />
-      <VersionLabels device={device} divider={divider} />
+      <VersionLabels page={page} device={device} divider={divider} />
     </m.div>
   );
 }

@@ -19,22 +19,24 @@ test("loads with its title and no console errors", async ({ page }) => {
 test("introduces the case study", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("banner").getByText("Role", { exact: true })).toHaveCount(0);
-  await expect(page.getByRole("banner")).toContainText("In 2026 Bookable's homepage");
+  await expect(page.getByRole("banner")).toContainText("Bookable in January 2026");
   await expect(page.getByRole("link", { name: "bookable.health", exact: true })).toHaveAttribute(
     "href",
     "https://bookable.health",
   );
 });
 
-test("names the year once, in the intro, and no exact dates", async ({ page }) => {
+test("dates each side by month only, never by day", async ({ page }) => {
   await page.goto("/?page=help");
   await page.getByTestId("design-diff").scrollIntoViewIfNeeded();
   await expect(page.getByRole("region", { name: "The system underneath" })).toBeVisible();
   const text = await page.locator("body").innerText();
-  const month =
-    /\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.? \d{4}\b|\b\d{1,2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/;
-  expect(text.match(month)).toBeNull();
-  expect(text.match(/\b2026\b/g)).toEqual(["2026"]);
+  const day = /\b\d{1,2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/;
+  expect(text.match(day)).toBeNull();
+  const months = new Set(text.match(/\b[A-Z][a-z]+ 2026\b/g));
+  expect(months.has("January 2026") && months.has("October 2026")).toBe(true);
+  const allowed = new Set(["January 2026", "September 2026", "October 2026"]);
+  expect([...months].filter((month) => !allowed.has(month))).toEqual([]);
 });
 
 test("credits the captures", async ({ page }) => {

@@ -18,7 +18,7 @@ import type { RawImage } from "./shoot";
 
 const HOW_PANELS: LoopRegionQuery[] = [0, 1, 2].map((index) => ({
   id: `how-${index + 1}`,
-  scopeHeading: "How Bookable works",
+  scopeHeading: "How to register and book with an NHS GP",
   selector: 'li > div[aria-hidden="true"]',
   index,
   radius: "parent-top",

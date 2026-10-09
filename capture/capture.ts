@@ -8,25 +8,10 @@ import { captureFlow } from "./flowShoot";
 import { FLOW_SOURCES } from "./flows";
 import { extractObjectLiteral, paletteGroups } from "./literal";
 import { type HomeExtras, mergeCaptures } from "./merge";
-import {
-  anchorList,
-  buildsFor,
-  HOME_TOKEN_SELECTORS,
-  isFlowPage,
-  NHS_FOOTER_BUILD,
-  NHS_HEADER_BUILD,
-  needsNhsFooter,
-  PAGE_SOURCES,
-} from "./pages";
+import { anchorList, buildsFor, HOME_TOKEN_SELECTORS, isFlowPage, PAGE_SOURCES } from "./pages";
 import { DATA_FILE } from "./paths";
 import { DEVICE_PROFILES } from "./profiles";
-import {
-  type CaptureResult,
-  capturePage,
-  type SwapImage,
-  shootFooter,
-  shootMasthead,
-} from "./shoot";
+import { type CaptureResult, capturePage } from "./shoot";
 
 const VERSIONS: readonly Version[] = ["before", "after"];
 const DEVICES: readonly Device[] = ["desktop", "mobile"];
@@ -60,8 +45,8 @@ function homeExtras(
   results: readonly CaptureResult[],
   served: ReadonlyMap<BuildName, ServedBuild>,
 ): HomeExtras {
-  const before = servedFor(served, "home-before");
-  const after = servedFor(served, "after");
+  const before = servedFor(served, "january");
+  const after = servedFor(served, "latest");
   return {
     tokens: { before: homeTokens(results, "before"), after: homeTokens(results, "after") },
     palettes: {
@@ -93,17 +78,6 @@ async function main() {
     const browser = await chromium.launch();
     const results: CaptureResult[] = [];
     try {
-      const nhsFooters = new Map<Device, SwapImage>();
-      if (needsNhsFooter(pages)) {
-        const footerBuild = servedFor(served, NHS_FOOTER_BUILD);
-        for (const device of DEVICES) {
-          console.log(`Shooting the NHS footer on ${device}`);
-          nhsFooters.set(
-            device,
-            await shootFooter(browser, `${footerBuild.url}/`, DEVICE_PROFILES[device]),
-          );
-        }
-      }
       for (const page of pages) {
         if (isFlowPage(page)) {
           for (const version of VERSIONS) {
@@ -118,7 +92,6 @@ async function main() {
                 baseUrl: build.url,
                 profile: DEVICE_PROFILES[device],
                 script: side.script,
-                footer: side.nhsFooter ? (nhsFooters.get(device) ?? null) : null,
               });
               results.push({ capture, tokens: null });
             }
@@ -140,15 +113,6 @@ async function main() {
                 anchors: anchorList(page, version),
                 pinned: side.pinned.filter((query) => query.devices.includes(device)),
                 unstick: side.unstick ?? [],
-                footer: side.nhsFooter ? (nhsFooters.get(device) ?? null) : null,
-                masthead: side.nhsHeader
-                  ? await shootMasthead(
-                      browser,
-                      page,
-                      `${servedFor(served, NHS_HEADER_BUILD).url}${side.path}`,
-                      DEVICE_PROFILES[device],
-                    )
-                  : null,
                 tokens: page === "home" ? HOME_TOKEN_SELECTORS[version] : null,
                 withLoops: page === "home" && version === "after" && !skipLoops,
                 withSpecimen: page === "home" && version === "before" && device === "desktop",

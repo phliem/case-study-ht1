@@ -1,0 +1,273 @@
+{
+  "method": "GET",
+  "url": "https://api.ht1.uk/v2/clinicians/location/loc_9a5qmmkpexdu",
+  "requestBody": null,
+  "status": 200,
+  "contentType": "application/json; charset=utf-8",
+  "body": {
+    "json": {
+      "clinicians": [
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmkr4e4h",
+          "prefix": "Dr",
+          "firstName": "Melody",
+          "lastName": "Tsai",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "TSAI, Melody (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-04-25T12:33:03.068+00:00",
+          "updatedAt": "2026-06-15T09:26:56.806+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmkr5v9w",
+          "prefix": "Dr",
+          "firstName": "Cynthia",
+          "lastName": "Akpobi",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "AKPOBI, Cynthia (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-04-25T12:33:03.068+00:00",
+          "updatedAt": "2026-06-15T09:26:33.878+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmkr767j",
+          "prefix": "Ms",
+          "firstName": "Arifa",
+          "lastName": "Begum",
+          "gender": "female",
+          "role": "admin",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "BEGUM, Arifa (Ms)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-04-25T12:33:03.068+00:00",
+          "updatedAt": "2026-06-15T09:25:54.806+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmkx0phs",
+          "prefix": "Dr",
+          "firstName": "JSM",
+          "lastName": "John Smith Medical Centre",
+          "gender": "female",
+          "role": "admin",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "JOHN SMITH MEDICAL CENTRE, JSM (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-05-22T10:49:45.518+00:00",
+          "updatedAt": "2026-06-15T09:25:28.491+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmmlv4qm",
+          "prefix": "Mr",
+          "firstName": "nadeem",
+          "lastName": "Abbass",
+          "gender": "female",
+          "role": "admin",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "ABBASS, nadeem (Mr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-01-13T11:56:22.718+00:00",
+          "updatedAt": "2026-06-15T09:24:55.245+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmpphxof",
+          "prefix": "Dr",
+          "firstName": "Ashwathi",
+          "lastName": "Devadas",
+          "gender": "female",
+          "role": "nurse",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "DEVADAS, Ashwathi (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-06-15T14:45:26.424+00:00",
+          "updatedAt": "2026-06-23T09:10:46.722+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmq63zqt",
+          "prefix": "Mr",
+          "firstName": "Tarar",
+          "lastName": "Umar",
+          "gender": "not-specified",
+          "role": "not-specified",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "UMAR, Tarar (Mr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-06-26T07:25:29.055+00:00",
+          "updatedAt": "2026-06-26T07:25:29.055+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmq66hsz",
+          "prefix": "Mr",
+          "firstName": "Rami",
+          "lastName": "Khalil",
+          "gender": "not-specified",
+          "role": "not-specified",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "KHALIL, Rami (Mr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-06-26T07:27:16.849+00:00",
+          "updatedAt": "2026-06-26T07:27:16.849+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmoc1brn",
+          "prefix": "Dr",
+          "firstName": "Sohail",
+          "lastName": "Shahzad",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "SHAHZAD, Sohail (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-05-01T05:21:18.922+00:00",
+          "updatedAt": "2026-06-15T09:17:44.828+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmqhn4r5",
+          "prefix": "Dr",
+          "firstName": "Matilda",
+          "lastName": "Esan",
+          "gender": "not-specified",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "ESAN, Matilda (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-07-03T14:04:22.771+00:00",
+          "updatedAt": "2026-07-03T14:04:22.771+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmr8fust",
+          "prefix": "Dr",
+          "firstName": "Rami",
+          "lastName": "Khalil",
+          "gender": "not-specified",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "KHALIL, Rami (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-07-24T12:06:46.066+00:00",
+          "updatedAt": "2026-07-24T12:06:46.066+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmr8hg18",
+          "prefix": "Dr",
+          "firstName": "Jery",
+          "lastName": "Abbas",
+          "gender": "not-specified",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "ABBAS, Jery (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-07-24T12:06:46.066+00:00",
+          "updatedAt": "2026-07-24T12:06:46.066+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkozjfr",
+          "id": "cli_9a5qmmsms82n",
+          "prefix": "Dr",
+          "firstName": "Mohammed Nazrul",
+          "lastName": "Hossain",
+          "gender": "not-specified",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "HOSSAIN, Mohammed Nazrul (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-09-01T07:01:03.338+00:00",
+          "updatedAt": "2026-09-01T07:01:03.338+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        }
+      ]
+    }
+  }
+}

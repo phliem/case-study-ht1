@@ -39,8 +39,11 @@ describe("PAGE_SOURCES", () => {
       ),
     );
     expect(absent).toEqual([
+      "home before proof",
+      "home before areas",
       "article before questions",
       "search before about",
+      "gp before reviews",
       "gp before questions",
     ]);
   });
@@ -63,32 +66,9 @@ describe("PAGE_SOURCES", () => {
   });
 });
 
-describe("NHS header and footer", () => {
-  it("gives the NHS footer to exactly the before pages built after the v2 footer", () => {
-    const wearing = STATIC_PAGE_IDS.filter((page) => PAGE_SOURCES[page].before.nhsFooter === true);
-    expect(wearing).toEqual(["gp", "clinician"]);
-    expect(STATIC_PAGE_IDS.filter((page) => PAGE_SOURCES[page].after.nhsFooter === true)).toEqual(
-      [],
-    );
-  });
-
-  it("gives the NHS header to exactly the before pages built after the v2 header", () => {
-    const wearing = STATIC_PAGE_IDS.filter((page) => PAGE_SOURCES[page].before.nhsHeader === true);
-    expect(wearing).toEqual(["gp", "clinician"]);
-  });
-});
-
 describe("buildsFor", () => {
   it("builds only what the chosen pages need", () => {
-    expect(buildsFor(["home"])).toEqual(["home-before", "after"]);
-    expect(buildsFor(["article", "help"])).toEqual(["article-before", "after", "help-before"]);
-    expect(buildsFor(["search"])).toEqual(["search-before", "latest"]);
-    expect(buildsFor(["gp", "clinician"])).toEqual([
-      "gp-before",
-      "latest",
-      "clinician-before",
-      "home-before",
-      "header-before",
-    ]);
+    expect(buildsFor(["home"])).toEqual(["january", "latest"]);
+    expect(buildsFor(["clinician", "booking"])).toEqual(["clinician-before", "latest", "january"]);
   });
 });

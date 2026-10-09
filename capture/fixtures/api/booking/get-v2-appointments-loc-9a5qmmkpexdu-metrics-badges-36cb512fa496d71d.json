@@ -1,0 +1,28 @@
+{
+  "method": "GET",
+  "url": "https://api.ht1.uk/v2/appointments/loc_9a5qmmkpexdu/metrics_badges?feature=withAppointments&service=medical",
+  "requestBody": null,
+  "status": 200,
+  "contentType": "application/json; charset=utf-8",
+  "body": {
+    "json": {
+      "metricsBadges": [
+        {
+          "type": "review",
+          "score": 4.2,
+          "count": 171
+        },
+        {
+          "metric": 0,
+          "subtitle": "patients booked weekly",
+          "type": "subtitle"
+        },
+        {
+          "metric": 6,
+          "subtitle": "total appointments",
+          "type": "subtitle"
+        }
+      ]
+    }
+  }
+}

@@ -5,12 +5,11 @@ import sharp, { type OverlayOptions } from "sharp";
 import { sectionIds } from "../src/data/pages";
 import type { Capture, Device, PageId, SectionId, Version } from "../src/data/types";
 import { API_ORIGIN, corsHeaders, recordedAt, takeMissingFixtures } from "./apiFixtures";
-import { CAPTURE_CSS } from "./css";
-import { footerBoxInPage, replaceFooterInPage } from "./inPage";
+import { FLOW_CAPTURE_CSS } from "./css";
 import { captureDir, ROOT } from "./paths";
 import { type DeviceProfile, SCALE } from "./profiles";
 import { resolveSections } from "./sections";
-import { openPage, type RawImage, type SwapImage, writeTiles } from "./shoot";
+import { openPage, type RawImage, writeTiles } from "./shoot";
 
 export type StubAnswer = { status?: number; json?: unknown };
 
@@ -32,7 +31,6 @@ export type FlowJob = {
   baseUrl: string;
   profile: DeviceProfile;
   script: FlowScript;
-  footer: SwapImage | null;
 };
 
 type Shot = { section: SectionId; caption: string; image: Buffer; height: number };
@@ -58,35 +56,6 @@ html, body { margin: 0; background: #061528; }
 #band b { flex: none; padding: 6px 10px; border-radius: 999px; background: #6ee7b7; color: #061528; font-size: 13px; letter-spacing: 0.02em; }
 #band span { overflow: hidden; text-overflow: ellipsis; color: #a8b8c8; }
 </style></head><body><div id="band"><b>${escapeHtml(label)}</b><span>${escapeHtml(rest.join(" · "))}</span></div></body></html>`;
-}
-
-// Paints the NHS footer over the placeholder that stands in for the v2 one, cropped to the part
-// of it the screenshot shows.
-async function paintFooter(
-  page: Page,
-  image: Buffer,
-  footer: SwapImage,
-  fullPage: boolean,
-): Promise<Buffer> {
-  const box = await page.evaluate(footerBoxInPage);
-  const scrollY = fullPage ? 0 : await page.evaluate(() => window.scrollY);
-  const { height = 0 } = await sharp(image).metadata();
-  const top = (box.top - scrollY) * SCALE;
-  const visibleTop = Math.max(0, top);
-  const visibleBottom = Math.min(height, top + footer.height * SCALE);
-  if (visibleBottom <= visibleTop) return image;
-  const piece = await sharp(footer.image)
-    .extract({
-      left: 0,
-      top: visibleTop - top,
-      width: (await sharp(footer.image).metadata()).width ?? 0,
-      height: visibleBottom - visibleTop,
-    })
-    .toBuffer();
-  return sharp(image)
-    .composite([{ input: piece, top: visibleTop, left: 0 }])
-    .png()
-    .toBuffer();
 }
 
 // A flow is shot as one tall page: each step's screenshot under a band naming the page or step,
@@ -135,7 +104,7 @@ export async function captureFlow(browser: Browser, job: FlowJob): Promise<Captu
     },
     async shot(section, caption, options = {}) {
       await page.waitForLoadState("networkidle").catch(() => undefined);
-      await page.addStyleTag({ content: CAPTURE_CSS });
+      await page.addStyleTag({ content: FLOW_CAPTURE_CSS });
       await page.evaluate(() => {
         if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
         return document.fonts.ready.then(() => undefined);
@@ -146,20 +115,7 @@ export async function captureFlow(browser: Browser, job: FlowJob): Promise<Captu
         throw new Error(`These API calls have no fixture or stub:\n${missing.join("\n")}`);
       }
       const fullPage = options.fullPage ?? false;
-      const hasFooter =
-        job.footer !== null &&
-        (await page.evaluate(() => {
-          const main = document.querySelector("main");
-          return Array.from(document.querySelectorAll("footer")).some(
-            (footer) =>
-              main !== null &&
-              !main.contains(footer) &&
-              Boolean(main.compareDocumentPosition(footer) & Node.DOCUMENT_POSITION_FOLLOWING),
-          );
-        }));
-      if (job.footer && hasFooter) await page.evaluate(replaceFooterInPage, job.footer.height);
-      let image = await page.screenshot({ fullPage, caret: "hide", animations: "disabled" });
-      if (job.footer && hasFooter) image = await paintFooter(page, image, job.footer, fullPage);
+      const image = await page.screenshot({ fullPage, caret: "hide", animations: "disabled" });
       const { height } = await sharp(image).metadata();
       shots.push({ section, caption, image, height: Math.round((height ?? 0) / SCALE) });
       if (debug) {

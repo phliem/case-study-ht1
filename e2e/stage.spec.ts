@@ -9,7 +9,7 @@ const MIDDLE: Record<PageId, SectionId> = {
   article: "guide",
   help: "questions",
   search: "results",
-  gp: "reviews",
+  gp: "team",
   clinician: "details",
   booking: "details",
   carenav: "reason",

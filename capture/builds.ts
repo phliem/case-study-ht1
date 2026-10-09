@@ -5,37 +5,18 @@ import { join } from "node:path";
 import { API_ORIGIN } from "./apiFixtures";
 import { WORK_DIR } from "./paths";
 
-export type BuildName =
-  | "home-before"
-  | "after"
-  | "article-before"
-  | "help-before"
-  | "search-before"
-  | "gp-before"
-  | "clinician-before"
-  | "header-before"
-  | "latest";
+export type BuildName = "january" | "clinician-before" | "latest";
 export type BuildSpec = { name: BuildName; commit: string; port: number };
 export type PreparedBuild = BuildSpec & { dir: string; fullCommit: string };
 export type ServedBuild = PreparedBuild & { url: string; stop: () => Promise<void> };
 
-// Each before commit is the last one before its page or flow was replaced: 1e021d8370 swapped the
-// how-to pages for the guide pages, 38facb0a65 swapped /faq for /help, 96766b8a9c rebuilt the GP
-// surgery page and moved booking into the v2 booker, 5a4e8c4cdf rebuilt the clinician page, and
-// e055a4e3c8 moved care navigation into a modal. The GP search before is end-of-January develop.
-// The booking and care navigation flows run before on 9a5d90ba1d^, the last commit with the NHS
-// header, which already has /choose and still books through the v0 pages.
-// The pages rebuilt after the shared after commit take their after side from latest.
+// Every before side is develop at the end of January 2026, except the clinician page, which did
+// not exist yet: its before is the page as it first shipped (0a3ca099df, 4 September, the build fix for b81a98fae9), still on
+// the NHS design system. Every after side is develop on 8 October 2026.
 export const BUILDS: Record<BuildName, BuildSpec> = {
-  "home-before": { name: "home-before", commit: "0a143c6820", port: 3061 },
-  after: { name: "after", commit: "c016453be7", port: 3062 },
-  "article-before": { name: "article-before", commit: "1e021d8370^", port: 3063 },
-  "help-before": { name: "help-before", commit: "38facb0a65^", port: 3064 },
-  "search-before": { name: "search-before", commit: "d304517e90", port: 3065 },
-  latest: { name: "latest", commit: "9732397e02", port: 3066 },
-  "gp-before": { name: "gp-before", commit: "96766b8a9c^", port: 3067 },
-  "clinician-before": { name: "clinician-before", commit: "5a4e8c4cdf^", port: 3068 },
-  "header-before": { name: "header-before", commit: "9a5d90ba1d^", port: 3069 },
+  january: { name: "january", commit: "d304517e90", port: 3065 },
+  "clinician-before": { name: "clinician-before", commit: "0a3ca099df", port: 3068 },
+  latest: { name: "latest", commit: "8b5181f781", port: 3066 },
 };
 
 export const SANNY_REPO = process.env.SANNY_REPO ?? join(homedir(), "Desktop/repos/sanny");

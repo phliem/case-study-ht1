@@ -6,7 +6,7 @@ import { type ApiFixture, fixtureDir } from "./apiFixtures";
 import type { BuildName } from "./builds";
 import type { FlowContext, FlowScript } from "./flowShoot";
 
-type FlowSide = { build: BuildName; script: FlowScript; nhsFooter?: true };
+type FlowSide = { build: BuildName; script: FlowScript };
 
 const PATIENT = {
   firstName: "Alex",
@@ -131,8 +131,11 @@ async function stubBooking(flow: FlowContext) {
   await flow.stub("POST", new RegExp(`^/v2/bookings/${BOOKING_ID}/extend$`), () => ({
     json: { id: BOOKING_ID, timeoutAt },
   }));
-  await flow.stub("GET", new RegExp(`^/v2/appointments/${BOOKING_ID}`), () => ({
+  await flow.stub("GET", new RegExp(`^/v2/appointments/${BOOKING_ID}(\\?|$)`), () => ({
     json: heldAppointment("booking", appointmentId),
+  }));
+  await flow.stub("GET", new RegExp(`^/v2/appointments/${BOOKING_ID}/register_link`), () => ({
+    json: { odsCode: "F00000", link: "https://bookable.health/", kind: "reg_form" },
   }));
   await flow.stub("PATCH", new RegExp(`^/v2/bookings/${BOOKING_ID}$`), () => ({
     json: { id: BOOKING_ID, reasonForBooking: PATIENT.reason, state: "pending-authentication" },
@@ -142,21 +145,58 @@ async function stubBooking(flow: FlowContext) {
   }));
 }
 
-async function verifyAndConfirm(flow: FlowContext, caption: (n: number) => string, from: number) {
+// January shows the code check and the confirmation as pages (on /booking-status/<id> itself);
+// today the code check is a step in the booking window. Each is captioned by where it appears.
+type Counter = { step: number; page: number };
+
+function where(page: Page, counter: Counter): Promise<string> {
+  return page
+    .getByRole("dialog")
+    .isVisible()
+    .then((inWindow) =>
+      inWindow
+        ? `Step ${counter.step++} · Booking window over bookable.health${SURGERY_PATH}`
+        : `Page ${counter.page++} · bookable.health${new URL(page.url()).pathname}`,
+    );
+}
+
+async function verifyAndConfirm(flow: FlowContext, counter: Counter) {
   const { page } = flow;
-  await page.waitForURL(/\/verify/);
-  await page.locator("input").filter({ visible: true }).first().click();
+  await page
+    .getByText(/^(Verification code|Check your phone or email)$/)
+    .first()
+    .waitFor({ timeout: 30_000 });
+  const scope = (await page.getByRole("dialog").isVisible()) ? page.getByRole("dialog") : page;
+  await scope.locator("input").filter({ visible: true }).first().click();
   await page.keyboard.type(PATIENT.code);
-  await flow.shot("verify", caption(from));
+  await flow.shot("verify", await where(page, counter));
   await flow.stub("POST", new RegExp(`^/v2/bookings/${BOOKING_ID}/authenticate$`), () => ({
     json: { id: BOOKING_ID, reasonForBooking: PATIENT.reason, state: "booked" },
   }));
   await flow.stub("GET", new RegExp(`^/v2/bookings/${BOOKING_ID}(\\?|$)`), () => ({
     json: bookingDetails("booked"),
   }));
-  await click(page, "Verify");
-  await page.waitForURL(/\/active/);
-  await flow.shot("confirmed", caption(from + 1));
+  await scope
+    .getByRole("button", { name: /^(Verify|Continue)$/ })
+    .filter({ visible: true })
+    .first()
+    .click();
+  // Today's window hands over to the booking's status page once the code is accepted; in a
+  // scripted run it can stay on "Finding your NHS record", so the capture opens that page itself.
+  const handedOver = await page
+    .waitForURL(/\/booking-status\//, { timeout: 10_000 })
+    .then(() => true)
+    .catch(() => false);
+  if (!handedOver) {
+    await page.goto(`${flow.base}/booking-status/${BOOKING_ID}?postcode=IG12UT&service=medical`);
+  }
+  await page
+    .getByText(/booking is confirmed|you're booked|appointment is booked|Manage your appointment/i)
+    .first()
+    .waitFor({ timeout: 30_000 });
+  await page.waitForLoadState("networkidle");
+  await page.waitForTimeout(1500);
+  await flow.shot("confirmed", await where(page, counter));
 }
 
 const bookingBefore: FlowScript = async (flow) => {
@@ -164,41 +204,33 @@ const bookingBefore: FlowScript = async (flow) => {
   const at = (n: number, path: string) => `Page ${n} · bookable.health${path}`;
   await stubBooking(flow);
   await page.goto(`${base}${SURGERY}`, { waitUntil: "networkidle" });
-  await page
-    .getByText(/Are you a new patient/)
-    .first()
-    .scrollIntoViewIfNeeded();
-  await flow.shot("patient", at(1, SURGERY_PATH));
-  await click(page, "Continue");
-  await scrollToTop(page, page.getByRole("heading", { name: "Book an appointment" }).first());
+  await scrollToTop(page, page.getByText("Book an appointment", { exact: true }).first());
   await flow.shot("time", at(1, SURGERY_PATH));
-  await click(page, "Book appointment");
+  await page
+    .getByRole("button", { name: /^Book$/ })
+    .filter({ visible: true })
+    .first()
+    .click();
   await page.getByText("Confirm and continue").first().waitFor();
-  await flow.shot("review", at(1, `${SURGERY_PATH} · Review drawer`));
+  await flow.shot("review", at(1, `${SURGERY_PATH} · Appointment details drawer`));
   await click(page, "Confirm and continue");
   await page.waitForURL(/\/appointment\//);
   await page.waitForLoadState("networkidle");
-  const reason = page.getByLabel("Reason", { exact: true });
-  await reason.click();
-  await reason.pressSequentially(PATIENT.reason);
-  await reason.blur();
+  await page.getByText("Your appointment is reserved").waitFor();
+  await page.waitForTimeout(1000);
   await page.locator('input[name="firstName"]').fill(PATIENT.firstName);
   await page.locator('input[name="lastName"]').fill(PATIENT.lastName);
   await page.locator('input[name="phoneNumber"]').fill(PATIENT.phone);
   await page.locator('input[name="email"]').fill(PATIENT.email);
   await page.locator('input[name="postcode"]').fill(PATIENT.postcode);
-  await fillDateOfBirth(page);
+  if ((await page.getByLabel("Day", { exact: true }).count()) > 0) await fillDateOfBirth(page);
+  const reason = page.locator("textarea").filter({ visible: true }).first();
+  await reason.click();
+  await reason.pressSequentially(PATIENT.reason);
+  await reason.blur();
   await flow.shot("details", at(2, `/appointment/${BOOKING_ID}`), { fullPage: true });
-  await click(page, /Continue to register|Confirm appointment details/);
-  await verifyAndConfirm(
-    flow,
-    (n) =>
-      at(
-        n,
-        n === 3 ? `/booking-status/${BOOKING_ID}/verify` : `/booking-status/${BOOKING_ID}/active`,
-      ),
-    3,
-  );
+  await click(page, /Continue to register|Confirm appointment details|Continue/);
+  await verifyAndConfirm(flow, { step: 1, page: 3 });
 };
 
 const bookingAfter: FlowScript = async (flow) => {
@@ -257,9 +289,7 @@ const bookingAfter: FlowScript = async (flow) => {
   });
   await flow.shot("details", window(step++));
   await dialog.getByRole("button", { name: "Continue" }).click();
-  const page2 = (n: number) =>
-    `Page ${n} · bookable.health/booking-status/${BOOKING_ID}/${n === 2 ? "verify" : "active"}`;
-  await verifyAndConfirm(flow, page2, 2);
+  await verifyAndConfirm(flow, { step, page: 2 });
 };
 
 async function stubCareNavigation(flow: FlowContext) {
@@ -282,13 +312,62 @@ async function stubCareNavigation(flow: FlowContext) {
   }));
 }
 
+// January's postcode box suggests places through Google Places, which the build has no key for, so
+// the one suggestion and its location are stubbed with IG1 2UT.
+async function stubGooglePlaces(page: Page) {
+  const json = (body: unknown) => ({
+    status: 200,
+    contentType: "application/json",
+    headers: { "access-control-allow-origin": "*" },
+    body: JSON.stringify(body),
+  });
+  await page
+    .context()
+    .route(/^https:\/\/places\.googleapis\.com\/v1\/places:autocomplete/, (route) =>
+      route.fulfill(
+        json({
+          suggestions: [
+            {
+              placePrediction: {
+                placeId: "casestudy-ig1-2ut",
+                text: { text: "Ilford IG1 2UT, UK" },
+                types: ["postal_code"],
+              },
+            },
+          ],
+        }),
+      ),
+    );
+  await page.context().route(/^https:\/\/places\.googleapis\.com\/v1\/places\/casestudy/, (route) =>
+    route.fulfill(
+      json({
+        location: { latitude: 51.54968, longitude: 0.087149 },
+        postalAddress: { postalCode: PATIENT.postcode, addressLines: [] },
+      }),
+    ),
+  );
+}
+
 const carenavBefore: FlowScript = async (flow) => {
   const { page, base } = flow;
   const at = (n: number, path: string) => `Page ${n} · bookable.health${path}`;
   await stubCareNavigation(flow);
-  await page.goto(`${base}${CHOOSE}`, { waitUntil: "networkidle" });
-  await flow.shot("start", at(1, "/choose"));
-  await click(page, /Book an appointment|Find an appointment/);
+  await stubGooglePlaces(page);
+  await page.goto(`${base}/`, { waitUntil: "networkidle" });
+  await page.getByText("Postcode, street or location name").first().click();
+  await page.locator("#location").filter({ visible: true }).pressSequentially(PATIENT.postcode);
+  await page
+    .locator("[data-vaul-drawer] button")
+    .filter({ hasText: PATIENT.postcode })
+    .first()
+    .click();
+  await page.locator("[data-vaul-drawer]").waitFor({ state: "detached" });
+  await flow.shot("start", at(1, ""));
+  await page
+    .getByRole("button", { name: "Search", exact: true })
+    .filter({ visible: true })
+    .first()
+    .click();
   await page.waitForURL(/date-of-birth/);
   await fillDateOfBirth(page);
   await flow.shot("about", at(2, "/care-navigation/date-of-birth"));
@@ -304,13 +383,14 @@ const carenavBefore: FlowScript = async (flow) => {
     .first()
     .pressSequentially(PATIENT.reason);
   await flow.shot("reason", at(4, "/care-navigation/description"));
-  await click(page, "Continue");
-  await page.getByText("Call 999 now for any of these:").first().waitFor();
-  await flow.shot("emergency", at(4, "/care-navigation/description · Emergency check"));
-  await click(page, "I have none of these");
+  await click(page, "Find an appointment");
+  await page.waitForURL(/emergency-check/);
+  await page.waitForLoadState("networkidle");
+  await flow.shot("emergency", at(5, "/care-navigation/emergency-check"));
+  await click(page, /none of these/i);
   await page.waitForURL(/\/gp\/search/, { timeout: 30_000 });
   await page.waitForLoadState("networkidle");
-  await flow.shot("result", at(5, "/gp/search"));
+  await flow.shot("result", at(6, "/gp/search"));
 };
 
 const carenavAfter: FlowScript = async (flow) => {
@@ -341,11 +421,11 @@ const carenavAfter: FlowScript = async (flow) => {
 
 export const FLOW_SOURCES: Record<FlowPageId, { before: FlowSide; after: FlowSide }> = {
   booking: {
-    before: { build: "header-before", script: bookingBefore, nhsFooter: true },
+    before: { build: "january", script: bookingBefore },
     after: { build: "latest", script: bookingAfter },
   },
   carenav: {
-    before: { build: "header-before", script: carenavBefore, nhsFooter: true },
+    before: { build: "january", script: carenavBefore },
     after: { build: "latest", script: carenavAfter },
   },
 };
