@@ -1,7 +1,7 @@
 # Bookable redesign
 
 An interactive, animated before and after of Bookable (bookable.health): the site at the end of
-January 2026, on the NHS design system, next to the site on 8 October 2026, on its own (v2). It
+January 2026, on the NHS design system, next to the site on 9 October 2026, on its own (v2). It
 covers the homepage, a guide article, the help centre, care navigation, the GP search, a GP surgery
 page, booking and a clinician page. Drag a divider, scroll
 inside a frame (both versions stay on the same section), switch Desktop and Mobile, or press Play.
@@ -42,7 +42,7 @@ JS (110 KB gzipped) and first-paint image (1.5 MB) budgets.
 
 The captures in `public/captures/` and `src/data/captures.json` come from two commits of the sanny
 repo: develop at the end of January (`d304517e90`, 30 January 2026) on the left and develop on
-8 October 2026 (`8b5181f781`) on the right. Clinician pages did not exist in January, so that
+9 October 2026 (`d82562aaf8`) on the right. Clinician pages did not exist in January, so that
 comparison's left side is the page as it first shipped (`0a3ca099df`, the build fix for
 `b81a98fae9`, 4 September 2026).
 
@@ -89,6 +89,8 @@ record" after the code in a scripted run, so the capture then opens the booking'
 itself, which is where the patient lands.
 
 `--page` captures only those pages and leaves every other page's files and data as they were.
+`--version after` re-shoots only the October sides and keeps the January ones, homepage tokens
+included, as they were (`--version before` does the reverse).
 `--skip-loops` skips the homepage's video loops. `pnpm capture:clean` deletes the builds;
 `pnpm capture:serve [--page …]` serves builds for inspection; `pnpm capture:compare [--page …]`
 puts the live site next to the capture in `.capture/live-vs-capture-<page>.png`.

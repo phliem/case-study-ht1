@@ -11,9 +11,10 @@ export function mergeCaptures(
   fresh: readonly Capture[],
   extras: HomeExtras | null,
 ): CapturesFile {
-  const replaced = new Set(fresh.map((capture) => capture.page));
+  const side = (capture: Capture) => `${capture.page} ${capture.version}`;
+  const replaced = new Set(fresh.map(side));
   const pool = [
-    ...(existing?.captures ?? []).filter((capture) => !replaced.has(capture.page)),
+    ...(existing?.captures ?? []).filter((capture) => !replaced.has(side(capture))),
     ...fresh,
   ];
   const captures: Capture[] = [];

@@ -12,11 +12,11 @@ export type ServedBuild = PreparedBuild & { url: string; stop: () => Promise<voi
 
 // Every before side is develop at the end of January 2026, except the clinician page, which did
 // not exist yet: its before is the page as it first shipped (0a3ca099df, 4 September, the build fix for b81a98fae9), still on
-// the NHS design system. Every after side is develop on 8 October 2026.
+// the NHS design system. Every after side is develop on 9 October 2026.
 export const BUILDS: Record<BuildName, BuildSpec> = {
   january: { name: "january", commit: "d304517e90", port: 3065 },
   "clinician-before": { name: "clinician-before", commit: "0a3ca099df", port: 3068 },
-  latest: { name: "latest", commit: "8b5181f781", port: 3066 },
+  latest: { name: "latest", commit: "d82562aaf8", port: 3066 },
 };
 
 export const SANNY_REPO = process.env.SANNY_REPO ?? join(homedir(), "Desktop/repos/sanny");

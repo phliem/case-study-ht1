@@ -81,6 +81,16 @@ describe("mergeCaptures", () => {
     expect(untouched(merged)).toBe(untouched(EXISTING));
   });
 
+  it("replaces only the versions it was given", () => {
+    const after = pageCaptures("gp", "new").filter((capture) => capture.version === "after");
+    const merged = mergeCaptures(EXISTING, after, null);
+    expect(
+      merged.captures
+        .filter((capture) => capture.page === "gp")
+        .map((capture) => `${capture.version} ${capture.device}:${capture.commit}`),
+    ).toEqual(["before desktop:old", "before mobile:old", "after desktop:new", "after mobile:new"]);
+  });
+
   it("orders captures by page, then version, then device", () => {
     const merged = mergeCaptures(EXISTING, pageCaptures("help", "new").reverse(), null);
     expect(

@@ -5,7 +5,7 @@ type PageChanges = { [P in PageId]: Record<SectionIdOf[P], readonly string[]> };
 export const CHANGES: PageChanges = {
   home: {
     hero: [
-      '"Get an appointment with a new GP surgery this week." becomes "Register and book with an NHS GP for free".',
+      '"Get an appointment with a new GP surgery this week." becomes "Register and book with an NHS GP".',
       "The postcode box that opened a drawer and its separate Search button become one search pill, with a reel of appointment cards beside it on desktop.",
       "The header lies clear over the hero and turns solid as soon as the page moves.",
     ],

@@ -13,7 +13,6 @@ import { DATA_FILE } from "./paths";
 import { DEVICE_PROFILES } from "./profiles";
 import { type CaptureResult, capturePage } from "./shoot";
 
-const VERSIONS: readonly Version[] = ["before", "after"];
 const DEVICES: readonly Device[] = ["desktop", "mobile"];
 
 function servedFor(served: ReadonlyMap<BuildName, ServedBuild>, name: BuildName): ServedBuild {
@@ -44,35 +43,68 @@ function homeTokens(results: readonly CaptureResult[], version: Version): Measur
 function homeExtras(
   results: readonly CaptureResult[],
   served: ReadonlyMap<BuildName, ServedBuild>,
+  versions: readonly Version[],
+  existing: CapturesFile | null,
 ): HomeExtras {
-  const before = servedFor(served, "january");
-  const after = servedFor(served, "latest");
+  const pick = <T>(version: Version, measure: () => T, keep: (file: CapturesFile) => T): T => {
+    if (versions.includes(version)) return measure();
+    if (!existing) {
+      throw new Error(`captures.json has no homepage ${version} extras to keep; capture both`);
+    }
+    return keep(existing);
+  };
   return {
-    tokens: { before: homeTokens(results, "before"), after: homeTokens(results, "after") },
-    palettes: {
-      before: paletteGroups(
-        extractObjectLiteral(
-          sourceIn(before, "packages/bookable/tailwind.config.ts"),
-          "NHS_COLORS",
-        ),
+    tokens: {
+      before: pick(
+        "before",
+        () => homeTokens(results, "before"),
+        (file) => file.tokens.before,
       ),
-      after: paletteGroups(
-        extractObjectLiteral(
-          sourceIn(after, "packages/bookable/app/_ui/tokens.colors.ts"),
-          "UI_COLORS",
-        ),
+      after: pick(
+        "after",
+        () => homeTokens(results, "after"),
+        (file) => file.tokens.after,
       ),
     },
-    radiusScale: radiusScale(sourceIn(after, "packages/bookable/app/_ui/tokens.ts")),
+    palettes: {
+      before: pick(
+        "before",
+        () =>
+          paletteGroups(
+            extractObjectLiteral(
+              sourceIn(servedFor(served, "january"), "packages/bookable/tailwind.config.ts"),
+              "NHS_COLORS",
+            ),
+          ),
+        (file) => file.palettes.before,
+      ),
+      after: pick(
+        "after",
+        () =>
+          paletteGroups(
+            extractObjectLiteral(
+              sourceIn(servedFor(served, "latest"), "packages/bookable/app/_ui/tokens.colors.ts"),
+              "UI_COLORS",
+            ),
+          ),
+        (file) => file.palettes.after,
+      ),
+    },
+    radiusScale: pick(
+      "after",
+      () =>
+        radiusScale(sourceIn(servedFor(served, "latest"), "packages/bookable/app/_ui/tokens.ts")),
+      (file) => file.radiusScale,
+    ),
     specimens: { frutiger: "captures/specimen-frutiger.png" },
   };
 }
 
 async function main() {
-  const { pages, skipLoops } = parseCaptureArgs(process.argv.slice(2));
+  const { pages, versions, skipLoops } = parseCaptureArgs(process.argv.slice(2));
   const served = new Map<BuildName, ServedBuild>();
   try {
-    for (const name of buildsFor(pages)) {
+    for (const name of buildsFor(pages, versions)) {
       served.set(name, await serveBuild(prepareBuild(BUILDS[name])));
     }
     const browser = await chromium.launch();
@@ -80,7 +112,7 @@ async function main() {
     try {
       for (const page of pages) {
         if (isFlowPage(page)) {
-          for (const version of VERSIONS) {
+          for (const version of versions) {
             const side = FLOW_SOURCES[page][version];
             const build = servedFor(served, side.build);
             for (const device of DEVICES) {
@@ -98,7 +130,7 @@ async function main() {
           }
           continue;
         }
-        for (const version of VERSIONS) {
+        for (const version of versions) {
           const side = PAGE_SOURCES[page][version];
           const build = servedFor(served, side.build);
           for (const device of DEVICES) {
@@ -130,7 +162,7 @@ async function main() {
     const file = mergeCaptures(
       existing,
       results.map(({ capture }) => capture),
-      pages.includes("home") ? homeExtras(results, served) : null,
+      pages.includes("home") ? homeExtras(results, served, versions, existing) : null,
     );
     writeFileSync(DATA_FILE, `${JSON.stringify(file, null, 2)}\n`);
     console.log(`Wrote ${DATA_FILE}`);

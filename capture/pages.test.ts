@@ -71,4 +71,12 @@ describe("buildsFor", () => {
     expect(buildsFor(["home"])).toEqual(["january", "latest"]);
     expect(buildsFor(["clinician", "booking"])).toEqual(["clinician-before", "latest", "january"]);
   });
+
+  it("builds only the versions asked for", () => {
+    expect(buildsFor(["clinician", "booking"], ["after"])).toEqual(["latest"]);
+    expect(buildsFor(["clinician", "booking"], ["before"])).toEqual([
+      "clinician-before",
+      "january",
+    ]);
+  });
 });

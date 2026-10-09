@@ -248,10 +248,13 @@ export function anchorList(page: StaticPageId, version: Version): [SectionId, Se
   });
 }
 
-export function buildsFor(pages: readonly PageId[]): BuildName[] {
+export function buildsFor(
+  pages: readonly PageId[],
+  versions: readonly Version[] = ["before", "after"],
+): BuildName[] {
   const names = pages.flatMap((page) => {
     const source = isFlowPage(page) ? FLOW_SOURCES[page] : PAGE_SOURCES[page];
-    return [source.before.build, source.after.build];
+    return versions.map((version) => source[version].build);
   });
   return [...new Set(names)];
 }

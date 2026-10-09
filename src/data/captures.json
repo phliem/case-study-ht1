@@ -114,8 +114,8 @@
       "page": "home",
       "version": "after",
       "device": "desktop",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:37:23.346Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:06:59.782Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -265,14 +265,14 @@
       "page": "home",
       "version": "after",
       "device": "mobile",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:38:56.399Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:08:28.898Z",
       "viewport": {
         "width": 390,
         "height": 844
       },
       "scale": 2,
-      "pageHeight": 5636,
+      "pageHeight": 5612,
       "tiles": [
         {
           "avif": "captures/home/after/mobile/tile-00.avif",
@@ -290,7 +290,7 @@
           "avif": "captures/home/after/mobile/tile-02.avif",
           "webp": "captures/home/after/mobile/tile-02.webp",
           "top": 4000,
-          "height": 1636
+          "height": 1612
         }
       ],
       "sections": [
@@ -304,19 +304,19 @@
         },
         {
           "id": "how",
-          "top": 1728
+          "top": 1704
         },
         {
           "id": "faq-about",
-          "top": 3025
+          "top": 3001
         },
         {
           "id": "areas",
-          "top": 4518
+          "top": 4494
         },
         {
           "id": "footer",
-          "top": 5054
+          "top": 5030
         }
       ],
       "pinned": [
@@ -326,7 +326,7 @@
           "y": 0,
           "width": 390,
           "stickTop": 0,
-          "releaseAt": 5636,
+          "releaseAt": 5612,
           "states": [
             {
               "from": 0,
@@ -348,7 +348,7 @@
           "id": "how-1",
           "rect": {
             "x": 25,
-            "y": 1888,
+            "y": 1864,
             "width": 340,
             "height": 173
           },
@@ -366,7 +366,7 @@
           "id": "how-2",
           "rect": {
             "x": 25,
-            "y": 2242,
+            "y": 2218,
             "width": 340,
             "height": 173
           },
@@ -384,7 +384,7 @@
           "id": "how-3",
           "rect": {
             "x": 25,
-            "y": 2620,
+            "y": 2596,
             "width": 340,
             "height": 173
           },
@@ -500,8 +500,8 @@
       "page": "article",
       "version": "after",
       "device": "desktop",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:39:35.225Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:08:57.420Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -642,8 +642,8 @@
       "page": "article",
       "version": "after",
       "device": "mobile",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:40:10.934Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:09:30.841Z",
       "viewport": {
         "width": 390,
         "height": 844
@@ -868,8 +868,8 @@
       "page": "help",
       "version": "after",
       "device": "desktop",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:40:53.850Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:09:41.604Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -948,8 +948,8 @@
       "page": "help",
       "version": "after",
       "device": "mobile",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:41:10.536Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:09:57.229Z",
       "viewport": {
         "width": 390,
         "height": 844
@@ -1142,8 +1142,8 @@
       "page": "carenav",
       "version": "after",
       "device": "desktop",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:41:57.196Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:10:15.321Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1199,8 +1199,8 @@
       "page": "carenav",
       "version": "after",
       "device": "mobile",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:42:06.327Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:10:24.660Z",
       "viewport": {
         "width": 390,
         "height": 844
@@ -1430,8 +1430,8 @@
       "page": "search",
       "version": "after",
       "device": "desktop",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:43:59.161Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:10:44.096Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1494,8 +1494,8 @@
       "page": "search",
       "version": "after",
       "device": "mobile",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:44:20.932Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:11:04.730Z",
       "viewport": {
         "width": 390,
         "height": 844
@@ -1666,8 +1666,8 @@
       "page": "gp",
       "version": "after",
       "device": "desktop",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:44:43.838Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:11:15.956Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1728,8 +1728,8 @@
       "page": "gp",
       "version": "after",
       "device": "mobile",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:45:01.654Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:11:32.286Z",
       "viewport": {
         "width": 390,
         "height": 844
@@ -1918,8 +1918,8 @@
       "page": "booking",
       "version": "after",
       "device": "desktop",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:46:05.364Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:12:04.802Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1979,8 +1979,8 @@
       "page": "booking",
       "version": "after",
       "device": "mobile",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:46:29.395Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:12:29.095Z",
       "viewport": {
         "width": 390,
         "height": 844
@@ -2126,8 +2126,8 @@
       "page": "clinician",
       "version": "after",
       "device": "desktop",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:46:48.776Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:12:36.448Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2180,8 +2180,8 @@
       "page": "clinician",
       "version": "after",
       "device": "mobile",
-      "commit": "8b5181f781e52315d6cce60b4647ae40e96589d8",
-      "capturedAt": "2026-10-08T21:46:59.509Z",
+      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
+      "capturedAt": "2026-10-09T12:12:46.489Z",
       "viewport": {
         "width": 390,
         "height": 844
@@ -2767,6 +2767,7 @@
     "10px",
     "11px",
     "12px",
+    "13px",
     "14px",
     "16px",
     "17px",
