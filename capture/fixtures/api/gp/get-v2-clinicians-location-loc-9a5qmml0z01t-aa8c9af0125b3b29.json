@@ -1,0 +1,733 @@
+{
+  "method": "GET",
+  "url": "https://api.ht1.uk/v2/clinicians/location/loc_9a5qmml0z01t",
+  "requestBody": null,
+  "status": 200,
+  "contentType": "application/json; charset=utf-8",
+  "body": {
+    "json": {
+      "clinicians": [
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmky7tjv",
+          "prefix": "Dr",
+          "firstName": "Selen",
+          "lastName": "Dogan",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "DOGAN, Selen (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-06-04T16:14:18.077+00:00",
+          "updatedAt": "2026-08-07T13:00:22.807+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmmky7tjv/square/5c10a0708a5703e6724f85b29aaec4e1790cd233551665e877319e148c57a177.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmml3sw3j",
+          "prefix": "Dr",
+          "firstName": "Kevin",
+          "lastName": "Clarkson",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "CLARKSON, Kevin (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-07-29T20:43:26.849+00:00",
+          "updatedAt": "2026-08-07T12:56:14.324+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmml3sw3j/square/9e15d9868e064d8adbff63fdae0e3ab93ce1e11bdb60187c924dc69986539170.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmml3u5j9",
+          "prefix": "Dr",
+          "firstName": "Lior",
+          "lastName": "Levy",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "LEVY, Lior (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-07-29T20:43:26.849+00:00",
+          "updatedAt": "2026-08-07T12:59:45.845+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmml3u5j9/square/d16a2cb5b46cdcfe893b8c1af45eff536e88808ac92526555c519a86deb2bbb8.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmml3yan4",
+          "prefix": "Dr",
+          "firstName": "Myles",
+          "lastName": "Simpson",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "SIMPSON, Myles (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-07-29T20:58:51.305+00:00",
+          "updatedAt": "2026-08-07T12:56:53.106+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmml3yan4/square/fe6947d73091051b21d82c2a50f4802707fc51d3f830c64aa44cd1ef1f939f44.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmml5rdt4",
+          "prefix": "Dr",
+          "firstName": "Jenny",
+          "lastName": "Chia",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "CHIA, Jenny (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-08-07T08:05:38.456+00:00",
+          "updatedAt": "2026-08-11T19:12:05.898+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmml5rdt4/square/6f2dc6c2f59a00ea4e39985c2af67aa5abbdac35119f6bbc854740502ccce68b.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmlqlwi4",
+          "prefix": "Dr",
+          "firstName": "Alex",
+          "lastName": "Warner",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "WARNER, Alex (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-10-21T12:25:39.693+00:00",
+          "updatedAt": "2026-08-07T12:53:35.452+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmmlqlwi4/square/1ae138f256200c68357432995f8fbd80541e8a93f8652801fb5c3fd9349bfe14.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrq2elr",
+          "prefix": "Ms",
+          "firstName": "Zaneeta",
+          "lastName": "Nagji",
+          "gender": "female",
+          "role": "pharmacist",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "NAGJI, Zaneeta (Ms)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-07T12:11:42.240+00:00",
+          "updatedAt": "2026-08-07T12:13:43.033+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmlb9imk",
+          "prefix": "Dr",
+          "firstName": "Frances",
+          "lastName": "Blackmore",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "BLACKMORE, Frances (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-08-25T10:21:52.755+00:00",
+          "updatedAt": "2026-08-07T12:56:32.230+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmmlb9imk/square/7dd9eed68fb1167e66937111383b19a24b0e28d31055c5ed2edfeb1a191cdf52.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmml3w7s4",
+          "prefix": "Dr",
+          "firstName": "Samuel",
+          "lastName": "Wells",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "WELLS, Samuel (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-07-29T20:43:26.849+00:00",
+          "updatedAt": "2026-08-07T12:59:29.130+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmml3w7s4/square/54360b4bd7f379caaa473ab449ddb7cb14a55e0df19aecd3572b04a5294e6ea2.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmky49il",
+          "prefix": "Dr",
+          "firstName": "Keshni",
+          "lastName": "Gudka",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "GUDKA, Keshni (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-06-04T16:14:18.077+00:00",
+          "updatedAt": "2026-08-07T13:00:05.481+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmmky49il/square/422dd4c2533574691b916d0deb23cdf3d3f5a14c4d20e5f26200421862bfb71e.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmml3veu8",
+          "prefix": "Dr",
+          "firstName": "Ellis",
+          "lastName": "Basford",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "BASFORD, Ellis (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-07-29T20:43:26.849+00:00",
+          "updatedAt": "2026-08-07T13:03:32.871+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmml3veu8/square/e135c0112fba04defc2099390e7e1fc756d82c2dace9430ab59817623e1ca1c9.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmlfxmij",
+          "prefix": "Dr.",
+          "firstName": "Stephen",
+          "lastName": "Amiel",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "AMIEL, Stephen (Dr.)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-09-15T11:05:00.280+00:00",
+          "updatedAt": "2026-08-07T12:55:52.961+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmmlfxmij/square/f5bb487e8befbe9940b05f1ef2daf894f3aa61eb8c160cbfde9b2e978b9e5f05.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmlcbi0w",
+          "prefix": "Dr",
+          "firstName": "Joanna",
+          "lastName": "Clayton",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "CLAYTON, Joanna (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-08-29T10:21:57.137+00:00",
+          "updatedAt": "2026-08-07T13:00:42.972+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmmlcbi0w/square/425fec283569e8d056de1f3416b33796ae9af50ef08f639609de0ec7e08f3824.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmml5l1xw",
+          "prefix": "Dr",
+          "firstName": "Tim",
+          "lastName": "Mcdowall",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "MCDOWALL, Tim (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-08-05T10:21:02.010+00:00",
+          "updatedAt": "2026-08-07T13:03:46.115+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmml5l1xw/square/aa8e9038ce645e028fb04aea607f1222f20a79dd9f29775181f0637274ee41c0.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmld6otp",
+          "prefix": "Dr",
+          "firstName": "Charlotte",
+          "lastName": "Iveson",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "IVESON, Charlotte (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2025-09-04T09:33:39.606+00:00",
+          "updatedAt": "2026-08-07T13:04:03.988+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmmld6otp/square/86786aa8387c913678e44a96c15fc029b3efba292e68b8fbc5e56135759122c4.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrq7i5e",
+          "prefix": "Dr",
+          "firstName": "Thomas",
+          "lastName": "Marr",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "MARR, Thomas (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-07T13:25:39.272+00:00",
+          "updatedAt": "2026-08-11T19:11:23.772+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrqjrg0",
+          "prefix": "Dr",
+          "firstName": "Sandali",
+          "lastName": "Wickrama",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "WICKRAMA, Sandali (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-07T15:24:30.595+00:00",
+          "updatedAt": "2026-08-11T19:10:40.992+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrr2g1h",
+          "prefix": "Dr",
+          "firstName": "Anoushka",
+          "lastName": "Seegobin",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "SEEGOBIN, Anoushka (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-09T10:49:17.072+00:00",
+          "updatedAt": "2026-08-11T19:10:34.845+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrr4x23",
+          "prefix": "Dr",
+          "firstName": "Abbirami",
+          "lastName": "Linghanathan",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "LINGHANATHAN, Abbirami (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-09T16:20:18.136+00:00",
+          "updatedAt": "2026-08-12T20:24:43.470+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmmrr4x23/square/da46b73055973fa48398c1b8e8480a4805c19c024598ee59ff3374783fc61aae.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrsdaqf",
+          "prefix": "Dr",
+          "firstName": "Jennifer",
+          "lastName": "Frazer",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "FRAZER, Jennifer (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-10T13:04:16.286+00:00",
+          "updatedAt": "2026-08-11T19:10:15.481+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrwz674",
+          "prefix": "Mrs",
+          "firstName": "Lavaughn",
+          "lastName": "Alexander",
+          "gender": "female",
+          "role": "nurse",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "ALEXANDER, Lavaughn (Mrs.)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-11T19:18:34.709+00:00",
+          "updatedAt": "2026-08-12T20:02:09.240+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrx0myb",
+          "prefix": "Ms",
+          "firstName": "Karen",
+          "lastName": "Nicoll",
+          "gender": "female",
+          "role": "nurse",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "NICOLL, Karen (Ms)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-11T19:19:06.530+00:00",
+          "updatedAt": "2026-08-12T19:59:17.939+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrxcdhs",
+          "prefix": "Mr",
+          "firstName": "Rakesh",
+          "lastName": "Vyas",
+          "gender": "male",
+          "role": "pharmacist",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "VYAS, Rakesh (Mr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-12T09:29:47.635+00:00",
+          "updatedAt": "2026-08-12T19:56:41.751+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrxdgjq",
+          "prefix": "Dr",
+          "firstName": "Georgina",
+          "lastName": "King",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "KING, Georgina (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-12T09:36:34.778+00:00",
+          "updatedAt": "2026-08-12T20:26:32.170+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmmrxdgjq/square/f0e21d849a2c8106f9216ed8891d0c273bbd330f832f76fe6b629d13686cb46b.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrza36v",
+          "prefix": "Dr",
+          "firstName": "Jasmin",
+          "lastName": "Ranu",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "RANU, Jasmin (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-13T09:32:45.864+00:00",
+          "updatedAt": "2026-08-18T09:24:05.436+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrzc1i2",
+          "prefix": "Dr",
+          "firstName": "Hayden",
+          "lastName": "Davis",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "DAVIS, Hayden (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-13T09:32:45.864+00:00",
+          "updatedAt": "2026-08-18T09:23:56.404+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrx45th",
+          "prefix": "Mr",
+          "firstName": "Patrick",
+          "lastName": "Robb",
+          "gender": "male",
+          "role": "healthcare-assistant",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "ROBB, Patrick (Mr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-11T19:40:05.896+00:00",
+          "updatedAt": "2026-08-12T19:54:04.751+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrx2t6g",
+          "prefix": "Ms",
+          "firstName": "Sheril",
+          "lastName": "Madhoo",
+          "gender": "female",
+          "role": "nurse",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "MADHOO, Sheril (Ms)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-11T19:19:06.530+00:00",
+          "updatedAt": "2026-08-12T20:25:54.728+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/clinicians/cli_9a5qmmrx2t6g/square/2cc7d2d7552c879b2ea9b0c2b4447ba21185dccbceedd9971678ec5f2013372f.jpg"
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmrz10pt",
+          "prefix": "Dr",
+          "firstName": "Lucy",
+          "lastName": "Aitchison",
+          "gender": "female",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "AITCHISON, Lucy (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-13T08:21:28.052+00:00",
+          "updatedAt": "2026-08-18T09:24:09.030+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmms5d55c",
+          "prefix": "Dr",
+          "firstName": "James",
+          "lastName": "Lyles",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "LYLES, James (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-18T09:32:39.365+00:00",
+          "updatedAt": "2026-08-24T11:43:34.844+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmms94eo9",
+          "prefix": "Dr",
+          "firstName": "Jonathan",
+          "lastName": "Martin",
+          "gender": "male",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "MARTIN, Jonathan (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-19T18:31:18.291+00:00",
+          "updatedAt": "2026-08-24T11:43:24.933+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmms9g9lp",
+          "prefix": "Miss",
+          "firstName": "Olivia",
+          "lastName": "Kneafsey",
+          "gender": "female",
+          "role": "nurse",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "KNEAFSEY, Olivia (Miss)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-20T07:00:42.521+00:00",
+          "updatedAt": "2026-08-24T11:43:17.737+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmsgc49f",
+          "prefix": "Dr",
+          "firstName": "Charlie",
+          "lastName": "Zou",
+          "gender": "not-specified",
+          "role": "doctor",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "ZOU, Charlie (Dr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-08-25T07:06:11.009+00:00",
+          "updatedAt": "2026-08-25T07:06:11.009+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmt19yek",
+          "prefix": "Mr",
+          "firstName": "Athul",
+          "lastName": "Benny",
+          "gender": "not-specified",
+          "role": "not-specified",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "BENNY, Athul (Mr)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-09-07T09:18:03.622+00:00",
+          "updatedAt": "2026-09-07T09:18:03.622+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmtbq1aj",
+          "prefix": "Miss",
+          "firstName": "Nichalla",
+          "lastName": "Mason",
+          "gender": "not-specified",
+          "role": "not-specified",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "MASON, Nichalla (Miss)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-09-10T11:00:50.393+00:00",
+          "updatedAt": "2026-09-10T11:00:50.393+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        },
+        {
+          "organisationId": "org_9a5qmmkr0akv",
+          "id": "cli_9a5qmmu3pe6c",
+          "prefix": "Miss",
+          "firstName": "Sasha",
+          "lastName": "Tobin",
+          "gender": "not-specified",
+          "role": "not-specified",
+          "languagesSpoken": [
+            "english"
+          ],
+          "clinicalSystemName": "TOBIN, Sasha (Miss)",
+          "clinicalSystemNameForSystemOneBooking": null,
+          "createdAt": "2026-10-05T08:16:17.862+00:00",
+          "updatedAt": "2026-10-05T08:16:17.862+00:00",
+          "displayInTeam": true,
+          "displayForNewPatients": true,
+          "archived": false,
+          "displayImageUrl": null
+        }
+      ]
+    }
+  }
+}

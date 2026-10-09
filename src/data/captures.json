@@ -1029,13 +1029,13 @@
       "version": "before",
       "device": "desktop",
       "commit": "d304517e903b83a1a09d75155e5fcedd219f54e7",
-      "capturedAt": "2026-10-08T21:41:26.272Z",
+      "capturedAt": "2026-10-09T13:43:25.223Z",
       "viewport": {
         "width": 1440,
         "height": 900
       },
       "scale": 2,
-      "pageHeight": 5736,
+      "pageHeight": 4780,
       "tiles": [
         {
           "avif": "captures/carenav/before/desktop/tile-00.avif",
@@ -1053,7 +1053,7 @@
           "avif": "captures/carenav/before/desktop/tile-02.avif",
           "webp": "captures/carenav/before/desktop/tile-02.webp",
           "top": 4000,
-          "height": 1736
+          "height": 780
         }
       ],
       "sections": [
@@ -1063,19 +1063,19 @@
         },
         {
           "id": "about",
-          "top": 956
+          "top": 0
         },
         {
           "id": "reason",
-          "top": 2868
+          "top": 1912
         },
         {
           "id": "emergency",
-          "top": 3824
+          "top": 2868
         },
         {
           "id": "result",
-          "top": 4780
+          "top": 3824
         }
       ],
       "pinned": [],
@@ -1086,13 +1086,13 @@
       "version": "before",
       "device": "mobile",
       "commit": "d304517e903b83a1a09d75155e5fcedd219f54e7",
-      "capturedAt": "2026-10-08T21:41:39.272Z",
+      "capturedAt": "2026-10-09T13:43:37.080Z",
       "viewport": {
         "width": 390,
         "height": 844
       },
       "scale": 2,
-      "pageHeight": 5400,
+      "pageHeight": 4500,
       "tiles": [
         {
           "avif": "captures/carenav/before/mobile/tile-00.avif",
@@ -1110,7 +1110,7 @@
           "avif": "captures/carenav/before/mobile/tile-02.avif",
           "webp": "captures/carenav/before/mobile/tile-02.webp",
           "top": 4000,
-          "height": 1400
+          "height": 500
         }
       ],
       "sections": [
@@ -1120,19 +1120,19 @@
         },
         {
           "id": "about",
-          "top": 900
+          "top": 0
         },
         {
           "id": "reason",
-          "top": 2700
+          "top": 1800
         },
         {
           "id": "emergency",
-          "top": 3600
+          "top": 2700
         },
         {
           "id": "result",
-          "top": 4500
+          "top": 3600
         }
       ],
       "pinned": [],
@@ -1565,13 +1565,13 @@
       "version": "before",
       "device": "desktop",
       "commit": "d304517e903b83a1a09d75155e5fcedd219f54e7",
-      "capturedAt": "2026-10-08T21:44:28.511Z",
+      "capturedAt": "2026-10-09T13:34:08.949Z",
       "viewport": {
         "width": 1440,
         "height": 900
       },
       "scale": 2,
-      "pageHeight": 2439,
+      "pageHeight": 2025,
       "tiles": [
         {
           "avif": "captures/gp/before/desktop/tile-00.avif",
@@ -1583,7 +1583,7 @@
           "avif": "captures/gp/before/desktop/tile-01.avif",
           "webp": "captures/gp/before/desktop/tile-01.webp",
           "top": 2000,
-          "height": 439
+          "height": 25
         }
       ],
       "sections": [
@@ -1592,20 +1592,20 @@
           "top": 0
         },
         {
-          "id": "reviews",
-          "top": 1673
+          "id": "nearby",
+          "top": 1259
         },
         {
           "id": "team",
-          "top": 1673
+          "top": 1259
         },
         {
           "id": "questions",
-          "top": 2274
+          "top": 1860
         },
         {
           "id": "footer",
-          "top": 2274
+          "top": 1860
         }
       ],
       "pinned": [],
@@ -1616,13 +1616,13 @@
       "version": "before",
       "device": "mobile",
       "commit": "d304517e903b83a1a09d75155e5fcedd219f54e7",
-      "capturedAt": "2026-10-08T21:44:32.663Z",
+      "capturedAt": "2026-10-09T13:34:12.990Z",
       "viewport": {
         "width": 390,
         "height": 844
       },
       "scale": 2,
-      "pageHeight": 2486,
+      "pageHeight": 2022,
       "tiles": [
         {
           "avif": "captures/gp/before/mobile/tile-00.avif",
@@ -1634,7 +1634,7 @@
           "avif": "captures/gp/before/mobile/tile-01.avif",
           "webp": "captures/gp/before/mobile/tile-01.webp",
           "top": 2000,
-          "height": 486
+          "height": 22
         }
       ],
       "sections": [
@@ -1643,20 +1643,20 @@
           "top": 0
         },
         {
-          "id": "reviews",
-          "top": 1598
+          "id": "nearby",
+          "top": 1198
         },
         {
           "id": "team",
-          "top": 1598
+          "top": 1198
         },
         {
           "id": "questions",
-          "top": 2177
+          "top": 1713
         },
         {
           "id": "footer",
-          "top": 2177
+          "top": 1713
         }
       ],
       "pinned": [],
@@ -1667,19 +1667,25 @@
       "version": "after",
       "device": "desktop",
       "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
-      "capturedAt": "2026-10-09T12:11:15.956Z",
+      "capturedAt": "2026-10-09T13:34:26.899Z",
       "viewport": {
         "width": 1440,
         "height": 900
       },
       "scale": 2,
-      "pageHeight": 1940,
+      "pageHeight": 2381,
       "tiles": [
         {
           "avif": "captures/gp/after/desktop/tile-00.avif",
           "webp": "captures/gp/after/desktop/tile-00.webp",
           "top": 0,
-          "height": 1940
+          "height": 2000
+        },
+        {
+          "avif": "captures/gp/after/desktop/tile-01.avif",
+          "webp": "captures/gp/after/desktop/tile-01.webp",
+          "top": 2000,
+          "height": 381
         }
       ],
       "sections": [
@@ -1688,20 +1694,20 @@
           "top": 0
         },
         {
-          "id": "reviews",
-          "top": 466
+          "id": "nearby",
+          "top": 463
         },
         {
           "id": "team",
-          "top": 737
+          "top": 853
         },
         {
           "id": "questions",
-          "top": 1085
+          "top": 1526
         },
         {
           "id": "footer",
-          "top": 1672
+          "top": 2113
         }
       ],
       "pinned": [
@@ -1711,7 +1717,7 @@
           "y": 0,
           "width": 1440,
           "stickTop": 0,
-          "releaseAt": 1940,
+          "releaseAt": 2381,
           "states": [
             {
               "from": 0,
@@ -1729,13 +1735,13 @@
       "version": "after",
       "device": "mobile",
       "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
-      "capturedAt": "2026-10-09T12:11:32.286Z",
+      "capturedAt": "2026-10-09T13:34:45.825Z",
       "viewport": {
         "width": 390,
         "height": 844
       },
       "scale": 2,
-      "pageHeight": 3659,
+      "pageHeight": 4214,
       "tiles": [
         {
           "avif": "captures/gp/after/mobile/tile-00.avif",
@@ -1747,7 +1753,13 @@
           "avif": "captures/gp/after/mobile/tile-01.avif",
           "webp": "captures/gp/after/mobile/tile-01.webp",
           "top": 2000,
-          "height": 1659
+          "height": 2000
+        },
+        {
+          "avif": "captures/gp/after/mobile/tile-02.avif",
+          "webp": "captures/gp/after/mobile/tile-02.webp",
+          "top": 4000,
+          "height": 214
         }
       ],
       "sections": [
@@ -1756,20 +1768,20 @@
           "top": 0
         },
         {
-          "id": "reviews",
+          "id": "nearby",
           "top": 1427
         },
         {
           "id": "team",
-          "top": 1722
+          "top": 1869
         },
         {
           "id": "questions",
-          "top": 2390
+          "top": 2919
         },
         {
           "id": "footer",
-          "top": 3077
+          "top": 3632
         }
       ],
       "pinned": [
@@ -1779,7 +1791,7 @@
           "y": 0,
           "width": 390,
           "stickTop": 0,
-          "releaseAt": 3659,
+          "releaseAt": 4214,
           "states": [
             {
               "from": 0,

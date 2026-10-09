@@ -42,7 +42,7 @@ const CONTENTS: PinnedQuery = { id: "contents", selector: "main aside", devices:
 // The surgery and clinician rail sticks both ways and is taller than the window, which a pinned
 // layer cannot show, so the capture lets it scroll with the page.
 const RAIL = "main aside";
-const GP_PATH = "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu?postcode=IG1%202UT";
+const GP_PATH = "/gp/caversham-group-practice-loc_9a5qmml0z01t?postcode=NW5%201UD";
 const CLINICIAN_PATH = "/clinician/cli_9a5qmmqhn4r5?postcode=IG1%202UT";
 const SEARCH_PATH = "/gp/search?postcode=IG1%202UT";
 const FOOTER: SectionAnchor = { kind: "footer-after-main" };
@@ -174,7 +174,7 @@ export const PAGE_SOURCES: { [P in StaticPageId]: PageSource<P> } = {
       path: GP_PATH,
       anchors: {
         title: { kind: "page-top" },
-        reviews: { kind: "absent" },
+        nearby: { kind: "absent" },
         team: { kind: "element", selector: "main h2, main h3, main h4", text: "Meet the team" },
         questions: { kind: "absent" },
         footer: FOOTER,
@@ -186,12 +186,12 @@ export const PAGE_SOURCES: { [P in StaticPageId]: PageSource<P> } = {
       path: GP_PATH,
       anchors: {
         title: { kind: "page-top" },
-        reviews: { kind: "element", selector: "main h2", text: "What patients say" },
+        nearby: { kind: "element", selector: "main h2", text: "Other GP surgeries nearby" },
         team: { kind: "element", selector: "main h2", text: "Care team" },
         questions: {
           kind: "element",
           selector: "main h2",
-          text: "Common questions about John Smith Medical Centre",
+          text: "Common questions about Caversham Group Practice",
         },
         footer: FOOTER,
       },

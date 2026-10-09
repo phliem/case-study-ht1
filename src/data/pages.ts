@@ -50,7 +50,7 @@ const SEARCH_SECTIONS = [
 
 const GP_SECTIONS = [
   { id: "title", label: "Surgery & booking" },
-  { id: "reviews", label: "Reviews" },
+  { id: "nearby", label: "Nearby surgeries" },
   { id: "team", label: "Care team" },
   { id: "questions", label: "Common questions" },
   { id: "footer", label: "Footer" },
@@ -144,10 +144,10 @@ export const PAGES: Record<PageId, PageInfo> = {
     name: "GP surgery page",
     noun: "GP surgery page",
     summary:
-      "The page most patients book from. January stacked NHS cards: a score box, a calendar with a Book bar docked to the window, directions and the team. Today it is a v2 surgery page with a booking card, what patients say, the care team, common questions and a rail with the map and opening hours.",
+      "The page most patients book from, here for Caversham Group Practice in Kentish Town. January stacked NHS cards: a photo, a score box, the booking calendar with a Book bar docked to the window, directions, the team and opening hours. Today it is a v2 surgery page with a booking card, nearby surgeries, the care team, facilities, common questions and a rail with the photo, map and opening hours.",
     route: {
-      before: "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu",
-      after: "/gp/john-smith-medical-centre-loc_9a5qmmkpexdu",
+      before: "/gp/caversham-group-practice-loc_9a5qmml0z01t",
+      after: "/gp/caversham-group-practice-loc_9a5qmml0z01t",
     },
     when: JANUARY_TO_TODAY,
     sections: GP_SECTIONS,
@@ -170,7 +170,7 @@ export const PAGES: Record<PageId, PageInfo> = {
     noun: "care navigation",
     summary:
       "In January the homepage search led into four question pages before the results. Today Book an appointment opens a two-step window over the GP search, and the reason stays on the results. The answers are fictional.",
-    route: { before: "/", after: "/choose" },
+    route: { before: "/care-navigation/date-of-birth", after: "/choose" },
     when: JANUARY_TO_TODAY,
     sections: CARENAV_SECTIONS,
   },

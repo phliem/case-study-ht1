@@ -362,7 +362,6 @@ const carenavBefore: FlowScript = async (flow) => {
     .first()
     .click();
   await page.locator("[data-vaul-drawer]").waitFor({ state: "detached" });
-  await flow.shot("start", at(1, ""));
   await page
     .getByRole("button", { name: "Search", exact: true })
     .filter({ visible: true })
@@ -370,11 +369,11 @@ const carenavBefore: FlowScript = async (flow) => {
     .click();
   await page.waitForURL(/date-of-birth/);
   await fillDateOfBirth(page);
-  await flow.shot("about", at(2, "/care-navigation/date-of-birth"));
+  await flow.shot("about", at(1, "/care-navigation/date-of-birth"));
   await click(page, "Continue");
   await page.waitForURL(/sex-at-birth/);
   await page.getByText("Female", { exact: true }).click();
-  await flow.shot("about", at(3, "/care-navigation/sex-at-birth"));
+  await flow.shot("about", at(2, "/care-navigation/sex-at-birth"));
   await click(page, "Continue");
   await page.waitForURL(/description/);
   await page
@@ -382,15 +381,15 @@ const carenavBefore: FlowScript = async (flow) => {
     .filter({ visible: true })
     .first()
     .pressSequentially(PATIENT.reason);
-  await flow.shot("reason", at(4, "/care-navigation/description"));
+  await flow.shot("reason", at(3, "/care-navigation/description"));
   await click(page, "Find an appointment");
   await page.waitForURL(/emergency-check/);
   await page.waitForLoadState("networkidle");
-  await flow.shot("emergency", at(5, "/care-navigation/emergency-check"));
+  await flow.shot("emergency", at(4, "/care-navigation/emergency-check"));
   await click(page, /none of these/i);
   await page.waitForURL(/\/gp\/search/, { timeout: 30_000 });
   await page.waitForLoadState("networkidle");
-  await flow.shot("result", at(6, "/gp/search"));
+  await flow.shot("result", at(5, "/gp/search"));
 };
 
 const carenavAfter: FlowScript = async (flow) => {

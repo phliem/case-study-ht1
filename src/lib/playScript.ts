@@ -93,8 +93,8 @@ export const TOURS: Record<PageId, Tours> = {
     short: shortTour(["results", "about"]),
   },
   gp: {
-    full: fullTour(["reviews", "team", "questions", "footer"], ["reviews", "team"]),
-    short: shortTour(["reviews", "team"]),
+    full: fullTour(["nearby", "team", "questions", "footer"], ["nearby", "team"]),
+    short: shortTour(["nearby", "team"]),
   },
   booking: {
     full: fullTour(["time", "review", "details", "verify", "confirmed"], ["time", "details"]),

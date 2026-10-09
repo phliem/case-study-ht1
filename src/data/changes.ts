@@ -91,17 +91,17 @@ export const CHANGES: PageChanges = {
   },
   gp: {
     title: [
-      "January's stack of NHS cards (photo, a score box, the calendar) becomes a v2 header: breadcrumbs, the surgery's name, rating, distance and phone number.",
-      "A booking card shows the earliest slot with Book appointment and Register without appointment. The calendar, and the Book bar January docked to the window, move into the booking window.",
-      "The photo, map, address and opening hours move into a rail that stays in view on desktop.",
+      "January's stack of NHS cards (a thumbnail photo, then a score box with the rating and total appointments) becomes a v2 header: breadcrumbs, the surgery's name, rating, distance and phone number.",
+      "A booking card says when nothing is free and keeps Register without appointment next to Book appointment. The calendar, and the Book bar January docked to the window, move into the booking window.",
+      "The photo, map, address and opening hours move into a rail that stays in view on desktop, with today's hours highlighted.",
     ],
-    reviews: [
-      'New since January: "What patients say", with the score and the latest review. January showed only the score and review count, in a box at the top.',
-      "So the before side waits here while it scrolls past.",
+    nearby: [
+      'New since January: "Other GP surgeries nearby" lists three surgeries with how many appointments each has, their rating and distance, and links to every surgery near London.',
+      "January had nothing like it, so the before side waits here while it scrolls past.",
     ],
     team: [
-      '"Meet the team" showed three people behind a See more link. "Care team" shows nine in a grid, with initials and roles.',
-      "A bigger team folds behind Show more and Show fewer.",
+      '"Meet the team" counted 36 people and showed three, with photos, languages and a role badge, behind a See more link. "Care team" shows nine GPs with their photos in a grid.',
+      "A bigger team folds behind Show more. Facilities and access, with the CQC rating, follow, also new since January.",
     ],
     questions: [
       "New since January: common questions about the surgery, answered on the page.",
@@ -129,8 +129,8 @@ export const CHANGES: PageChanges = {
   },
   carenav: {
     start: [
-      "January started on the homepage: pick a postcode in a drawer, then press Search.",
       "Today Book an appointment on /choose opens the GP search with a care navigation window on top.",
+      "In January the questions came after a postcode search on the homepage, so the before side waits on its first question page.",
     ],
     about: [
       "Date of birth and sex were pages 1 and 2 of 4, each with its own Continue. They are now one step in the window.",

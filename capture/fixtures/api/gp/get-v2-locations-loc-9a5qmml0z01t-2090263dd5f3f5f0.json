@@ -1,0 +1,80 @@
+{
+  "method": "GET",
+  "url": "https://api.ht1.uk/v2/locations/loc_9a5qmml0z01t",
+  "requestBody": null,
+  "status": 200,
+  "contentType": "application/json; charset=utf-8",
+  "body": {
+    "json": {
+      "id": "loc_9a5qmml0z01t",
+      "createdAt": "2025-06-04T16:14:17.943+00:00",
+      "updatedAt": "2026-08-07T13:11:02.995+00:00",
+      "name": "Caversham Group Practice",
+      "clinicalSystemName": "Caversham Practice",
+      "addressLine1": "4 Peckwater St",
+      "addressLine2": "",
+      "addressLine3": "",
+      "postTown": "London",
+      "postcode": "NW5 2UP",
+      "organisationId": "org_9a5qmmkr0akv",
+      "ratingScore": 3.9,
+      "ratingReviewCount": 227,
+      "bookableRatingTotal": null,
+      "bookableRatingCount": null,
+      "bookableRatingScore": null,
+      "blendedRatingScore": 3.9,
+      "blendedRatingCount": 227,
+      "blendedRatingRank": 3.908,
+      "accessibility": [],
+      "gpConnectId": null,
+      "websiteUrl": "http://www.cavershamgrouppractice.co.uk/",
+      "triageUrl": "https://www.cavershamgrouppractice.co.uk/appointments",
+      "phoneNumber": "+442074285700",
+      "registrationOdsCode": "F83022",
+      "constituencyName": "Holborn and St Pancras",
+      "openingHours": {
+        "monday": [
+          [
+            "08:00",
+            "18:30"
+          ]
+        ],
+        "tuesday": [
+          [
+            "08:00",
+            "18:30"
+          ]
+        ],
+        "wednesday": [
+          [
+            "08:00",
+            "18:30"
+          ]
+        ],
+        "thursday": [
+          [
+            "08:00",
+            "18:30"
+          ]
+        ],
+        "friday": [
+          [
+            "08:00",
+            "18:30"
+          ]
+        ],
+        "saturday": "closed",
+        "sunday": "closed"
+      },
+      "displayImageUrl": "https://ht1publicprod.blob.core.windows.net/locations/loc_9a5qmml0z01t/square/411e5d1bfb994a698ae0d8d9ac0b4a8961a47a1332bec0183e82ca160dccd6ca.jpg",
+      "hiddenAt": null,
+      "latitude": 51.55044,
+      "longitude": -0.13819,
+      "odsCode": "F83022",
+      "quote": null,
+      "fastRegistration": true,
+      "registrationTermsUrl": null,
+      "organisationKind": "gp"
+    }
+  }
+}

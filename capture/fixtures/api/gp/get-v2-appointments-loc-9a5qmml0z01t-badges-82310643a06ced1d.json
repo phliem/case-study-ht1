@@ -1,0 +1,17 @@
+{
+  "method": "GET",
+  "url": "https://api.ht1.uk/v2/appointments/loc_9a5qmml0z01t/badges?feature=withAppointments",
+  "requestBody": null,
+  "status": 200,
+  "contentType": "application/json; charset=utf-8",
+  "body": {
+    "json": {
+      "badges": [
+        {
+          "text": "Longer appointment",
+          "colour": "green"
+        }
+      ]
+    }
+  }
+}

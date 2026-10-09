@@ -43,7 +43,7 @@ describe("PAGE_SOURCES", () => {
       "home before areas",
       "article before questions",
       "search before about",
-      "gp before reviews",
+      "gp before nearby",
       "gp before questions",
     ]);
   });

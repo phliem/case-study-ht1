@@ -51,9 +51,9 @@ comparison's left side is the page as it first shipped (`0a3ca099df`, the build 
 | Homepage | `/` | `/` |
 | Guide article | `/how-to/book-doctor-appointment-nhs` | `/articles/book-a-gp-appointment` |
 | Help centre | `/faq` | `/help` |
-| Care navigation | homepage search onwards | `/choose` onwards |
+| Care navigation | `/care-navigation/date-of-birth` onwards, reached from the homepage search | `/choose` onwards |
 | GP search | `/gp/search` | `/gp/search` |
-| GP surgery page | `/gp/john-smith-medical-centre-loc_9a5qmmkpexdu` | the same |
+| GP surgery page | `/gp/caversham-group-practice-loc_9a5qmml0z01t` | the same |
 | Booking | Book on the surgery page onwards | Book appointment onwards |
 | Clinician page | `/clinician/cli_9a5qmmqhn4r5` (September) | the same |
 
@@ -66,8 +66,8 @@ This needs a sanny checkout (`SANNY_REPO`, default `~/Desktop/repos/sanny`), pnp
 with libx264 and libvpx-vp9. Each commit is exported with `git archive` into `CAPTURE_WORK_DIR`
 (default `~/.cache/bookable-before-after`, not the OS temp folder, which macOS prunes), built,
 and served: January on 3065, October on 3066 and the first clinician page on 3068. A build that is
-missing files is rebuilt. The search, surgery, clinician and journey captures use postcode
-IG1 2UT. Nothing is written to sanny.
+missing files is rebuilt. The search, clinician and journey captures use postcode IG1 2UT; the
+surgery page, Caversham Group Practice, uses NW5 1UD nearby. Nothing is written to sanny.
 
 API calls (and postcodes.io lookups) are answered from `capture/fixtures/api/<page>/`. A read with
 no fixture is fetched from production once and saved there; writes are never sent. Each page's

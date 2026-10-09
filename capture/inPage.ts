@@ -12,9 +12,10 @@ export async function settleInPage(): Promise<void> {
     await new Promise((resolve) => setTimeout(resolve, 150));
   }
   window.scrollTo({ top: 0, behavior: "instant" });
+  // A lazy image the page never shows, such as one folded behind See more, never loads.
   await Promise.all(
     Array.from(document.images, (image) =>
-      image.complete
+      image.complete || !image.checkVisibility()
         ? undefined
         : new Promise((resolve) => {
             image.addEventListener("load", resolve, { once: true });
@@ -240,7 +241,7 @@ export function markLoopRegionInPage(region: LoopRegionQuery): {
     return (
       target !== null &&
       element.contains(target) &&
-      animation.effect?.getComputedTiming().iterations === Infinity
+      animation.effect?.getComputedTiming().iterations === Number.POSITIVE_INFINITY
     );
   });
   if (animations.length === 0)

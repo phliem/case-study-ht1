@@ -1,6 +1,6 @@
 {
   "method": "GET",
-  "url": "https://api.ht1.uk/v2/appointments/loc_9a5qmmkpexdu/metrics_badges?feature=withAppointments&service=medical",
+  "url": "https://api.ht1.uk/v2/appointments/loc_9a5qmml0z01t/metrics_badges?feature=withAppointments&service=medical",
   "requestBody": null,
   "status": 200,
   "contentType": "application/json; charset=utf-8",
@@ -9,8 +9,8 @@
       "metricsBadges": [
         {
           "type": "review",
-          "score": 4.2,
-          "count": 171
+          "score": 3.9,
+          "count": 227
         },
         {
           "metric": 0,
@@ -18,7 +18,7 @@
           "type": "subtitle"
         },
         {
-          "metric": 6,
+          "metric": 17,
           "subtitle": "total appointments",
           "type": "subtitle"
         }
