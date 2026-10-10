@@ -171,8 +171,8 @@ export const CHANGES: PageChanges = {
       'Today it is step 4 of the window: "Check your phone or email".',
     ],
     confirmed: [
-      'Both end on "Manage your appointment" with "Your booking is confirmed."',
-      "This page has not moved to v2 yet, so the two sides look alike apart from the header.",
+      'January ended on "Manage your appointment", with the green "Your booking is confirmed." panel under the appointment and your details.',
+      'Today it ends on a status card: a tick and "Your booking is confirmed" first, then how, when, with whom and where.',
     ],
   },
 };

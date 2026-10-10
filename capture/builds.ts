@@ -5,18 +5,20 @@ import { join } from "node:path";
 import { API_ORIGIN } from "./apiFixtures";
 import { WORK_DIR } from "./paths";
 
-export type BuildName = "january" | "clinician-before" | "latest";
+export type BuildName = "january" | "clinician-before" | "latest" | "booking-after";
 export type BuildSpec = { name: BuildName; commit: string; port: number };
 export type PreparedBuild = BuildSpec & { dir: string; fullCommit: string };
 export type ServedBuild = PreparedBuild & { url: string; stop: () => Promise<void> };
 
 // Every before side is develop at the end of January 2026, except the clinician page, which did
 // not exist yet: its before is the page as it first shipped (0a3ca099df, 4 September, the build fix for b81a98fae9), still on
-// the NHS design system. Every after side is develop on 9 October 2026.
+// the NHS design system. Every after side is develop on 9 October 2026, at midday for every page
+// but booking, which is the end of that day: its confirmed page moved to v2 that afternoon.
 export const BUILDS: Record<BuildName, BuildSpec> = {
   january: { name: "january", commit: "d304517e90", port: 3065 },
   "clinician-before": { name: "clinician-before", commit: "0a3ca099df", port: 3068 },
   latest: { name: "latest", commit: "d82562aaf8", port: 3066 },
+  "booking-after": { name: "booking-after", commit: "a0253fbf0f", port: 3067 },
 };
 
 export const SANNY_REPO = process.env.SANNY_REPO ?? join(homedir(), "Desktop/repos/sanny");

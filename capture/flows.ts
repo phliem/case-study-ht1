@@ -421,7 +421,7 @@ const carenavAfter: FlowScript = async (flow) => {
 export const FLOW_SOURCES: Record<FlowPageId, { before: FlowSide; after: FlowSide }> = {
   booking: {
     before: { build: "january", script: bookingBefore },
-    after: { build: "latest", script: bookingAfter },
+    after: { build: "booking-after", script: bookingAfter },
   },
   carenav: {
     before: { build: "january", script: carenavBefore },

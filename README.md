@@ -40,11 +40,12 @@ JS (110 KB gzipped) and first-paint image (1.5 MB) budgets.
 
 ## Recapture
 
-The captures in `public/captures/` and `src/data/captures.json` come from two commits of the sanny
-repo: develop at the end of January (`d304517e90`, 30 January 2026) on the left and develop on
-9 October 2026 (`d82562aaf8`) on the right. Clinician pages did not exist in January, so that
-comparison's left side is the page as it first shipped (`0a3ca099df`, the build fix for
-`b81a98fae9`, 4 September 2026).
+The captures in `public/captures/` and `src/data/captures.json` come from commits of the sanny
+repo: develop at the end of January (`d304517e90`, 30 January 2026) on the left and develop at
+midday on 9 October 2026 (`d82562aaf8`) on the right. Booking's right side is develop at the end of
+that day (`a0253fbf0f`), after its confirmed page moved to v2. Clinician pages did not exist in
+January, so that comparison's left side is the page as it first shipped (`0a3ca099df`, the build
+fix for `b81a98fae9`, 4 September 2026).
 
 | Page | January | October |
 |---|---|---|
@@ -65,9 +66,10 @@ pnpm capture --page article --page help
 This needs a sanny checkout (`SANNY_REPO`, default `~/Desktop/repos/sanny`), pnpm, and ffmpeg
 with libx264 and libvpx-vp9. Each commit is exported with `git archive` into `CAPTURE_WORK_DIR`
 (default `~/.cache/bookable-before-after`, not the OS temp folder, which macOS prunes), built,
-and served: January on 3065, October on 3066 and the first clinician page on 3068. A build that is
-missing files is rebuilt. The search, clinician and journey captures use postcode IG1 2UT; the
-surgery page, Caversham Group Practice, uses NW5 1UD nearby. Nothing is written to sanny.
+and served: January on 3065, October on 3066, booking's October on 3067 and the first clinician
+page on 3068. A build that is missing files is rebuilt. The search, clinician and journey captures
+use postcode IG1 2UT; the surgery page, Caversham Group Practice, uses NW5 1UD nearby. Nothing is
+written to sanny.
 
 API calls (and postcodes.io lookups) are answered from `capture/fixtures/api/<page>/`. A read with
 no fixture is fetched from production once and saved there; writes are never sent. Each page's

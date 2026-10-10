@@ -69,11 +69,16 @@ describe("PAGE_SOURCES", () => {
 describe("buildsFor", () => {
   it("builds only what the chosen pages need", () => {
     expect(buildsFor(["home"])).toEqual(["january", "latest"]);
-    expect(buildsFor(["clinician", "booking"])).toEqual(["clinician-before", "latest", "january"]);
+    expect(buildsFor(["clinician", "booking"])).toEqual([
+      "clinician-before",
+      "latest",
+      "january",
+      "booking-after",
+    ]);
   });
 
   it("builds only the versions asked for", () => {
-    expect(buildsFor(["clinician", "booking"], ["after"])).toEqual(["latest"]);
+    expect(buildsFor(["clinician", "booking"], ["after"])).toEqual(["latest", "booking-after"]);
     expect(buildsFor(["clinician", "booking"], ["before"])).toEqual([
       "clinician-before",
       "january",

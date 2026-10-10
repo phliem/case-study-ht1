@@ -1930,8 +1930,8 @@
       "page": "booking",
       "version": "after",
       "device": "desktop",
-      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
-      "capturedAt": "2026-10-09T12:12:04.802Z",
+      "commit": "a0253fbf0f625516c13378a2a2fe150b578d9799",
+      "capturedAt": "2026-10-10T19:59:38.936Z",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1991,8 +1991,8 @@
       "page": "booking",
       "version": "after",
       "device": "mobile",
-      "commit": "d82562aaf86c1e2c5d3ffb0f21aac77d07f4e008",
-      "capturedAt": "2026-10-09T12:12:29.095Z",
+      "commit": "a0253fbf0f625516c13378a2a2fe150b578d9799",
+      "capturedAt": "2026-10-10T20:00:02.735Z",
       "viewport": {
         "width": 390,
         "height": 844
