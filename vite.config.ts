@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig, type Plugin } from "vite";
@@ -15,4 +16,12 @@ function socialImage(): Plugin {
 export default defineConfig({
   base,
   plugins: [react(), tailwindcss(), socialImage()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: fileURLToPath(new URL("./index.html", import.meta.url)),
+        journeys: fileURLToPath(new URL("./journeys/index.html", import.meta.url)),
+      },
+    },
+  },
 });

@@ -25,7 +25,10 @@
     "capture:compare": "tsx capture/compareLive.ts"
   },
   "dependencies": {
+    "@fontsource-variable/newsreader": "5.3.0",
     "@fontsource/hanken-grotesk": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "@fontsource/public-sans": "5.3.0",
     "motion": "13.5.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"
