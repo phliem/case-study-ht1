@@ -31,6 +31,14 @@ comparisons, and `&tour=short` for a cut of about 15 seconds. The comparison fil
 no controls or cursor and loops its tour; screen-record the window. Recording mode ignores the
 reduced-motion setting.
 
+## Journeys
+
+`/journeys/` is a separate page: Bookable's registration journeys as a board of screens that you
+drag, zoom and hover to trace the routes to a screen, with a player that walks through one journey
+at a time. Its flow, `src/journeys/registrationFlow.ts`, is still the design's mock: every screen
+shows a placeholder, and the screens and journeys have not been checked against the live form. Give
+a screen a `screenshot` path to replace its placeholder.
+
 ## Deploy
 
 `pnpm build` writes a static site to `dist/`. Set `VITE_BASE=/work/bookable/` to serve it from a
@@ -106,5 +114,5 @@ captures.
 ## Licensing
 
 Frutiger is licensed to the NHS, so no Frutiger file is in this project; the specimen is a
-rendered image. Hanken Grotesk is OFL and is bundled from `@fontsource/hanken-grotesk`. The screenshots show public
-Bookable pages.
+rendered image. Hanken Grotesk, and the journeys page's Newsreader, Public Sans and JetBrains
+Mono, are OFL and bundled from Fontsource packages. The screenshots show public Bookable pages.

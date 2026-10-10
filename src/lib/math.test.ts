@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { clamp, easeInOutCubic, lerp } from "./math";
+import { clamp, easeInOutCubic, lerp, smoothstep } from "./math";
 
 describe("clamp", () => {
   it("holds a value inside its bounds", () => {
@@ -31,5 +31,18 @@ describe("easeInOutCubic", () => {
       expect(value).toBeGreaterThanOrEqual(previous);
       previous = value;
     }
+  });
+});
+
+describe("smoothstep", () => {
+  it("eases from 0 to 1 through the middle", () => {
+    expect(smoothstep(0)).toBe(0);
+    expect(smoothstep(0.5)).toBe(0.5);
+    expect(smoothstep(1)).toBe(1);
+  });
+
+  it("starts and ends slowly", () => {
+    expect(smoothstep(0.1)).toBeLessThan(0.1);
+    expect(smoothstep(0.9)).toBeGreaterThan(0.9);
   });
 });
